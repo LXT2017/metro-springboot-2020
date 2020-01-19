@@ -2,15 +2,16 @@ package com.mt.metro.controller;
 
 import com.mt.metro.annotation.PassToken;
 import com.mt.metro.annotation.UserLoginToken;
+import com.mt.metro.annotation.VisitLog;
 import com.mt.metro.common.ResponseResult;
 import com.mt.metro.common.Time;
 import com.mt.metro.entity.User;
 import com.mt.metro.service.TokenService;
 import com.mt.metro.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author jinbin
@@ -19,13 +20,21 @@ import java.util.*;
 @RestController
 @RequestMapping("user")
 public class UserLogin {
-    @Autowired
-    UserService userService;
-    @Autowired
-    TokenService tokenService;
+    //我也不知道为什么要用set注入，另一个文件field注入不警告
+    final
+    private UserService userService;
+    final
+    private TokenService tokenService;
+
+    public UserLogin(UserService userService, TokenService tokenService) {
+        this.userService = userService;
+        this.tokenService = tokenService;
+    }
+
     //登录
     @PassToken
     @PostMapping("/login")
+    @SuppressWarnings("unchecked")
     public ResponseResult login(User user){
         ResponseResult responseResult;
         User userForBase = userService.findUserByUId(user);
@@ -58,7 +67,7 @@ public class UserLogin {
 
     /**
      * 签到
-     * @return
+     * @return 信息
      */
     @UserLoginToken
     @PostMapping("/signIn")
@@ -68,8 +77,10 @@ public class UserLogin {
 
 
 
+    @VisitLog
     @UserLoginToken
     @PostMapping("/infoModify")
+    @SuppressWarnings("unchecked")//取消分析
     public ResponseResult infoModify(User user){
         int i = userService.infoModify(user);
         if(i == 0){

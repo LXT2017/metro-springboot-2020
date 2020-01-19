@@ -1,4 +1,4 @@
-package com.mt.metro.config;
+package com.mt.metro.aop;
 
 import com.mt.metro.common.MultipleDataSourceHelper;
 import org.aspectj.lang.annotation.Aspect;

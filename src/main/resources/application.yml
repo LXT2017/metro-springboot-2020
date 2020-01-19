@@ -1,5 +1,6 @@
 spring:
   datasource:
+    //本地数据库
     master1:
       driver-class-name: com.mysql.cj.jdbc.Driver
       jdbc-url: jdbc:mysql://localhost:3306/metro?serverTimezone=GMT
@@ -59,3 +60,6 @@ audience:
   name: restapiuser
   # 过期时间，时间戳
   expiresSecond: 172800
+
+logging:
+  config: classpath:log4j2.xml
