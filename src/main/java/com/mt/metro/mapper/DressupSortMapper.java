@@ -2,8 +2,9 @@ package com.mt.metro.mapper;
 
 import com.mt.metro.entity.DressupSort;
 import com.mt.metro.entity.DressupSortExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DressupSortMapper {
     int countByExample(DressupSortExample example);
@@ -27,4 +28,7 @@ public interface DressupSortMapper {
     int updateByPrimaryKeySelective(DressupSort record);
 
     int updateByPrimaryKey(DressupSort record);
+
+    //查询所有
+    List<DressupSort> selectAll();
 }

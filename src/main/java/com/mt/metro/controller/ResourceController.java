@@ -23,7 +23,7 @@ public class ResourceController {
     @PassToken
     @GetMapping("/getResource")
     public ResponseResult getResource(){
-        ResponseResult responseResult = new ResponseResult(100,"success",resourceService.getParam());
+        ResponseResult responseResult = new ResponseResult(200,"success",resourceService.getParam());
         return responseResult;
     }
 

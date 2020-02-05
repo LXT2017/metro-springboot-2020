@@ -1,12 +1,8 @@
 package com.mt.metro.service;
 
-import com.mt.metro.annotation.Master;
-import com.mt.metro.annotation.Slave;
 import com.mt.metro.common.ResponseResult;
 import com.mt.metro.common.Time;
-import com.mt.metro.entity.HistoryIntegral;
-import com.mt.metro.entity.User;
-import com.mt.metro.entity.UserExample;
+import com.mt.metro.entity.*;
 import com.mt.metro.mapper.CarbonRankingMapper;
 import com.mt.metro.mapper.HistoryIntegralMapper;
 import com.mt.metro.mapper.UserMapper;
@@ -35,13 +31,14 @@ public class UserService {
     TokenService tokenService;
 
     @Autowired
-    CarbonRankingMapper carbonRankingMapper;
+    private CarbonRankingMapper carbonRankingMapper;
+
 
     @Autowired
     HistoryIntegralMapper historyIntegralMapper;
 
     //在这里使用注解来选择数据源
-    @Slave
+    //@Slave
     public User findUserByUId(User user){
 
         UserExample userExample = new UserExample();
@@ -91,6 +88,7 @@ public class UserService {
     }
 
     //签到
+    //@Master
     public ResponseResult signIn(int id){
         try {
             ValueOperations<String, String> operations = redisTemplate.opsForValue();
@@ -109,7 +107,7 @@ public class UserService {
 
 
     //注册新用户
-    @Master
+    //@Master
     public User registry(User user){
         userMapper.insertSelective(user);
         return user;
@@ -117,7 +115,7 @@ public class UserService {
 
 
     //修改个人信息
-    @Master
+    //@Master
     public int infoModify(User user){
         UserExample example = new UserExample();
         UserExample.Criteria criteria = example.createCriteria();
@@ -128,7 +126,25 @@ public class UserService {
         }catch (Exception e){
             throw  new RuntimeException("数据库出错");
         }
+    }
 
+
+
+
+    public CarbonRanking getCarbonRanking(int uid){
+        CarbonRankingExample example = new CarbonRankingExample();
+        CarbonRankingExample.Criteria criteria = example.createCriteria();
+        criteria.andUserIdEqualTo(uid);
+        try {
+            List<CarbonRanking> list = carbonRankingMapper.selectByExample(example);
+            if(list.size()==0){
+                return null;
+            }else{
+                return list.get(0);
+            }
+        }catch (Exception e){
+            throw  new RuntimeException("数据库出错");
+        }
 
     }
 }

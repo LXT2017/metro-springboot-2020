@@ -5,6 +5,7 @@ import com.mt.metro.annotation.UserLoginToken;
 import com.mt.metro.annotation.VisitLog;
 import com.mt.metro.common.ResponseResult;
 import com.mt.metro.common.Time;
+import com.mt.metro.entity.CarbonRanking;
 import com.mt.metro.entity.User;
 import com.mt.metro.service.TokenService;
 import com.mt.metro.service.UserService;
@@ -34,7 +35,6 @@ public class UserLogin {
     //登录
     @PassToken
     @PostMapping("/login")
-    @SuppressWarnings("unchecked")
     public ResponseResult login(User user){
         ResponseResult responseResult;
         User userForBase = userService.findUserByUId(user);
@@ -96,5 +96,17 @@ public class UserLogin {
     public String getMessage(){
         System.out.println(Time.getRefreshTime());
         return "你已通过验证";
+    }
+
+
+
+
+
+    //查询用户碳积分情况，需要用户id
+    @GetMapping("/getCarbonRanking")
+    public ResponseResult getCarbonRanking(@RequestParam("uid")int uid){
+        CarbonRanking carbonRanking = userService.getCarbonRanking(uid);
+        ResponseResult result = new ResponseResult(200,"success",carbonRanking);
+        return result;
     }
 }
