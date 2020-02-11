@@ -11,21 +11,6 @@ public class Game {
 
     private Integer userId;
 
-    private Integer addition;
-
-    public Game(Integer id, Integer maxDistance, Integer maxScore, Integer totalDistance, Integer userId, Integer addition) {
-        this.id = id;
-        this.maxDistance = maxDistance;
-        this.maxScore = maxScore;
-        this.totalDistance = totalDistance;
-        this.userId = userId;
-        this.addition = addition;
-    }
-
-    public Game() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }
@@ -66,14 +51,6 @@ public class Game {
         this.userId = userId;
     }
 
-    public Integer getAddition() {
-        return addition;
-    }
-
-    public void setAddition(Integer addition) {
-        this.addition = addition;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -85,7 +62,6 @@ public class Game {
         sb.append(", maxScore=").append(maxScore);
         sb.append(", totalDistance=").append(totalDistance);
         sb.append(", userId=").append(userId);
-        sb.append(", addition=").append(addition);
         sb.append("]");
         return sb.toString();
     }

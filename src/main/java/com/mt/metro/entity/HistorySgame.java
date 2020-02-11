@@ -9,17 +9,6 @@ public class HistorySgame {
 
     private Integer userId;
 
-    public HistorySgame(Integer id, Integer num, Integer distance, Integer userId) {
-        this.id = id;
-        this.num = num;
-        this.distance = distance;
-        this.userId = userId;
-    }
-
-    public HistorySgame() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

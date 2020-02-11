@@ -9,16 +9,9 @@ public class Achievement {
 
     private Integer requirement;
 
-    public Achievement(Integer id, String name, String achieveUrl, Integer requirement) {
-        this.id = id;
-        this.name = name;
-        this.achieveUrl = achieveUrl;
-        this.requirement = requirement;
-    }
+    private String category;
 
-    public Achievement() {
-        super();
-    }
+    private Integer reward;
 
     public Integer getId() {
         return id;
@@ -52,6 +45,22 @@ public class Achievement {
         this.requirement = requirement;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category == null ? null : category.trim();
+    }
+
+    public Integer getReward() {
+        return reward;
+    }
+
+    public void setReward(Integer reward) {
+        this.reward = reward;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -62,6 +71,8 @@ public class Achievement {
         sb.append(", name=").append(name);
         sb.append(", achieveUrl=").append(achieveUrl);
         sb.append(", requirement=").append(requirement);
+        sb.append(", category=").append(category);
+        sb.append(", reward=").append(reward);
         sb.append("]");
         return sb.toString();
     }

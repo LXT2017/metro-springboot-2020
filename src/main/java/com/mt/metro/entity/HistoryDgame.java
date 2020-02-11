@@ -11,17 +11,6 @@ public class HistoryDgame {
 
     private Integer userId;
 
-    public HistoryDgame(Integer id, Date cTime, Integer result, Integer userId) {
-        this.id = id;
-        this.cTime = cTime;
-        this.result = result;
-        this.userId = userId;
-    }
-
-    public HistoryDgame() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

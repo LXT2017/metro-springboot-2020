@@ -1,9 +1,11 @@
 package com.mt.metro.mapper;
 
 import com.mt.metro.entity.User;
+import com.mt.metro.entity.User1;
 import com.mt.metro.entity.UserExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface UserMapper {
     int countByExample(UserExample example);
@@ -27,4 +29,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
+
+    User1 selectInitialInfo(@Param("id")int id);
+
+    List<User1> selectDailyRanking();
+    List<User1> selectWeekRanking();
 }

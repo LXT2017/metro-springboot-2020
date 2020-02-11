@@ -17,20 +17,6 @@ public class PicPuzzle {
 
     private Date pTime;
 
-    public PicPuzzle(Integer id, String name, String introduction, String chipUrl, String picUrl, Integer score, Date pTime) {
-        this.id = id;
-        this.name = name;
-        this.introduction = introduction;
-        this.chipUrl = chipUrl;
-        this.picUrl = picUrl;
-        this.score = score;
-        this.pTime = pTime;
-    }
-
-    public PicPuzzle() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

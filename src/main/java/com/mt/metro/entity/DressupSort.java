@@ -5,15 +5,6 @@ public class DressupSort {
 
     private String name;
 
-    public DressupSort(Integer id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public DressupSort() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

@@ -1,7 +1,10 @@
 package com.mt.metro.common;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -37,6 +40,7 @@ public class Time {
 
 
     /**
+     * String
      * 获取准确的信息储存到数据库
      */
     public static String getCurrentTime(){
@@ -45,6 +49,41 @@ public class Time {
         String dateString = date.format(DateTimeFormatter.ofPattern("yyyyMMddHHMMss"));
         return dateString;
     }
+
+
+
+    /**
+     * LocalDateTime==>Date
+     * 获取准确的信息储存到数据库
+     */
+    public static Date getDateCurrentTime(){
+        ZoneId zoneId = ZoneId.systemDefault();
+        LocalDateTime localDateTime = LocalDateTime.now();
+        ZonedDateTime zdt = localDateTime.atZone(zoneId);
+
+        Date date = Date.from(zdt.toInstant());
+
+        System.out.println("LocalDateTime = " + localDateTime);
+        System.out.println("Date = " + date);
+        return date;
+    }
+
+
+    /**
+     * Date==>LocalDateTime
+     * 获取准确的信息储存到数据库
+     */
+    public static LocalDateTime getLocalDateCurrentTime(){
+        Date date = new Date();
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+
+        LocalDateTime localDateTime = instant.atZone(zoneId).toLocalDateTime();
+        System.out.println("Date = " + date);
+        System.out.println("LocalDateTime = " + localDateTime);
+        return localDateTime;
+    }
+
 
 
     /**

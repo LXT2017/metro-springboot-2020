@@ -294,66 +294,6 @@ public class DressupExample {
             return (Criteria) this;
         }
 
-        public Criteria andDressupNameIsNull() {
-            addCriterion("dressup_name is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameIsNotNull() {
-            addCriterion("dressup_name is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameEqualTo(Integer value) {
-            addCriterion("dressup_name =", value, "dressupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameNotEqualTo(Integer value) {
-            addCriterion("dressup_name <>", value, "dressupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameGreaterThan(Integer value) {
-            addCriterion("dressup_name >", value, "dressupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameGreaterThanOrEqualTo(Integer value) {
-            addCriterion("dressup_name >=", value, "dressupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameLessThan(Integer value) {
-            addCriterion("dressup_name <", value, "dressupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameLessThanOrEqualTo(Integer value) {
-            addCriterion("dressup_name <=", value, "dressupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameIn(List<Integer> values) {
-            addCriterion("dressup_name in", values, "dressupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameNotIn(List<Integer> values) {
-            addCriterion("dressup_name not in", values, "dressupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameBetween(Integer value1, Integer value2) {
-            addCriterion("dressup_name between", value1, value2, "dressupName");
-            return (Criteria) this;
-        }
-
-        public Criteria andDressupNameNotBetween(Integer value1, Integer value2) {
-            addCriterion("dressup_name not between", value1, value2, "dressupName");
-            return (Criteria) this;
-        }
-
         public Criteria andDressupIdIsNull() {
             addCriterion("dressup_id is null");
             return (Criteria) this;

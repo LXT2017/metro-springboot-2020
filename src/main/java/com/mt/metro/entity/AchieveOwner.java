@@ -7,16 +7,6 @@ public class AchieveOwner {
 
     private Integer achievementId;
 
-    public AchieveOwner(Integer id, Integer userId, Integer achievementId) {
-        this.id = id;
-        this.userId = userId;
-        this.achievementId = achievementId;
-    }
-
-    public AchieveOwner() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

@@ -35,7 +35,7 @@
             <!-- 默认false 是否允许子包 -->
             <property name="enableSubPackages" value="true" />
             <!-- 默认false 是否对model添加 构造函数 -->
-            <property name="constructorBased" value="true"/>
+            <property name="constructorBased" value="false"/>
             <!-- 默认false 建立的Model对象是否 不可改变  即生成的Model对象不会有 setter方法，只有构造方法 -->
             <property name="immutable" value="false"/>
             <!-- 默认false 是否对类CHAR类型的列的数据进行trim操作 -->
@@ -60,17 +60,18 @@
 <!--        <table tableName="dressup_owner"></table>-->
 <!--        <table tableName="dressup_sort"></table>-->
 <!--        <table tableName="feedback"></table>-->
-         <table tableName="game"></table>
+<!--         <table tableName="game"></table>-->
 <!--        <table tableName="history_dgame"></table>-->
 <!--        <table tableName="history_integral"></table>-->
 <!--        <table tableName="history_puzzle"></table>-->
 <!--        <table tableName="history_sgame"></table>-->
 <!--        <table tableName="integral_owner"></table>-->
 <!--        <table tableName="mall"></table>-->
-<!--        <table tableName="notice"></table>-->
-        <table tableName="parameter"></table>
+        <table tableName="notice"></table>
+<!--        <table tableName="parameter"></table>-->
 <!--        <table tableName="pic_puzzle"></table>-->
 <!--        <table tableName="prop"></table>-->
 <!--        <table tableName="user"></table>-->
+<!--        <table tableName="coin"></table>-->
     </context>
 </generatorConfiguration>

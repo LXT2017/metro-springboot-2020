@@ -2,13 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mt.metro.mapper.DressupMapper" >
   <resultMap id="BaseResultMap" type="com.mt.metro.entity.Dressup" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="dress_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="price" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="dressup_name" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="dressup_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dress_url" property="dressUrl" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="dressup_id" property="dressupId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, dress_url, price, dressup_name, dressup_id
+    id, dress_url, price, dressup_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mt.metro.entity.DressupExample" >
     select
@@ -103,9 +100,9 @@
   </delete>
   <insert id="insert" parameterType="com.mt.metro.entity.Dressup" >
     insert into dressup (id, dress_url, price, 
-      dressup_name, dressup_id)
+      dressup_id)
     values (#{id,jdbcType=INTEGER}, #{dressUrl,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
-      #{dressupName,jdbcType=INTEGER}, #{dressupId,jdbcType=INTEGER})
+      #{dressupId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mt.metro.entity.Dressup" >
     insert into dressup
@@ -118,9 +115,6 @@
       </if>
       <if test="price != null" >
         price,
-      </if>
-      <if test="dressupName != null" >
-        dressup_name,
       </if>
       <if test="dressupId != null" >
         dressup_id,
@@ -135,9 +129,6 @@
       </if>
       <if test="price != null" >
         #{price,jdbcType=INTEGER},
-      </if>
-      <if test="dressupName != null" >
-        #{dressupName,jdbcType=INTEGER},
       </if>
       <if test="dressupId != null" >
         #{dressupId,jdbcType=INTEGER},
@@ -162,9 +153,6 @@
       <if test="record.price != null" >
         price = #{record.price,jdbcType=INTEGER},
       </if>
-      <if test="record.dressupName != null" >
-        dressup_name = #{record.dressupName,jdbcType=INTEGER},
-      </if>
       <if test="record.dressupId != null" >
         dressup_id = #{record.dressupId,jdbcType=INTEGER},
       </if>
@@ -178,7 +166,6 @@
     set id = #{record.id,jdbcType=INTEGER},
       dress_url = #{record.dressUrl,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=INTEGER},
-      dressup_name = #{record.dressupName,jdbcType=INTEGER},
       dressup_id = #{record.dressupId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -193,9 +180,6 @@
       <if test="price != null" >
         price = #{price,jdbcType=INTEGER},
       </if>
-      <if test="dressupName != null" >
-        dressup_name = #{dressupName,jdbcType=INTEGER},
-      </if>
       <if test="dressupId != null" >
         dressup_id = #{dressupId,jdbcType=INTEGER},
       </if>
@@ -206,7 +190,6 @@
     update dressup
     set dress_url = #{dressUrl,jdbcType=VARCHAR},
       price = #{price,jdbcType=INTEGER},
-      dressup_name = #{dressupName,jdbcType=INTEGER},
       dressup_id = #{dressupId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

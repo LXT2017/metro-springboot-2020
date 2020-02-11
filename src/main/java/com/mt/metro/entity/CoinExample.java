@@ -1,17 +1,16 @@
 package com.mt.metro.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class NoticeExample {
+public class CoinExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public NoticeExample() {
+    public CoinExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,193 +164,183 @@ public class NoticeExample {
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNull() {
-            addCriterion("content is null");
+        public Criteria andCoinNumberIsNull() {
+            addCriterion("coin_number is null");
             return (Criteria) this;
         }
 
-        public Criteria andContentIsNotNull() {
-            addCriterion("content is not null");
+        public Criteria andCoinNumberIsNotNull() {
+            addCriterion("coin_number is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContentEqualTo(String value) {
-            addCriterion("content =", value, "content");
+        public Criteria andCoinNumberEqualTo(Integer value) {
+            addCriterion("coin_number =", value, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotEqualTo(String value) {
-            addCriterion("content <>", value, "content");
+        public Criteria andCoinNumberNotEqualTo(Integer value) {
+            addCriterion("coin_number <>", value, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThan(String value) {
-            addCriterion("content >", value, "content");
+        public Criteria andCoinNumberGreaterThan(Integer value) {
+            addCriterion("coin_number >", value, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentGreaterThanOrEqualTo(String value) {
-            addCriterion("content >=", value, "content");
+        public Criteria andCoinNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("coin_number >=", value, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThan(String value) {
-            addCriterion("content <", value, "content");
+        public Criteria andCoinNumberLessThan(Integer value) {
+            addCriterion("coin_number <", value, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentLessThanOrEqualTo(String value) {
-            addCriterion("content <=", value, "content");
+        public Criteria andCoinNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("coin_number <=", value, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentLike(String value) {
-            addCriterion("content like", value, "content");
+        public Criteria andCoinNumberIn(List<Integer> values) {
+            addCriterion("coin_number in", values, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotLike(String value) {
-            addCriterion("content not like", value, "content");
+        public Criteria andCoinNumberNotIn(List<Integer> values) {
+            addCriterion("coin_number not in", values, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentIn(List<String> values) {
-            addCriterion("content in", values, "content");
+        public Criteria andCoinNumberBetween(Integer value1, Integer value2) {
+            addCriterion("coin_number between", value1, value2, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotIn(List<String> values) {
-            addCriterion("content not in", values, "content");
+        public Criteria andCoinNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("coin_number not between", value1, value2, "coinNumber");
             return (Criteria) this;
         }
 
-        public Criteria andContentBetween(String value1, String value2) {
-            addCriterion("content between", value1, value2, "content");
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andContentNotBetween(String value1, String value2) {
-            addCriterion("content not between", value1, value2, "content");
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateIsNull() {
-            addCriterion("notice_date is null");
+        public Criteria andUserIdEqualTo(Integer value) {
+            addCriterion("user_id =", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateIsNotNull() {
-            addCriterion("notice_date is not null");
+        public Criteria andUserIdNotEqualTo(Integer value) {
+            addCriterion("user_id <>", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateEqualTo(Date value) {
-            addCriterion("notice_date =", value, "noticeDate");
+        public Criteria andUserIdGreaterThan(Integer value) {
+            addCriterion("user_id >", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateNotEqualTo(Date value) {
-            addCriterion("notice_date <>", value, "noticeDate");
+        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_id >=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateGreaterThan(Date value) {
-            addCriterion("notice_date >", value, "noticeDate");
+        public Criteria andUserIdLessThan(Integer value) {
+            addCriterion("user_id <", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateGreaterThanOrEqualTo(Date value) {
-            addCriterion("notice_date >=", value, "noticeDate");
+        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("user_id <=", value, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateLessThan(Date value) {
-            addCriterion("notice_date <", value, "noticeDate");
+        public Criteria andUserIdIn(List<Integer> values) {
+            addCriterion("user_id in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateLessThanOrEqualTo(Date value) {
-            addCriterion("notice_date <=", value, "noticeDate");
+        public Criteria andUserIdNotIn(List<Integer> values) {
+            addCriterion("user_id not in", values, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateIn(List<Date> values) {
-            addCriterion("notice_date in", values, "noticeDate");
+        public Criteria andUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("user_id between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateNotIn(List<Date> values) {
-            addCriterion("notice_date not in", values, "noticeDate");
+        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateBetween(Date value1, Date value2) {
-            addCriterion("notice_date between", value1, value2, "noticeDate");
+        public Criteria andWeekNumberIsNull() {
+            addCriterion("week_number is null");
             return (Criteria) this;
         }
 
-        public Criteria andNoticeDateNotBetween(Date value1, Date value2) {
-            addCriterion("notice_date not between", value1, value2, "noticeDate");
+        public Criteria andWeekNumberIsNotNull() {
+            addCriterion("week_number is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDurationIsNull() {
-            addCriterion("duration is null");
+        public Criteria andWeekNumberEqualTo(Integer value) {
+            addCriterion("week_number =", value, "weekNumber");
             return (Criteria) this;
         }
 
-        public Criteria andDurationIsNotNull() {
-            addCriterion("duration is not null");
+        public Criteria andWeekNumberNotEqualTo(Integer value) {
+            addCriterion("week_number <>", value, "weekNumber");
             return (Criteria) this;
         }
 
-        public Criteria andDurationEqualTo(Integer value) {
-            addCriterion("duration =", value, "duration");
+        public Criteria andWeekNumberGreaterThan(Integer value) {
+            addCriterion("week_number >", value, "weekNumber");
             return (Criteria) this;
         }
 
-        public Criteria andDurationNotEqualTo(Integer value) {
-            addCriterion("duration <>", value, "duration");
+        public Criteria andWeekNumberGreaterThanOrEqualTo(Integer value) {
+            addCriterion("week_number >=", value, "weekNumber");
             return (Criteria) this;
         }
 
-        public Criteria andDurationGreaterThan(Integer value) {
-            addCriterion("duration >", value, "duration");
+        public Criteria andWeekNumberLessThan(Integer value) {
+            addCriterion("week_number <", value, "weekNumber");
             return (Criteria) this;
         }
 
-        public Criteria andDurationGreaterThanOrEqualTo(Integer value) {
-            addCriterion("duration >=", value, "duration");
+        public Criteria andWeekNumberLessThanOrEqualTo(Integer value) {
+            addCriterion("week_number <=", value, "weekNumber");
             return (Criteria) this;
         }
 
-        public Criteria andDurationLessThan(Integer value) {
-            addCriterion("duration <", value, "duration");
+        public Criteria andWeekNumberIn(List<Integer> values) {
+            addCriterion("week_number in", values, "weekNumber");
             return (Criteria) this;
         }
 
-        public Criteria andDurationLessThanOrEqualTo(Integer value) {
-            addCriterion("duration <=", value, "duration");
+        public Criteria andWeekNumberNotIn(List<Integer> values) {
+            addCriterion("week_number not in", values, "weekNumber");
             return (Criteria) this;
         }
 
-        public Criteria andDurationIn(List<Integer> values) {
-            addCriterion("duration in", values, "duration");
+        public Criteria andWeekNumberBetween(Integer value1, Integer value2) {
+            addCriterion("week_number between", value1, value2, "weekNumber");
             return (Criteria) this;
         }
 
-        public Criteria andDurationNotIn(List<Integer> values) {
-            addCriterion("duration not in", values, "duration");
-            return (Criteria) this;
-        }
-
-        public Criteria andDurationBetween(Integer value1, Integer value2) {
-            addCriterion("duration between", value1, value2, "duration");
-            return (Criteria) this;
-        }
-
-        public Criteria andDurationNotBetween(Integer value1, Integer value2) {
-            addCriterion("duration not between", value1, value2, "duration");
+        public Criteria andWeekNumberNotBetween(Integer value1, Integer value2) {
+            addCriterion("week_number not between", value1, value2, "weekNumber");
             return (Criteria) this;
         }
     }

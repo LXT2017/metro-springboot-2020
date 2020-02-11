@@ -15,19 +15,7 @@ public class Mall {
 
     private Integer remainingCapacity;
 
-    public Mall(Integer id, String name, String introduction, String picUrl, Integer price, Integer capacity, Integer remainingCapacity) {
-        this.id = id;
-        this.name = name;
-        this.introduction = introduction;
-        this.picUrl = picUrl;
-        this.price = price;
-        this.capacity = capacity;
-        this.remainingCapacity = remainingCapacity;
-    }
-
-    public Mall() {
-        super();
-    }
+    private String kind;
 
     public Integer getId() {
         return id;
@@ -85,6 +73,14 @@ public class Mall {
         this.remainingCapacity = remainingCapacity;
     }
 
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind == null ? null : kind.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -98,6 +94,7 @@ public class Mall {
         sb.append(", price=").append(price);
         sb.append(", capacity=").append(capacity);
         sb.append(", remainingCapacity=").append(remainingCapacity);
+        sb.append(", kind=").append(kind);
         sb.append("]");
         return sb.toString();
     }

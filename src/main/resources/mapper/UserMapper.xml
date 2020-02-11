@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mt.metro.mapper.UserMapper" >
+
+  <resultMap id="UserResultMap" type="com.mt.metro.entity.User1" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="u_id" property="uId" jdbcType="INTEGER" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="statement" property="statement" jdbcType="VARCHAR" />
+    <result column="default_station" property="defaultStation" jdbcType="VARCHAR" />
+      <result column="coin_number" property="coinNumber" jdbcType="INTEGER" />
+      <result column="week_number" property="weekNumber" javaType="INTEGER"/>
+      <result column="daily_score" property="dailyScore" jdbcType="INTEGER" />
+      <result column="week_score" property="weekScore" jdbcType="INTEGER" />
+      <result column="total_score" property="totalScore" jdbcType="INTEGER" />
+      <result column="daily_ranking" property="dailyRanking" jdbcType="INTEGER" />
+      <result column="week_ranking" property="weekRanking" jdbcType="INTEGER" />
+  </resultMap>
+
+  <resultMap id="User1ResultMap" type="com.mt.metro.entity.User1" >
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="daily_score" property="dailyScore" jdbcType="INTEGER" />
+    <result column="week_score" property="weekScore" jdbcType="INTEGER" />
+  </resultMap>
+  
+  
   <resultMap id="BaseResultMap" type="com.mt.metro.entity.User" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="u_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="nickname" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="city_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="statement" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="u_id" property="uId" jdbcType="INTEGER" />
+    <result column="gender" property="gender" jdbcType="INTEGER" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="statement" property="statement" jdbcType="VARCHAR" />
+    <result column="default_station" property="defaultStation" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,8 +94,33 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, u_id, nickname, city_id, statement
+    id, u_id, gender, nickname, city, statement, default_station
   </sql>
+
+
+  <select id="selectInitialInfo" resultMap="UserResultMap" >
+   select u.*,co.coin_number,co.week_number,car.* from user u,coin co,carbon_ranking car
+    where u.id = #{id} and co.user_id=u.id and car.user_id=u.id
+  </select>
+
+
+
+  <select id="selectDailyRanking" resultMap="UserResultMap" >
+   select u.nickname,c.daily_score
+   from user u,carbon_ranking c
+   where u.id=c.user_id
+    order by c.daily_score desc
+  </select>
+
+  <select id="selectWeekRanking" resultMap="UserResultMap" >
+   select u.nickname,c.week_score
+   from user u,carbon_ranking c
+   where u.id=c.user_id
+    order by c.week_score desc
+  </select>
+
+
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mt.metro.entity.UserExample" >
     select
     <if test="distinct" >
@@ -102,10 +152,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mt.metro.entity.User" >
-    insert into user (id, u_id, nickname, 
-      city_id, statement)
-    values (#{id,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, 
-      #{cityId,jdbcType=INTEGER}, #{statement,jdbcType=VARCHAR})
+    insert into user (id, u_id, gender, 
+      nickname, city, statement, 
+      default_station)
+    values (#{id,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{gender,jdbcType=INTEGER}, 
+      #{nickname,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{statement,jdbcType=VARCHAR}, 
+      #{defaultStation,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mt.metro.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into user
@@ -116,14 +168,20 @@
       <if test="uId != null" >
         u_id,
       </if>
+      <if test="gender != null" >
+        gender,
+      </if>
       <if test="nickname != null" >
         nickname,
       </if>
-      <if test="cityId != null" >
-        city_id,
+      <if test="city != null" >
+        city,
       </if>
       <if test="statement != null" >
         statement,
+      </if>
+      <if test="defaultStation != null" >
+        default_station,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -133,14 +191,20 @@
       <if test="uId != null" >
         #{uId,jdbcType=INTEGER},
       </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=INTEGER},
+      </if>
       <if test="nickname != null" >
         #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="cityId != null" >
-        #{cityId,jdbcType=INTEGER},
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
       </if>
       <if test="statement != null" >
         #{statement,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultStation != null" >
+        #{defaultStation,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -159,14 +223,20 @@
       <if test="record.uId != null" >
         u_id = #{record.uId,jdbcType=INTEGER},
       </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=INTEGER},
+      </if>
       <if test="record.nickname != null" >
         nickname = #{record.nickname,jdbcType=VARCHAR},
       </if>
-      <if test="record.cityId != null" >
-        city_id = #{record.cityId,jdbcType=INTEGER},
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
       </if>
       <if test="record.statement != null" >
         statement = #{record.statement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultStation != null" >
+        default_station = #{record.defaultStation,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -177,9 +247,11 @@
     update user
     set id = #{record.id,jdbcType=INTEGER},
       u_id = #{record.uId,jdbcType=INTEGER},
+      gender = #{record.gender,jdbcType=INTEGER},
       nickname = #{record.nickname,jdbcType=VARCHAR},
-      city_id = #{record.cityId,jdbcType=INTEGER},
-      statement = #{record.statement,jdbcType=VARCHAR}
+      city = #{record.city,jdbcType=VARCHAR},
+      statement = #{record.statement,jdbcType=VARCHAR},
+      default_station = #{record.defaultStation,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -190,14 +262,20 @@
       <if test="uId != null" >
         u_id = #{uId,jdbcType=INTEGER},
       </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=INTEGER},
+      </if>
       <if test="nickname != null" >
         nickname = #{nickname,jdbcType=VARCHAR},
       </if>
-      <if test="cityId != null" >
-        city_id = #{cityId,jdbcType=INTEGER},
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
       </if>
       <if test="statement != null" >
         statement = #{statement,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultStation != null" >
+        default_station = #{defaultStation,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -205,9 +283,11 @@
   <update id="updateByPrimaryKey" parameterType="com.mt.metro.entity.User" >
     update user
     set u_id = #{uId,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=INTEGER},
       nickname = #{nickname,jdbcType=VARCHAR},
-      city_id = #{cityId,jdbcType=INTEGER},
-      statement = #{statement,jdbcType=VARCHAR}
+      city = #{city,jdbcType=VARCHAR},
+      statement = #{statement,jdbcType=VARCHAR},
+      default_station = #{defaultStation,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

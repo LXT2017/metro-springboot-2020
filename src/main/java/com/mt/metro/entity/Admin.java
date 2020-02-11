@@ -5,15 +5,6 @@ public class Admin {
 
     private String password;
 
-    public Admin(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
-
-    public Admin() {
-        super();
-    }
-
     public String getUserName() {
         return userName;
     }

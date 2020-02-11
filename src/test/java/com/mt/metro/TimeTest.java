@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class TimeTest {
 
-    //@Test
+    @Test
     public void getCurrentDate(){
         System.out.println(Time.getCurrentDate());
     }

@@ -1,19 +1,21 @@
 package com.mt.metro.service;
 
+import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
+import com.mt.metro.common.JsonFilter;
 import com.mt.metro.common.ResponseResult;
 import com.mt.metro.common.Time;
 import com.mt.metro.entity.*;
-import com.mt.metro.mapper.CarbonRankingMapper;
-import com.mt.metro.mapper.HistoryIntegralMapper;
-import com.mt.metro.mapper.UserMapper;
+import com.mt.metro.mapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.util.Date;
+import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,21 +27,82 @@ import java.util.concurrent.TimeUnit;
 public class UserService {
     @Autowired
     UserMapper userMapper;
-    @Autowired
+    @Resource
     RedisTemplate redisTemplate;
     @Autowired
     TokenService tokenService;
-
     @Autowired
-    private CarbonRankingMapper carbonRankingMapper;
-
-
+    CarbonRankingMapper carbonRankingMapper;
     @Autowired
     HistoryIntegralMapper historyIntegralMapper;
+    @Autowired
+    CoinMapper coinMapper;
+    @Autowired
+    ParameterMapper parameterMapper;
+
+    @Autowired
+    FeedbackMapper feedbackMapper;
+
+    //获取初始化资源
+    //@Slave
+    public Map getInitialInfo(User user){
+        Map map = new HashMap();
+        User1 user1 = null;
+        if(user != null) {
+            user1 = userMapper.selectInitialInfo(user.getId());
+            if(user1 == null){
+                System.out.println("多数据表异常");
+            }
+        }
+        Parameter parameter = parameterMapper.selectByPrimaryKey(1);
+
+        /*过滤字段
+        System.out.println(parameter);
+        SimplePropertyPreFilter filter = new SimplePropertyPreFilter(
+                Parameter.class, "addition");
+        System.out.println(JSONObject.toJSONString(parameter, filter));
+
+
+
+        过滤不必要的字段
+        final String[] arr = new String[] { "ticketNo", "status", "updateTime",  "createTime" };
+        PropertyFilter propertyFilter = new PropertyFilter() {
+        public boolean apply(Object object, String name, Object value) {
+        for (String string : arr) {
+            if (name.equalsIgnoreCase(string)) {
+                return false;// 过滤掉
+            }
+        }
+             return true;// 不过滤
+            }
+        };
+         json = JSON.toJSONString(user, propertyFilter);
+        System.out.println(json);
+        */
+
+
+        map.put("user",user1);
+        map.put("param",parameter);
+        map.put("trainInfo",getSubwayInfo());
+        map.put("notice",getNotice());
+
+        return map;
+    }
+
+
+
+    //模仿列车信息
+    public Map getSubwayInfo(){
+        Map map = new HashMap();
+        map.put("first",2);
+        map.put("second",8);
+        return map;
+    }
+
 
     //在这里使用注解来选择数据源
     //@Slave
-    public User findUserByUId(User user){
+    public Object findUserByUId(User user){
 
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
@@ -48,10 +111,45 @@ public class UserService {
         System.out.println(user1);
         //没有注册过就先注册
         if(user1.size() == 0){
-            return null;
+            System.out.println("用户不存在");
+            return registry(user);
         }
         return user1.get(0);
     }
+
+
+
+
+    //注册新用户
+    //@Master
+    public User registry(User user){
+        user.setNickname("匿名用户");
+        userMapper.insertSelective(user);
+
+        Coin coin = new Coin();
+        coin.setCoinNumber(0);
+        coin.setUserId(user.getId());
+        coinMapper.insertSelective(coin);
+
+        CarbonRanking carbonRanking = new CarbonRanking(0,0,0,-1,-1);
+        carbonRanking.setUserId(user.getId());
+        carbonRankingMapper.insertSelective(carbonRanking);
+        return user;
+    }
+
+
+
+    public String getNotice(){
+        ValueOperations<String, Notice> operations = redisTemplate.opsForValue();
+        Notice notice = operations.get("notice");
+        if(notice == null){
+            return null;
+        }else {
+            return notice.getContent();
+        }
+    }
+
+    /////////////////////////////////////////////////////////////////////////
 
 
     public String getUserToken(String id){
@@ -70,6 +168,7 @@ public class UserService {
         }
         return token;
     }
+
     //签到查询
     public ResponseResult querySignIn(int id){
         ValueOperations<String, String> operations = redisTemplate.opsForValue();
@@ -81,7 +180,7 @@ public class UserService {
             code=501;
             message = "今日未签到";
         }else{
-            code=100;
+            code=200;
             message = "今日已签到";
         }
         return new ResponseResult(code,message,null);
@@ -94,11 +193,14 @@ public class UserService {
             ValueOperations<String, String> operations = redisTemplate.opsForValue();
             String key = Time.getCurrentDate()+id;
             operations.set(key,"true",Time.getRefreshTime(), TimeUnit.SECONDS);
-            HistoryIntegral historyIntegral = new HistoryIntegral(null,1,new Date(),"签到",id);
-            historyIntegralMapper.insertSelective(historyIntegral);
-            //这里还需要加一个排行的
-
-            return new ResponseResult(100,"success",null);
+            //HistoryIntegral historyIntegral = new HistoryIntegral(null,1,new Date(),"签到",id);
+            //historyIntegralMapper.insertSelective(historyIntegral);
+            //签到加积分
+            Coin coin = new Coin();
+            coin.setUserId(id);
+            coin.setCoinNumber(10);
+            coinMapper.updateByUid(coin);
+            return new ResponseResult(200,"签到成功",null);
         }catch (Exception e){
             throw new RuntimeException("签到失败");
         }
@@ -106,12 +208,7 @@ public class UserService {
     }
 
 
-    //注册新用户
-    //@Master
-    public User registry(User user){
-        userMapper.insertSelective(user);
-        return user;
-    }
+/////////////////////////////////////////////////////////////////
 
 
     //修改个人信息
@@ -130,21 +227,39 @@ public class UserService {
 
 
 
+    /*
+    排行，只需返回用户昵称和碳积分
+    日排行和周排行
+     */
+    public Object getCarbonRanking(int option){
+        Map map = new HashMap();
+        SimplePropertyPreFilter filter1 = new SimplePropertyPreFilter(
+                User1.class, "nickname","dailyScore");
+        SimplePropertyPreFilter filter2 = new SimplePropertyPreFilter(
+                User1.class, "nickname","weekScore");
+        List<User1> user1 = null;
 
-    public CarbonRanking getCarbonRanking(int uid){
-        CarbonRankingExample example = new CarbonRankingExample();
-        CarbonRankingExample.Criteria criteria = example.createCriteria();
-        criteria.andUserIdEqualTo(uid);
-        try {
-            List<CarbonRanking> list = carbonRankingMapper.selectByExample(example);
-            if(list.size()==0){
-                return null;
-            }else{
-                return list.get(0);
-            }
-        }catch (Exception e){
-            throw  new RuntimeException("数据库出错");
+        if(option == 1){
+            user1 = userMapper.selectDailyRanking();
+            map.put("dailyRanking",JsonFilter.getJsonFilter(user1,filter1));
+        }else if(option == 2){
+            user1 = userMapper.selectWeekRanking();
+            map.put("weekRanking", JsonFilter.getJsonFilter(user1,filter2));
         }
+        return map;
+    }
 
+
+
+    //@Master
+    public Boolean postFeedBack(Feedback feedback) {
+
+        feedback.setfDate(Time.getDateCurrentTime());
+        int i = feedbackMapper.insertSelective(feedback);
+        if (i == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

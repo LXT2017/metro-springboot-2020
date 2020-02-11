@@ -15,21 +15,12 @@ public class CarbonRanking {
 
     private Integer userId;
 
-    private Integer currentStrength;
-
-    public CarbonRanking(Integer id, Integer dailyScore, Integer weekScore, Integer totalScore, Integer dailyRanking, Integer weekRanking, Integer userId, Integer currentStrength) {
-        this.id = id;
+    public CarbonRanking(Integer dailyScore, Integer weekScore, Integer totalScore, Integer dailyRanking, Integer weekRanking) {
         this.dailyScore = dailyScore;
         this.weekScore = weekScore;
         this.totalScore = totalScore;
         this.dailyRanking = dailyRanking;
         this.weekRanking = weekRanking;
-        this.userId = userId;
-        this.currentStrength = currentStrength;
-    }
-
-    public CarbonRanking() {
-        super();
     }
 
     public Integer getId() {
@@ -88,14 +79,6 @@ public class CarbonRanking {
         this.userId = userId;
     }
 
-    public Integer getCurrentStrength() {
-        return currentStrength;
-    }
-
-    public void setCurrentStrength(Integer currentStrength) {
-        this.currentStrength = currentStrength;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -109,7 +92,6 @@ public class CarbonRanking {
         sb.append(", dailyRanking=").append(dailyRanking);
         sb.append(", weekRanking=").append(weekRanking);
         sb.append(", userId=").append(userId);
-        sb.append(", currentStrength=").append(currentStrength);
         sb.append("]");
         return sb.toString();
     }

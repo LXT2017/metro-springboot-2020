@@ -2,13 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mt.metro.mapper.HistoryPuzzleMapper" >
   <resultMap id="BaseResultMap" type="com.mt.metro.entity.HistoryPuzzle" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="complete_time" jdbcType="TIME" javaType="java.util.Date" />
-      <arg column="complete_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="puzzle_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="complete_time" property="completeTime" jdbcType="TIME" />
+    <result column="complete_date" property="completeDate" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="puzzle_id" property="puzzleId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

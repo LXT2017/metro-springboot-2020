@@ -5,13 +5,12 @@ import com.mt.metro.annotation.UserLoginToken;
 import com.mt.metro.annotation.VisitLog;
 import com.mt.metro.common.ResponseResult;
 import com.mt.metro.common.Time;
-import com.mt.metro.entity.CarbonRanking;
+import com.mt.metro.entity.Feedback;
 import com.mt.metro.entity.User;
 import com.mt.metro.service.TokenService;
 import com.mt.metro.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -32,24 +31,27 @@ public class UserLogin {
         this.tokenService = tokenService;
     }
 
-    //登录
+
+    /**
+     * 用户初始化以及公共资源获取
+     * @param user
+     * @return
+     */
     @PassToken
     @PostMapping("/login")
     public ResponseResult login(User user){
         ResponseResult responseResult;
-        User userForBase = userService.findUserByUId(user);
+        User userForBase = (User)userService.findUserByUId(user);
         //假设传过来的都是合法用户
-        if(userForBase==null){
+        if(userForBase==null) {
             System.out.println("用户不存在");
             userForBase = userService.registry(user);
         }
-
+        Map map = userService.getInitialInfo(userForBase);
         String token = tokenService.getToken(userForBase);
-        Map map = new HashMap();
         map.put("token",token);
-        map.put("user",userForBase);
 
-        responseResult = new ResponseResult(100,"success",map);
+        responseResult = new ResponseResult(200,"success",map);
         return responseResult;
 
     }
@@ -104,9 +106,27 @@ public class UserLogin {
 
     //查询用户碳积分情况，需要用户id
     @GetMapping("/getCarbonRanking")
-    public ResponseResult getCarbonRanking(@RequestParam("uid")int uid){
-        CarbonRanking carbonRanking = userService.getCarbonRanking(uid);
-        ResponseResult result = new ResponseResult(200,"success",carbonRanking);
+    public ResponseResult getCarbonRanking(int option){
+        if(option != 1 && option != 2){
+            return new ResponseResult(400,"参数错误",null);
+        }
+        Map map = (Map)userService.getCarbonRanking(option);
+        ResponseResult result = new ResponseResult(200,"success",map);
         return result;
+    }
+
+
+    /**
+     * 反馈模块
+     */
+    @PostMapping("/feedBack")
+    public ResponseResult postFeedBack(Feedback feedback) {
+        int code = 400;
+        String msg = "fail";
+        if (userService.postFeedBack(feedback)) {
+            code = 200;
+            msg = "success";
+        }
+        return new ResponseResult(code, msg, null);
     }
 }

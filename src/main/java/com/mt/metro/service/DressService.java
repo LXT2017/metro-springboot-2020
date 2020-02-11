@@ -1,15 +1,18 @@
 package com.mt.metro.service;
 
 
+import com.alibaba.fastjson.serializer.PropertyFilter;
+import com.mt.metro.common.JsonFilter;
 import com.mt.metro.entity.Dressup;
 import com.mt.metro.entity.DressupExample;
-import com.mt.metro.entity.DressupSort;
 import com.mt.metro.mapper.DressupMapper;
 import com.mt.metro.mapper.DressupSortMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("DressService")
 public class DressService {
@@ -24,21 +27,31 @@ public class DressService {
     DressupMapper dressupMapper;
 
 
-    //获取所有分类装扮
-    public List<DressupSort> getDressSort(){
-        return dressupSortMapper.selectAll();
-    }
 
+    //@Slave
+    public Object getDress(Dressup dressup){
+        Map map = new HashMap();
 
-    public List<Dressup> getDress(Dressup dressup){
         DressupExample example = new DressupExample();
         DressupExample.Criteria criteria = example.createCriteria();
         criteria.andDressupIdEqualTo(dressup.getDressupId());
-        try {
-            List<Dressup> list = dressupMapper.selectByExample(example);
-            return list;
-        }catch (Exception e){
-            throw  new RuntimeException("数据库出错");
-        }
+
+        PropertyFilter profilter = new PropertyFilter(){
+            @Override
+            public boolean apply(Object object, String name, Object value) {
+                if(name.equalsIgnoreCase("dressupId")){
+                    //false表示last字段将被排除在外
+                    return false;
+                }
+                return true;
+            }
+
+        };
+
+        List<Dressup> list = dressupMapper.selectByExample(example);
+        map.put("dress", JsonFilter.getJsonPreFilter(list,profilter));
+        return map;
     }
+
+
 }

@@ -13,18 +13,6 @@ public class HistoryIntegral {
 
     private Integer userId;
 
-    public HistoryIntegral(Integer id, Integer num, Date hDate, String reason, Integer userId) {
-        this.id = id;
-        this.num = num;
-        this.hDate = hDate;
-        this.reason = reason;
-        this.userId = userId;
-    }
-
-    public HistoryIntegral() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

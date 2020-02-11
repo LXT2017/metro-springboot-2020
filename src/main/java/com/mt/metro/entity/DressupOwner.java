@@ -7,16 +7,6 @@ public class DressupOwner {
 
     private Integer dressupId;
 
-    public DressupOwner(Integer id, Integer userId, Integer dressupId) {
-        this.id = id;
-        this.userId = userId;
-        this.dressupId = dressupId;
-    }
-
-    public DressupOwner() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

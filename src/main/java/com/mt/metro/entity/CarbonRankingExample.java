@@ -523,66 +523,6 @@ public class CarbonRankingExample {
             addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
-
-        public Criteria andCurrentStrengthIsNull() {
-            addCriterion("current_strength is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthIsNotNull() {
-            addCriterion("current_strength is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthEqualTo(Integer value) {
-            addCriterion("current_strength =", value, "currentStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthNotEqualTo(Integer value) {
-            addCriterion("current_strength <>", value, "currentStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthGreaterThan(Integer value) {
-            addCriterion("current_strength >", value, "currentStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthGreaterThanOrEqualTo(Integer value) {
-            addCriterion("current_strength >=", value, "currentStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthLessThan(Integer value) {
-            addCriterion("current_strength <", value, "currentStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthLessThanOrEqualTo(Integer value) {
-            addCriterion("current_strength <=", value, "currentStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthIn(List<Integer> values) {
-            addCriterion("current_strength in", values, "currentStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthNotIn(List<Integer> values) {
-            addCriterion("current_strength not in", values, "currentStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthBetween(Integer value1, Integer value2) {
-            addCriterion("current_strength between", value1, value2, "currentStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andCurrentStrengthNotBetween(Integer value1, Integer value2) {
-            addCriterion("current_strength not between", value1, value2, "currentStrength");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {

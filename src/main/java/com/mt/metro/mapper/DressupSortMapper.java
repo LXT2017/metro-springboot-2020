@@ -28,7 +28,4 @@ public interface DressupSortMapper {
     int updateByPrimaryKeySelective(DressupSort record);
 
     int updateByPrimaryKey(DressupSort record);
-
-    //查询所有
-    List<DressupSort> selectAll();
 }

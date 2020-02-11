@@ -403,66 +403,6 @@ public class GameExample {
             addCriterion("user_id not between", value1, value2, "userId");
             return (Criteria) this;
         }
-
-        public Criteria andAdditionIsNull() {
-            addCriterion("addition is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionIsNotNull() {
-            addCriterion("addition is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionEqualTo(Integer value) {
-            addCriterion("addition =", value, "addition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionNotEqualTo(Integer value) {
-            addCriterion("addition <>", value, "addition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionGreaterThan(Integer value) {
-            addCriterion("addition >", value, "addition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionGreaterThanOrEqualTo(Integer value) {
-            addCriterion("addition >=", value, "addition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionLessThan(Integer value) {
-            addCriterion("addition <", value, "addition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionLessThanOrEqualTo(Integer value) {
-            addCriterion("addition <=", value, "addition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionIn(List<Integer> values) {
-            addCriterion("addition in", values, "addition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionNotIn(List<Integer> values) {
-            addCriterion("addition not in", values, "addition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionBetween(Integer value1, Integer value2) {
-            addCriterion("addition between", value1, value2, "addition");
-            return (Criteria) this;
-        }
-
-        public Criteria andAdditionNotBetween(Integer value1, Integer value2) {
-            addCriterion("addition not between", value1, value2, "addition");
-            return (Criteria) this;
-        }
     }
 
     public static class Criteria extends GeneratedCriteria {

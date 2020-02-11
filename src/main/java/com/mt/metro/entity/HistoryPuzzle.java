@@ -13,18 +13,6 @@ public class HistoryPuzzle {
 
     private Integer puzzleId;
 
-    public HistoryPuzzle(Integer id, Date completeTime, Date completeDate, Integer userId, Integer puzzleId) {
-        this.id = id;
-        this.completeTime = completeTime;
-        this.completeDate = completeDate;
-        this.userId = userId;
-        this.puzzleId = puzzleId;
-    }
-
-    public HistoryPuzzle() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

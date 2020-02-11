@@ -9,15 +9,7 @@ public class Notice {
 
     private Date noticeDate;
 
-    public Notice(Integer id, String content, Date noticeDate) {
-        this.id = id;
-        this.content = content;
-        this.noticeDate = noticeDate;
-    }
-
-    public Notice() {
-        super();
-    }
+    private Integer duration;
 
     public Integer getId() {
         return id;
@@ -43,6 +35,14 @@ public class Notice {
         this.noticeDate = noticeDate;
     }
 
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -52,6 +52,7 @@ public class Notice {
         sb.append(", id=").append(id);
         sb.append(", content=").append(content);
         sb.append(", noticeDate=").append(noticeDate);
+        sb.append(", duration=").append(duration);
         sb.append("]");
         return sb.toString();
     }

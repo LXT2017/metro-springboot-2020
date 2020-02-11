@@ -2,15 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mt.metro.mapper.MallMapper" >
   <resultMap id="BaseResultMap" type="com.mt.metro.entity.Mall" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pic_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="price" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="capacity" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="remaining_capacity" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="capacity" property="capacity" jdbcType="INTEGER" />
+    <result column="remaining_capacity" property="remainingCapacity" jdbcType="INTEGER" />
+    <result column="kind" property="kind" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -71,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, introduction, pic_url, price, capacity, remaining_capacity
+    id, name, introduction, pic_url, price, capacity, remaining_capacity, kind
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mt.metro.entity.MallExample" >
     select
@@ -106,10 +105,10 @@
   <insert id="insert" parameterType="com.mt.metro.entity.Mall" >
     insert into mall (id, name, introduction, 
       pic_url, price, capacity, 
-      remaining_capacity)
+      remaining_capacity, kind)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{introduction,jdbcType=VARCHAR}, 
       #{picUrl,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, #{capacity,jdbcType=INTEGER}, 
-      #{remainingCapacity,jdbcType=INTEGER})
+      #{remainingCapacity,jdbcType=INTEGER}, #{kind,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mt.metro.entity.Mall" >
     insert into mall
@@ -135,6 +134,9 @@
       <if test="remainingCapacity != null" >
         remaining_capacity,
       </if>
+      <if test="kind != null" >
+        kind,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -157,6 +159,9 @@
       </if>
       <if test="remainingCapacity != null" >
         #{remainingCapacity,jdbcType=INTEGER},
+      </if>
+      <if test="kind != null" >
+        #{kind,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -190,6 +195,9 @@
       <if test="record.remainingCapacity != null" >
         remaining_capacity = #{record.remainingCapacity,jdbcType=INTEGER},
       </if>
+      <if test="record.kind != null" >
+        kind = #{record.kind,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -203,7 +211,8 @@
       pic_url = #{record.picUrl,jdbcType=VARCHAR},
       price = #{record.price,jdbcType=INTEGER},
       capacity = #{record.capacity,jdbcType=INTEGER},
-      remaining_capacity = #{record.remainingCapacity,jdbcType=INTEGER}
+      remaining_capacity = #{record.remainingCapacity,jdbcType=INTEGER},
+      kind = #{record.kind,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -229,6 +238,9 @@
       <if test="remainingCapacity != null" >
         remaining_capacity = #{remainingCapacity,jdbcType=INTEGER},
       </if>
+      <if test="kind != null" >
+        kind = #{kind,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -239,7 +251,8 @@
       pic_url = #{picUrl,jdbcType=VARCHAR},
       price = #{price,jdbcType=INTEGER},
       capacity = #{capacity,jdbcType=INTEGER},
-      remaining_capacity = #{remainingCapacity,jdbcType=INTEGER}
+      remaining_capacity = #{remainingCapacity,jdbcType=INTEGER},
+      kind = #{kind,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

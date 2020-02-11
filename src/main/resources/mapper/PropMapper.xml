@@ -2,13 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mt.metro.mapper.PropMapper" >
   <resultMap id="BaseResultMap" type="com.mt.metro.entity.Prop" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="prop_describe" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pic_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="effect_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-    </constructor>
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="prop_describe" property="propDescribe" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="effect_url" property="effectUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

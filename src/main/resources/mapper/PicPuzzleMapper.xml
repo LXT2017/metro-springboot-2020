@@ -2,15 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.mt.metro.mapper.PicPuzzleMapper" >
   <resultMap id="BaseResultMap" type="com.mt.metro.entity.PicPuzzle" >
-    <constructor >
-      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="chip_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="pic_url" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="score" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="p_time" jdbcType="TIME" javaType="java.util.Date" />
-    </constructor>
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+    <result column="chip_url" property="chipUrl" jdbcType="VARCHAR" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+    <result column="p_time" property="pTime" jdbcType="TIME" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >

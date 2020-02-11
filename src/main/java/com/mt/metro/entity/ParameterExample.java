@@ -444,66 +444,6 @@ public class ParameterExample {
             return (Criteria) this;
         }
 
-        public Criteria andTotalStrengthIsNull() {
-            addCriterion("total_strength is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthIsNotNull() {
-            addCriterion("total_strength is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthEqualTo(Integer value) {
-            addCriterion("total_strength =", value, "totalStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthNotEqualTo(Integer value) {
-            addCriterion("total_strength <>", value, "totalStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthGreaterThan(Integer value) {
-            addCriterion("total_strength >", value, "totalStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthGreaterThanOrEqualTo(Integer value) {
-            addCriterion("total_strength >=", value, "totalStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthLessThan(Integer value) {
-            addCriterion("total_strength <", value, "totalStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthLessThanOrEqualTo(Integer value) {
-            addCriterion("total_strength <=", value, "totalStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthIn(List<Integer> values) {
-            addCriterion("total_strength in", values, "totalStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthNotIn(List<Integer> values) {
-            addCriterion("total_strength not in", values, "totalStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthBetween(Integer value1, Integer value2) {
-            addCriterion("total_strength between", value1, value2, "totalStrength");
-            return (Criteria) this;
-        }
-
-        public Criteria andTotalStrengthNotBetween(Integer value1, Integer value2) {
-            addCriterion("total_strength not between", value1, value2, "totalStrength");
-            return (Criteria) this;
-        }
-
         public Criteria andAdditionIsNull() {
             addCriterion("addition is null");
             return (Criteria) this;
@@ -561,6 +501,66 @@ public class ParameterExample {
 
         public Criteria andAdditionNotBetween(Integer value1, Integer value2) {
             addCriterion("addition not between", value1, value2, "addition");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthIsNull() {
+            addCriterion("total_strength is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthIsNotNull() {
+            addCriterion("total_strength is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthEqualTo(Integer value) {
+            addCriterion("total_strength =", value, "totalStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthNotEqualTo(Integer value) {
+            addCriterion("total_strength <>", value, "totalStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthGreaterThan(Integer value) {
+            addCriterion("total_strength >", value, "totalStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthGreaterThanOrEqualTo(Integer value) {
+            addCriterion("total_strength >=", value, "totalStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthLessThan(Integer value) {
+            addCriterion("total_strength <", value, "totalStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthLessThanOrEqualTo(Integer value) {
+            addCriterion("total_strength <=", value, "totalStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthIn(List<Integer> values) {
+            addCriterion("total_strength in", values, "totalStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthNotIn(List<Integer> values) {
+            addCriterion("total_strength not in", values, "totalStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthBetween(Integer value1, Integer value2) {
+            addCriterion("total_strength between", value1, value2, "totalStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andTotalStrengthNotBetween(Integer value1, Integer value2) {
+            addCriterion("total_strength not between", value1, value2, "totalStrength");
             return (Criteria) this;
         }
     }

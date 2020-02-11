@@ -1,17 +1,13 @@
 package com.mt.metro.entity;
 
-import java.util.Date;
-
-public class Feedback {
+public class Coin {
     private Integer id;
 
-    private String content;
-
-    private Date fDate;
+    private Integer coinNumber;
 
     private Integer userId;
 
-    private String name;
+    private Integer weekNumber;
 
     public Integer getId() {
         return id;
@@ -21,20 +17,12 @@ public class Feedback {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public Integer getCoinNumber() {
+        return coinNumber;
     }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    public Date getfDate() {
-        return fDate;
-    }
-
-    public void setfDate(Date fDate) {
-        this.fDate = fDate;
+    public void setCoinNumber(Integer coinNumber) {
+        this.coinNumber = coinNumber;
     }
 
     public Integer getUserId() {
@@ -45,12 +33,12 @@ public class Feedback {
         this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public Integer getWeekNumber() {
+        return weekNumber;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setWeekNumber(Integer weekNumber) {
+        this.weekNumber = weekNumber;
     }
 
     @Override
@@ -60,10 +48,9 @@ public class Feedback {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", content=").append(content);
-        sb.append(", fDate=").append(fDate);
+        sb.append(", coinNumber=").append(coinNumber);
         sb.append(", userId=").append(userId);
-        sb.append(", name=").append(name);
+        sb.append(", weekNumber=").append(weekNumber);
         sb.append("]");
         return sb.toString();
     }

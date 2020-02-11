@@ -1,8 +1,6 @@
 package com.mt.metro.entity;
 
-import java.io.Serializable;
-
-public class Parameter implements Serializable {
+public class Parameter {
     private Integer id;
 
     private String puzzleMusic;
@@ -13,23 +11,9 @@ public class Parameter implements Serializable {
 
     private String gamePic;
 
-    private Integer totalStrength;
-
     private Integer addition;
 
-    public Parameter(Integer id, String puzzleMusic, String gameMusic, String puzzlePic, String gamePic, Integer totalStrength, Integer addition) {
-        this.id = id;
-        this.puzzleMusic = puzzleMusic;
-        this.gameMusic = gameMusic;
-        this.puzzlePic = puzzlePic;
-        this.gamePic = gamePic;
-        this.totalStrength = totalStrength;
-        this.addition = addition;
-    }
-
-    public Parameter() {
-        super();
-    }
+    private Integer totalStrength;
 
     public Integer getId() {
         return id;
@@ -71,20 +55,20 @@ public class Parameter implements Serializable {
         this.gamePic = gamePic == null ? null : gamePic.trim();
     }
 
-    public Integer getTotalStrength() {
-        return totalStrength;
-    }
-
-    public void setTotalStrength(Integer totalStrength) {
-        this.totalStrength = totalStrength;
-    }
-
     public Integer getAddition() {
         return addition;
     }
 
     public void setAddition(Integer addition) {
         this.addition = addition;
+    }
+
+    public Integer getTotalStrength() {
+        return totalStrength;
+    }
+
+    public void setTotalStrength(Integer totalStrength) {
+        this.totalStrength = totalStrength;
     }
 
     @Override
@@ -98,8 +82,8 @@ public class Parameter implements Serializable {
         sb.append(", gameMusic=").append(gameMusic);
         sb.append(", puzzlePic=").append(puzzlePic);
         sb.append(", gamePic=").append(gamePic);
-        sb.append(", totalStrength=").append(totalStrength);
         sb.append(", addition=").append(addition);
+        sb.append(", totalStrength=").append(totalStrength);
         sb.append("]");
         return sb.toString();
     }

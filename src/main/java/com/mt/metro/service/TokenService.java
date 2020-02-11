@@ -9,6 +9,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 
 /**
  * @author jinbin
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class TokenService {
     @Autowired
     Audience audience;
-    @Autowired
+    @Resource
     RedisTemplate redisTemplate;
 
     public String getToken(User user) {

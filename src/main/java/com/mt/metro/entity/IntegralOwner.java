@@ -7,16 +7,6 @@ public class IntegralOwner {
 
     private Integer mallId;
 
-    public IntegralOwner(Integer id, Integer userId, Integer mallId) {
-        this.id = id;
-        this.userId = userId;
-        this.mallId = mallId;
-    }
-
-    public IntegralOwner() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }

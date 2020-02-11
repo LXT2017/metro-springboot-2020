@@ -7,14 +7,17 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service
 public class ResourceService {
 
-    @Autowired
-    RedisTemplate<String,Object> redisTemplate;
+    @Resource
+    RedisTemplate redisTemplate;
 
     @Autowired
     ParameterMapper parameterMapper;
+
 
     public Parameter getParam(){
         Parameter parameter = (Parameter) redisTemplate.opsForValue().get("parameter");

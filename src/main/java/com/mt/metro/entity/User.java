@@ -5,23 +5,16 @@ public class User {
 
     private Integer uId;
 
+    //男1女2
+    private Integer gender;
+
     private String nickname;
 
-    private Integer cityId;
+    private String city;
 
     private String statement;
 
-    public User(Integer id, Integer uId, String nickname, Integer cityId, String statement) {
-        this.id = id;
-        this.uId = uId;
-        this.nickname = nickname;
-        this.cityId = cityId;
-        this.statement = statement;
-    }
-
-    public User() {
-        super();
-    }
+    private String defaultStation;
 
     public Integer getId() {
         return id;
@@ -39,6 +32,14 @@ public class User {
         this.uId = uId;
     }
 
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
+
     public String getNickname() {
         return nickname;
     }
@@ -47,12 +48,12 @@ public class User {
         this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public Integer getCityId() {
-        return cityId;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
     public String getStatement() {
@@ -63,6 +64,14 @@ public class User {
         this.statement = statement == null ? null : statement.trim();
     }
 
+    public String getDefaultStation() {
+        return defaultStation;
+    }
+
+    public void setDefaultStation(String defaultStation) {
+        this.defaultStation = defaultStation == null ? null : defaultStation.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -71,9 +80,11 @@ public class User {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", uId=").append(uId);
+        sb.append(", gender=").append(gender);
         sb.append(", nickname=").append(nickname);
-        sb.append(", cityId=").append(cityId);
+        sb.append(", city=").append(city);
         sb.append(", statement=").append(statement);
+        sb.append(", defaultStation=").append(defaultStation);
         sb.append("]");
         return sb.toString();
     }

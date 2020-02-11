@@ -11,18 +11,6 @@ public class Prop {
 
     private String effectUrl;
 
-    public Prop(Integer id, String name, String propDescribe, String picUrl, String effectUrl) {
-        this.id = id;
-        this.name = name;
-        this.propDescribe = propDescribe;
-        this.picUrl = picUrl;
-        this.effectUrl = effectUrl;
-    }
-
-    public Prop() {
-        super();
-    }
-
     public Integer getId() {
         return id;
     }
