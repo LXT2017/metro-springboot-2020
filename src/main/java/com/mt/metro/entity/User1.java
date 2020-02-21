@@ -32,7 +32,8 @@ public class User1 {
 
     private Integer weekRanking;
 
+    private Integer currentStrength;
 
-
+    private String headPortrait;
 
 }

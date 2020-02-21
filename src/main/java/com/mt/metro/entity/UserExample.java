@@ -563,6 +563,136 @@ public class UserExample {
             addCriterion("default_station not between", value1, value2, "defaultStation");
             return (Criteria) this;
         }
+
+        public Criteria andCurrentStrengthIsNull() {
+            addCriterion("current_strength is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthIsNotNull() {
+            addCriterion("current_strength is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthEqualTo(Integer value) {
+            addCriterion("current_strength =", value, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthNotEqualTo(Integer value) {
+            addCriterion("current_strength <>", value, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthGreaterThan(Integer value) {
+            addCriterion("current_strength >", value, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthGreaterThanOrEqualTo(Integer value) {
+            addCriterion("current_strength >=", value, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthLessThan(Integer value) {
+            addCriterion("current_strength <", value, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthLessThanOrEqualTo(Integer value) {
+            addCriterion("current_strength <=", value, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthIn(List<Integer> values) {
+            addCriterion("current_strength in", values, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthNotIn(List<Integer> values) {
+            addCriterion("current_strength not in", values, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthBetween(Integer value1, Integer value2) {
+            addCriterion("current_strength between", value1, value2, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andCurrentStrengthNotBetween(Integer value1, Integer value2) {
+            addCriterion("current_strength not between", value1, value2, "currentStrength");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitIsNull() {
+            addCriterion("head_portrait is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitIsNotNull() {
+            addCriterion("head_portrait is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitEqualTo(String value) {
+            addCriterion("head_portrait =", value, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitNotEqualTo(String value) {
+            addCriterion("head_portrait <>", value, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitGreaterThan(String value) {
+            addCriterion("head_portrait >", value, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitGreaterThanOrEqualTo(String value) {
+            addCriterion("head_portrait >=", value, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitLessThan(String value) {
+            addCriterion("head_portrait <", value, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitLessThanOrEqualTo(String value) {
+            addCriterion("head_portrait <=", value, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitLike(String value) {
+            addCriterion("head_portrait like", value, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitNotLike(String value) {
+            addCriterion("head_portrait not like", value, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitIn(List<String> values) {
+            addCriterion("head_portrait in", values, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitNotIn(List<String> values) {
+            addCriterion("head_portrait not in", values, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitBetween(String value1, String value2) {
+            addCriterion("head_portrait between", value1, value2, "headPortrait");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadPortraitNotBetween(String value1, String value2) {
+            addCriterion("head_portrait not between", value1, value2, "headPortrait");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

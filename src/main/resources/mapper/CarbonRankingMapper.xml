@@ -1,243 +1,245 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.mt.metro.mapper.CarbonRankingMapper" >
-  <resultMap id="BaseResultMap" type="com.mt.metro.entity.CarbonRanking" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="daily_score" property="dailyScore" jdbcType="INTEGER" />
-    <result column="week_score" property="weekScore" jdbcType="INTEGER" />
-    <result column="total_score" property="totalScore" jdbcType="INTEGER" />
-    <result column="daily_ranking" property="dailyRanking" jdbcType="INTEGER" />
-    <result column="week_ranking" property="weekRanking" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+<mapper namespace="com.mt.metro.mapper.CarbonRankingMapper">
+    <resultMap id="BaseResultMap" type="com.mt.metro.entity.CarbonRanking">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="daily_score" property="dailyScore" jdbcType="INTEGER"/>
+        <result column="week_score" property="weekScore" jdbcType="INTEGER"/>
+        <result column="total_score" property="totalScore" jdbcType="INTEGER"/>
+        <result column="daily_ranking" property="dailyRanking" jdbcType="INTEGER"/>
+        <result column="week_ranking" property="weekRanking" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
             </foreach>
-          </trim>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, daily_score, week_score, total_score, daily_ranking, week_ranking, user_id
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mt.metro.entity.CarbonRankingExample">
+        select
+        <if test="distinct">
+            distinct
         </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    id, daily_score, week_score, total_score, daily_ranking, week_ranking, user_id
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mt.metro.entity.CarbonRankingExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from carbon_ranking
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from carbon_ranking
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from carbon_ranking
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.mt.metro.entity.CarbonRankingExample" >
-    delete from carbon_ranking
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.mt.metro.entity.CarbonRanking" >
-    insert into carbon_ranking (id, daily_score, week_score, 
-      total_score, daily_ranking, week_ranking, 
-      user_id)
-    values (#{id,jdbcType=INTEGER}, #{dailyScore,jdbcType=INTEGER}, #{weekScore,jdbcType=INTEGER}, 
-      #{totalScore,jdbcType=INTEGER}, #{dailyRanking,jdbcType=INTEGER}, #{weekRanking,jdbcType=INTEGER}, 
-      #{userId,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.mt.metro.entity.CarbonRanking" >
-    insert into carbon_ranking
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="dailyScore != null" >
-        daily_score,
-      </if>
-      <if test="weekScore != null" >
-        week_score,
-      </if>
-      <if test="totalScore != null" >
-        total_score,
-      </if>
-      <if test="dailyRanking != null" >
-        daily_ranking,
-      </if>
-      <if test="weekRanking != null" >
-        week_ranking,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="dailyScore != null" >
-        #{dailyScore,jdbcType=INTEGER},
-      </if>
-      <if test="weekScore != null" >
-        #{weekScore,jdbcType=INTEGER},
-      </if>
-      <if test="totalScore != null" >
-        #{totalScore,jdbcType=INTEGER},
-      </if>
-      <if test="dailyRanking != null" >
-        #{dailyRanking,jdbcType=INTEGER},
-      </if>
-      <if test="weekRanking != null" >
-        #{weekRanking,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.mt.metro.entity.CarbonRankingExample" resultType="java.lang.Integer" >
-    select count(*) from carbon_ranking
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update carbon_ranking
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.dailyScore != null" >
+        <include refid="Base_Column_List"/>
+        from carbon_ranking
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from carbon_ranking
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from carbon_ranking
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.mt.metro.entity.CarbonRankingExample">
+        delete from carbon_ranking
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.mt.metro.entity.CarbonRanking">
+        insert into carbon_ranking (id, daily_score, week_score,
+        total_score, daily_ranking, week_ranking,
+        user_id)
+        values (#{id,jdbcType=INTEGER}, #{dailyScore,jdbcType=INTEGER}, #{weekScore,jdbcType=INTEGER},
+        #{totalScore,jdbcType=INTEGER}, #{dailyRanking,jdbcType=INTEGER}, #{weekRanking,jdbcType=INTEGER},
+        #{userId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mt.metro.entity.CarbonRanking">
+        insert into carbon_ranking
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="dailyScore != null">
+                daily_score,
+            </if>
+            <if test="weekScore != null">
+                week_score,
+            </if>
+            <if test="totalScore != null">
+                total_score,
+            </if>
+            <if test="dailyRanking != null">
+                daily_ranking,
+            </if>
+            <if test="weekRanking != null">
+                week_ranking,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="dailyScore != null">
+                #{dailyScore,jdbcType=INTEGER},
+            </if>
+            <if test="weekScore != null">
+                #{weekScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalScore != null">
+                #{totalScore,jdbcType=INTEGER},
+            </if>
+            <if test="dailyRanking != null">
+                #{dailyRanking,jdbcType=INTEGER},
+            </if>
+            <if test="weekRanking != null">
+                #{weekRanking,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.mt.metro.entity.CarbonRankingExample" resultType="java.lang.Integer">
+        select count(*) from carbon_ranking
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update carbon_ranking
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.dailyScore != null">
+                daily_score = #{record.dailyScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.weekScore != null">
+                week_score = #{record.weekScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.totalScore != null">
+                total_score = #{record.totalScore,jdbcType=INTEGER},
+            </if>
+            <if test="record.dailyRanking != null">
+                daily_ranking = #{record.dailyRanking,jdbcType=INTEGER},
+            </if>
+            <if test="record.weekRanking != null">
+                week_ranking = #{record.weekRanking,jdbcType=INTEGER},
+            </if>
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update carbon_ranking
+        set id = #{record.id,jdbcType=INTEGER},
         daily_score = #{record.dailyScore,jdbcType=INTEGER},
-      </if>
-      <if test="record.weekScore != null" >
         week_score = #{record.weekScore,jdbcType=INTEGER},
-      </if>
-      <if test="record.totalScore != null" >
         total_score = #{record.totalScore,jdbcType=INTEGER},
-      </if>
-      <if test="record.dailyRanking != null" >
         daily_ranking = #{record.dailyRanking,jdbcType=INTEGER},
-      </if>
-      <if test="record.weekRanking != null" >
         week_ranking = #{record.weekRanking,jdbcType=INTEGER},
-      </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update carbon_ranking
-    set id = #{record.id,jdbcType=INTEGER},
-      daily_score = #{record.dailyScore,jdbcType=INTEGER},
-      week_score = #{record.weekScore,jdbcType=INTEGER},
-      total_score = #{record.totalScore,jdbcType=INTEGER},
-      daily_ranking = #{record.dailyRanking,jdbcType=INTEGER},
-      week_ranking = #{record.weekRanking,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mt.metro.entity.CarbonRanking" >
-    update carbon_ranking
-    <set >
-      <if test="dailyScore != null" >
-        daily_score = #{dailyScore,jdbcType=INTEGER},
-      </if>
-      <if test="weekScore != null" >
+        user_id = #{record.userId,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mt.metro.entity.CarbonRanking">
+        update carbon_ranking
+        <set>
+            <if test="dailyScore != null">
+                daily_score = #{dailyScore,jdbcType=INTEGER},
+            </if>
+            <if test="weekScore != null">
+                week_score = #{weekScore,jdbcType=INTEGER},
+            </if>
+            <if test="totalScore != null">
+                total_score = #{totalScore,jdbcType=INTEGER},
+            </if>
+            <if test="dailyRanking != null">
+                daily_ranking = #{dailyRanking,jdbcType=INTEGER},
+            </if>
+            <if test="weekRanking != null">
+                week_ranking = #{weekRanking,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mt.metro.entity.CarbonRanking">
+        update carbon_ranking
+        set daily_score = #{dailyScore,jdbcType=INTEGER},
         week_score = #{weekScore,jdbcType=INTEGER},
-      </if>
-      <if test="totalScore != null" >
         total_score = #{totalScore,jdbcType=INTEGER},
-      </if>
-      <if test="dailyRanking != null" >
         daily_ranking = #{dailyRanking,jdbcType=INTEGER},
-      </if>
-      <if test="weekRanking != null" >
         week_ranking = #{weekRanking,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mt.metro.entity.CarbonRanking" >
-    update carbon_ranking
-    set daily_score = #{dailyScore,jdbcType=INTEGER},
-      week_score = #{weekScore,jdbcType=INTEGER},
-      total_score = #{totalScore,jdbcType=INTEGER},
-      daily_ranking = #{dailyRanking,jdbcType=INTEGER},
-      week_ranking = #{weekRanking,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        user_id = #{userId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

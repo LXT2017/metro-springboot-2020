@@ -25,28 +25,23 @@ public class NewsService {
 
 
     //@Master
-    public Boolean postFeedBack(Feedback feedback){
+    public Boolean postFeedBack(Feedback feedback) {
 
         feedback.setfDate(Time.getDateCurrentTime());
         int i = feedbackMapper.insertSelective(feedback);
-        if(i == 1){
+        if (i == 1) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
 
-
-
-
-
-
     @Master
-    public Boolean postNotice(Notice notice){
+    public Boolean postNotice(Notice notice) {
         ValueOperations<String, Notice> operations = redisTemplate.opsForValue();
         String key = Time.getCurrentDate();
-        operations.set("notice",notice,200, TimeUnit.SECONDS);
+        operations.set("notice", notice, 200, TimeUnit.SECONDS);
         return true;
     }
 }

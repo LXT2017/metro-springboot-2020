@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.*;
  * @date 2018-07-08 22:33
  */
 @Configuration
-public class InterceptorConfig implements WebMvcConfigurer {
+public class InterceptorConfig extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor())
@@ -29,11 +29,21 @@ public class InterceptorConfig implements WebMvcConfigurer {
     }
 
 
+
     @Override
     @PassToken
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**").addResourceLocations("classpath:/images/");
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        registry.addResourceHandler("doc.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
     }
+
     @Bean
     public AuthenticationInterceptor authenticationInterceptor() {
         return new AuthenticationInterceptor();

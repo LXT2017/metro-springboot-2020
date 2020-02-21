@@ -60,7 +60,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 throw new RuntimeException("id获取失败");
             }
             // 验证 token
-            if(!(userService.getUserToken(userId).equals(token))) {
+            if (!(userService.getUserToken(userId).equals(token))) {
                 throw new RuntimeException("token验证失败");
             }
         }
@@ -72,6 +72,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
 
     }
+
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
 

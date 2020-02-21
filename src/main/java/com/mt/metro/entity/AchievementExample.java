@@ -304,63 +304,63 @@ public class AchievementExample {
             return (Criteria) this;
         }
 
-        public Criteria andRequirementIsNull() {
-            addCriterion("requirement is null");
+        public Criteria andConditionIsNull() {
+            addCriterion("condition is null");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementIsNotNull() {
-            addCriterion("requirement is not null");
+        public Criteria andConditionIsNotNull() {
+            addCriterion("condition is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementEqualTo(Integer value) {
-            addCriterion("requirement =", value, "requirement");
+        public Criteria andConditionEqualTo(Integer value) {
+            addCriterion("condition =", value, "condition");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementNotEqualTo(Integer value) {
-            addCriterion("requirement <>", value, "requirement");
+        public Criteria andConditionNotEqualTo(Integer value) {
+            addCriterion("condition <>", value, "condition");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementGreaterThan(Integer value) {
-            addCriterion("requirement >", value, "requirement");
+        public Criteria andConditionGreaterThan(Integer value) {
+            addCriterion("condition >", value, "condition");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementGreaterThanOrEqualTo(Integer value) {
-            addCriterion("requirement >=", value, "requirement");
+        public Criteria andConditionGreaterThanOrEqualTo(Integer value) {
+            addCriterion("condition >=", value, "condition");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementLessThan(Integer value) {
-            addCriterion("requirement <", value, "requirement");
+        public Criteria andConditionLessThan(Integer value) {
+            addCriterion("condition <", value, "condition");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementLessThanOrEqualTo(Integer value) {
-            addCriterion("requirement <=", value, "requirement");
+        public Criteria andConditionLessThanOrEqualTo(Integer value) {
+            addCriterion("condition <=", value, "condition");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementIn(List<Integer> values) {
-            addCriterion("requirement in", values, "requirement");
+        public Criteria andConditionIn(List<Integer> values) {
+            addCriterion("condition in", values, "condition");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementNotIn(List<Integer> values) {
-            addCriterion("requirement not in", values, "requirement");
+        public Criteria andConditionNotIn(List<Integer> values) {
+            addCriterion("condition not in", values, "condition");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementBetween(Integer value1, Integer value2) {
-            addCriterion("requirement between", value1, value2, "requirement");
+        public Criteria andConditionBetween(Integer value1, Integer value2) {
+            addCriterion("condition between", value1, value2, "condition");
             return (Criteria) this;
         }
 
-        public Criteria andRequirementNotBetween(Integer value1, Integer value2) {
-            addCriterion("requirement not between", value1, value2, "requirement");
+        public Criteria andConditionNotBetween(Integer value1, Integer value2) {
+            addCriterion("condition not between", value1, value2, "condition");
             return (Criteria) this;
         }
 
@@ -374,62 +374,52 @@ public class AchievementExample {
             return (Criteria) this;
         }
 
-        public Criteria andCategoryEqualTo(String value) {
+        public Criteria andCategoryEqualTo(Integer value) {
             addCriterion("category =", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotEqualTo(String value) {
+        public Criteria andCategoryNotEqualTo(Integer value) {
             addCriterion("category <>", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryGreaterThan(String value) {
+        public Criteria andCategoryGreaterThan(Integer value) {
             addCriterion("category >", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryGreaterThanOrEqualTo(String value) {
+        public Criteria andCategoryGreaterThanOrEqualTo(Integer value) {
             addCriterion("category >=", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLessThan(String value) {
+        public Criteria andCategoryLessThan(Integer value) {
             addCriterion("category <", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLessThanOrEqualTo(String value) {
+        public Criteria andCategoryLessThanOrEqualTo(Integer value) {
             addCriterion("category <=", value, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLike(String value) {
-            addCriterion("category like", value, "category");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryNotLike(String value) {
-            addCriterion("category not like", value, "category");
-            return (Criteria) this;
-        }
-
-        public Criteria andCategoryIn(List<String> values) {
+        public Criteria andCategoryIn(List<Integer> values) {
             addCriterion("category in", values, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotIn(List<String> values) {
+        public Criteria andCategoryNotIn(List<Integer> values) {
             addCriterion("category not in", values, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryBetween(String value1, String value2) {
+        public Criteria andCategoryBetween(Integer value1, Integer value2) {
             addCriterion("category between", value1, value2, "category");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotBetween(String value1, String value2) {
+        public Criteria andCategoryNotBetween(Integer value1, Integer value2) {
             addCriterion("category not between", value1, value2, "category");
             return (Criteria) this;
         }
@@ -491,6 +481,66 @@ public class AchievementExample {
 
         public Criteria andRewardNotBetween(Integer value1, Integer value2) {
             addCriterion("reward not between", value1, value2, "reward");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindIsNull() {
+            addCriterion("kind is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindIsNotNull() {
+            addCriterion("kind is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindEqualTo(Integer value) {
+            addCriterion("kind =", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindNotEqualTo(Integer value) {
+            addCriterion("kind <>", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindGreaterThan(Integer value) {
+            addCriterion("kind >", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindGreaterThanOrEqualTo(Integer value) {
+            addCriterion("kind >=", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindLessThan(Integer value) {
+            addCriterion("kind <", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindLessThanOrEqualTo(Integer value) {
+            addCriterion("kind <=", value, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindIn(List<Integer> values) {
+            addCriterion("kind in", values, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindNotIn(List<Integer> values) {
+            addCriterion("kind not in", values, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindBetween(Integer value1, Integer value2) {
+            addCriterion("kind between", value1, value2, "kind");
+            return (Criteria) this;
+        }
+
+        public Criteria andKindNotBetween(Integer value1, Integer value2) {
+            addCriterion("kind not between", value1, value2, "kind");
             return (Criteria) this;
         }
     }

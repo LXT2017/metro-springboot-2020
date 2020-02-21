@@ -27,10 +27,11 @@ public class LockCheckAspect {
 
     // 增强带有CacheLock注解的方法
     @Pointcut("@annotation(com.mt.metro.annotation.CacheLock)")
-    public void pointCut(){}
+    public void pointCut() {
+    }
 
     @Around("pointCut()")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable{
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 
         // 可以根据业务获取用户唯一的个人信息，例如手机号码
         String phone = "12312";
@@ -39,7 +40,7 @@ public class LockCheckAspect {
         Method method = signature.getMethod();
         CacheLock cacheLock = method.getAnnotation(CacheLock.class);
         String prefix = cacheLock.prefix();
-        if (StringUtils.isEmpty(prefix)){
+        if (StringUtils.isEmpty(prefix)) {
             throw new RuntimeException("CacheLock prefix can't be null");
         }
         // 拼接 key
@@ -50,16 +51,16 @@ public class LockCheckAspect {
         final String UUID = java.util.UUID.randomUUID().toString();
         try {
             // 获取锁
-            boolean success = redisTemplate.opsForValue().setIfAbsent(lockKey,UUID,cacheLock.expire(),cacheLock.timeUnit());
-            if (!success){
+            boolean success = redisTemplate.opsForValue().setIfAbsent(lockKey, UUID, cacheLock.expire(), cacheLock.timeUnit());
+            if (!success) {
                 throw new RuntimeException("请勿重复提交");
             }
-            Object result= joinPoint.proceed();
+            Object result = joinPoint.proceed();
             return result;
-        }finally {
+        } finally {
             // 最后记得释放锁
-            DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(RELEASE_LOCK_LUA_SCRIPT,Long.class);
-            Long result = redisTemplate.execute(redisScript, Collections.singletonList(lockKey),UUID);
+            DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(RELEASE_LOCK_LUA_SCRIPT, Long.class);
+            Long result = redisTemplate.execute(redisScript, Collections.singletonList(lockKey), UUID);
         }
 
     }

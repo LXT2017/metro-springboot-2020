@@ -2,7 +2,9 @@ package com.mt.metro.mapper;
 
 import com.mt.metro.entity.Mall;
 import com.mt.metro.entity.MallExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface MallMapper {

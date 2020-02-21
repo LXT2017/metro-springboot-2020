@@ -12,9 +12,10 @@ public class ExerciseController {
 
     /**
      * 查询本周金币排行
+     *
      * @return
      */
-    public ResponseResult getCoinRanking(){
+    public ResponseResult getCoinRanking() {
 
         return null;
     }

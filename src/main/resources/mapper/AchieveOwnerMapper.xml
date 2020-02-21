@@ -4,6 +4,9 @@
   <resultMap id="BaseResultMap" type="com.mt.metro.entity.AchieveOwner" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="category" property="category" jdbcType="INTEGER" />
+    <result column="progress" property="progress" jdbcType="INTEGER" />
+    <result column="is_reach" property="isReach" jdbcType="INTEGER" />
     <result column="achievement_id" property="achievementId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -65,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, achievement_id
+    id, user_id, category, progress, is_reach, achievement_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mt.metro.entity.AchieveOwnerExample" >
     select
@@ -98,9 +101,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mt.metro.entity.AchieveOwner" >
-    insert into achieve_owner (id, user_id, achievement_id
+    insert into achieve_owner (id, user_id, category, 
+      progress, is_reach, achievement_id
       )
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{achievementId,jdbcType=INTEGER}
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{category,jdbcType=INTEGER}, 
+      #{progress,jdbcType=INTEGER}, #{isReach,jdbcType=INTEGER}, #{achievementId,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.mt.metro.entity.AchieveOwner" >
@@ -112,6 +117,15 @@
       <if test="userId != null" >
         user_id,
       </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="progress != null" >
+        progress,
+      </if>
+      <if test="isReach != null" >
+        is_reach,
+      </if>
       <if test="achievementId != null" >
         achievement_id,
       </if>
@@ -122,6 +136,15 @@
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=INTEGER},
+      </if>
+      <if test="progress != null" >
+        #{progress,jdbcType=INTEGER},
+      </if>
+      <if test="isReach != null" >
+        #{isReach,jdbcType=INTEGER},
       </if>
       <if test="achievementId != null" >
         #{achievementId,jdbcType=INTEGER},
@@ -143,6 +166,15 @@
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
+      <if test="record.category != null" >
+        category = #{record.category,jdbcType=INTEGER},
+      </if>
+      <if test="record.progress != null" >
+        progress = #{record.progress,jdbcType=INTEGER},
+      </if>
+      <if test="record.isReach != null" >
+        is_reach = #{record.isReach,jdbcType=INTEGER},
+      </if>
       <if test="record.achievementId != null" >
         achievement_id = #{record.achievementId,jdbcType=INTEGER},
       </if>
@@ -155,6 +187,9 @@
     update achieve_owner
     set id = #{record.id,jdbcType=INTEGER},
       user_id = #{record.userId,jdbcType=INTEGER},
+      category = #{record.category,jdbcType=INTEGER},
+      progress = #{record.progress,jdbcType=INTEGER},
+      is_reach = #{record.isReach,jdbcType=INTEGER},
       achievement_id = #{record.achievementId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -166,6 +201,15 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=INTEGER},
+      </if>
+      <if test="progress != null" >
+        progress = #{progress,jdbcType=INTEGER},
+      </if>
+      <if test="isReach != null" >
+        is_reach = #{isReach,jdbcType=INTEGER},
+      </if>
       <if test="achievementId != null" >
         achievement_id = #{achievementId,jdbcType=INTEGER},
       </if>
@@ -175,6 +219,9 @@
   <update id="updateByPrimaryKey" parameterType="com.mt.metro.entity.AchieveOwner" >
     update achieve_owner
     set user_id = #{userId,jdbcType=INTEGER},
+      category = #{category,jdbcType=INTEGER},
+      progress = #{progress,jdbcType=INTEGER},
+      is_reach = #{isReach,jdbcType=INTEGER},
       achievement_id = #{achievementId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

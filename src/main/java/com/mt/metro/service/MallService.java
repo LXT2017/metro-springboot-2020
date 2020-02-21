@@ -16,16 +16,16 @@ public class MallService {
 
 
     //@Slave
-    public Map getMallInfo(int option){
+    public Map getMallInfo(int option) {
         MallExample example = new MallExample();
         MallExample.Criteria criteria = example.createCriteria();
-        if(option == 1){
+        if (option == 1) {
             criteria.andKindEqualTo("现金券");
-        }else{
+        } else {
             criteria.andKindEqualTo("礼品");
         }
         Map map = new HashMap();
-        map.put("commodity",mallMapper.selectByExample(example));
+        map.put("commodity", mallMapper.selectByExample(example));
         return map;
     }
 

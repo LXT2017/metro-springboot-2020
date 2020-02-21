@@ -10,13 +10,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class TimeTest {
 
     @Test
-    public void getCurrentDate(){
-        System.out.println(Time.getCurrentDate());
+    public void getCurrentDate() {
+        System.out.println(Time.getRefreshTime());
     }
 
 
-    @Test
-    public void getCurrentTime(){
+    //@Test
+    public void getCurrentTime() {
         System.out.println(Time.getCurrentTime());
+    }
+
+    @Test
+    public void getWeek(){
+        System.out.println(Time.getRefreshWeekTime());
+
     }
 }

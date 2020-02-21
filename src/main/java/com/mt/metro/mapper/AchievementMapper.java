@@ -1,9 +1,14 @@
 package com.mt.metro.mapper;
 
+import com.mt.metro.entity.AchieveResponse;
 import com.mt.metro.entity.Achievement;
 import com.mt.metro.entity.AchievementExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface AchievementMapper {
     int countByExample(AchievementExample example);
@@ -27,4 +32,10 @@ public interface AchievementMapper {
     int updateByPrimaryKeySelective(Achievement record);
 
     int updateByPrimaryKey(Achievement record);
+
+    @Select("select * from achievement where category = #{option}")
+    @Results(value = {
+            @Result(column = "achieve_url", property = "achieveUrl")
+    })
+    List<AchieveResponse> getAllAchievement(int option);
 }

@@ -1,13 +1,12 @@
 package com.mt.metro.service;
 
 import com.mt.metro.entity.Parameter;
-import com.mt.metro.mapper.ParameterMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.mt.metro.entity.Sign;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 
 @Service
 public class ResourceService {
@@ -15,26 +14,29 @@ public class ResourceService {
     @Resource
     RedisTemplate redisTemplate;
 
-    @Autowired
-    ParameterMapper parameterMapper;
 
-
-    public Parameter getParam(){
+    public Parameter getParam() {
         Parameter parameter = (Parameter) redisTemplate.opsForValue().get("parameter");
-        System.out.println(parameter);
-        if(parameter !=null){
-            return parameter;
-        }else {
-            parameter = queryParam();
-            return parameter;
+
+        if(parameter == null){
+            throw new NullPointerException();
         }
-
-    }
-
-    @Scheduled(cron = "0 0 0 * * *")
-    public Parameter queryParam(){
-        Parameter parameter = parameterMapper.selectByPrimaryKey(1);
-        redisTemplate.opsForValue().set("parameter",parameter);
         return parameter;
     }
+
+
+
+
+    public Sign getquerySign() {
+        Sign sign = (Sign)redisTemplate.opsForValue().get("sign");
+        System.out.println(sign);
+        if(sign == null){
+            throw new NullPointerException();
+        }else {
+            return sign;
+        }
+    }
+
+
+
 }

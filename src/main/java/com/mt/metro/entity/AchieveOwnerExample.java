@@ -224,6 +224,186 @@ public class AchieveOwnerExample {
             return (Criteria) this;
         }
 
+        public Criteria andCategoryIsNull() {
+            addCriterion("category is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIsNotNull() {
+            addCriterion("category is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryEqualTo(Integer value) {
+            addCriterion("category =", value, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNotEqualTo(Integer value) {
+            addCriterion("category <>", value, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryGreaterThan(Integer value) {
+            addCriterion("category >", value, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryGreaterThanOrEqualTo(Integer value) {
+            addCriterion("category >=", value, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryLessThan(Integer value) {
+            addCriterion("category <", value, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryLessThanOrEqualTo(Integer value) {
+            addCriterion("category <=", value, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryIn(List<Integer> values) {
+            addCriterion("category in", values, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNotIn(List<Integer> values) {
+            addCriterion("category not in", values, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryBetween(Integer value1, Integer value2) {
+            addCriterion("category between", value1, value2, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andCategoryNotBetween(Integer value1, Integer value2) {
+            addCriterion("category not between", value1, value2, "category");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressIsNull() {
+            addCriterion("progress is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressIsNotNull() {
+            addCriterion("progress is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressEqualTo(Integer value) {
+            addCriterion("progress =", value, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressNotEqualTo(Integer value) {
+            addCriterion("progress <>", value, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressGreaterThan(Integer value) {
+            addCriterion("progress >", value, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressGreaterThanOrEqualTo(Integer value) {
+            addCriterion("progress >=", value, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressLessThan(Integer value) {
+            addCriterion("progress <", value, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressLessThanOrEqualTo(Integer value) {
+            addCriterion("progress <=", value, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressIn(List<Integer> values) {
+            addCriterion("progress in", values, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressNotIn(List<Integer> values) {
+            addCriterion("progress not in", values, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressBetween(Integer value1, Integer value2) {
+            addCriterion("progress between", value1, value2, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andProgressNotBetween(Integer value1, Integer value2) {
+            addCriterion("progress not between", value1, value2, "progress");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachIsNull() {
+            addCriterion("is_reach is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachIsNotNull() {
+            addCriterion("is_reach is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachEqualTo(Integer value) {
+            addCriterion("is_reach =", value, "isReach");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachNotEqualTo(Integer value) {
+            addCriterion("is_reach <>", value, "isReach");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachGreaterThan(Integer value) {
+            addCriterion("is_reach >", value, "isReach");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachGreaterThanOrEqualTo(Integer value) {
+            addCriterion("is_reach >=", value, "isReach");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachLessThan(Integer value) {
+            addCriterion("is_reach <", value, "isReach");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachLessThanOrEqualTo(Integer value) {
+            addCriterion("is_reach <=", value, "isReach");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachIn(List<Integer> values) {
+            addCriterion("is_reach in", values, "isReach");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachNotIn(List<Integer> values) {
+            addCriterion("is_reach not in", values, "isReach");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachBetween(Integer value1, Integer value2) {
+            addCriterion("is_reach between", value1, value2, "isReach");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsReachNotBetween(Integer value1, Integer value2) {
+            addCriterion("is_reach not between", value1, value2, "isReach");
+            return (Criteria) this;
+        }
+
         public Criteria andAchievementIdIsNull() {
             addCriterion("achievement_id is null");
             return (Criteria) this;

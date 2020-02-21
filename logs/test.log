@@ -1,0 +1,32 @@
+[14:58:37:221] [INFO] - org.springframework.boot.StartupInfoLogger.logStarting(StartupInfoLogger.java:55) - Starting MetroApplication on Shawn with PID 11524 (D:\work\intellij\metro-springboot-2020\target\classes started by Shawn in D:\work\intellij\metro-springboot-2020)
+[14:58:37:229] [INFO] - org.springframework.boot.SpringApplication.logStartupProfileInfo(SpringApplication.java:651) - No active profile set, falling back to default profiles: default
+[14:58:38:114] [INFO] - org.springframework.data.repository.config.RepositoryConfigurationDelegate.multipleStoresDetected(RepositoryConfigurationDelegate.java:249) - Multiple Spring Data modules found, entering strict repository configuration mode!
+[14:58:38:118] [INFO] - org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:127) - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+[14:58:38:167] [INFO] - org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:187) - Finished Spring Data repository scanning in 34ms. Found 0 Redis repository interfaces.
+[14:58:38:514] [INFO] - org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization(PostProcessorRegistrationDelegate.java:330) - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[14:58:38:638] [INFO] - org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization(PostProcessorRegistrationDelegate.java:330) - Bean 'redisConfig' of type [com.mt.metro.config.RedisConfig$$EnhancerBySpringCGLIB$$4275f30d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+[14:58:38:985] [INFO] - org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:92) - Tomcat initialized with port(s): 8888 (http)
+[14:58:38:993] [INFO] - org.apache.juli.logging.DirectJDKLog.log(DirectJDKLog.java:173) - Initializing ProtocolHandler ["http-nio-8888"]
+[14:58:38:994] [INFO] - org.apache.juli.logging.DirectJDKLog.log(DirectJDKLog.java:173) - Starting service [Tomcat]
+[14:58:38:995] [INFO] - org.apache.juli.logging.DirectJDKLog.log(DirectJDKLog.java:173) - Starting Servlet engine: [Apache Tomcat/9.0.29]
+[14:58:39:101] [INFO] - org.apache.juli.logging.DirectJDKLog.log(DirectJDKLog.java:173) - Initializing Spring embedded WebApplicationContext
+[14:58:39:101] [INFO] - org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.prepareWebApplicationContext(ServletWebServerApplicationContext.java:284) - Root WebApplicationContext: initialization completed in 1831 ms
+[14:58:40:588] [INFO] - springfox.documentation.spring.web.PropertySourcedRequestMappingHandlerMapping.initHandlerMethods(PropertySourcedRequestMappingHandlerMapping.java:69) - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+[14:58:40:857] [INFO] - org.springframework.scheduling.concurrent.ExecutorConfigurationSupport.initialize(ExecutorConfigurationSupport.java:171) - Initializing ExecutorService 'taskScheduler'
+[14:58:40:879] [WARN] - org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration.checkTemplateLocationExists(ThymeleafAutoConfiguration.java:106) - Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+[14:58:40:954] [INFO] - springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper.start(DocumentationPluginsBootstrapper.java:160) - Context refreshed
+[14:58:40:988] [INFO] - springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapper.start(DocumentationPluginsBootstrapper.java:163) - Found 1 custom documentation plugin(s)
+[14:58:41:023] [INFO] - springfox.documentation.spring.web.scanners.ApiListingReferenceScanner.scan(ApiListingReferenceScanner.java:41) - Scanning for api listing references
+[14:58:41:182] [INFO] - springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator.startingWith(CachingOperationNameGenerator.java:40) - Generating unique operation named: postFeedBackUsingPOST_1
+[14:58:41:210] [INFO] - org.apache.juli.logging.DirectJDKLog.log(DirectJDKLog.java:173) - Starting ProtocolHandler ["http-nio-8888"]
+[14:58:41:232] [INFO] - org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:204) - Tomcat started on port(s): 8888 (http) with context path ''
+[14:58:41:235] [INFO] - org.springframework.boot.StartupInfoLogger.logStarted(StartupInfoLogger.java:61) - Started MetroApplication in 4.377 seconds (JVM running for 7.186)
+[14:58:54:117] [INFO] - org.apache.juli.logging.DirectJDKLog.log(DirectJDKLog.java:173) - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[14:58:54:117] [INFO] - org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:525) - Initializing Servlet 'dispatcherServlet'
+[14:58:54:129] [INFO] - org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:547) - Completed initialization in 12 ms
+[14:58:54:154] [ERROR] - com.mt.metro.interceptor.GloablExceptionHandler.handleException(GloablExceptionHandler.java:34) - 系统异常
+[14:58:57:057] [INFO] - com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:110) - HikariPool-1 - Starting...
+[14:58:57:730] [INFO] - com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:123) - HikariPool-1 - Start completed.
+[14:58:58:385] [INFO] - io.lettuce.core.EpollProvider.<clinit>(EpollProvider.java:68) - Starting without optional epoll library
+[14:58:58:387] [INFO] - io.lettuce.core.KqueueProvider.<clinit>(KqueueProvider.java:70) - Starting without optional kqueue library
+[14:59:10:996] [ERROR] - com.mt.metro.interceptor.GloablExceptionHandler.handleException(GloablExceptionHandler.java:34) - 系统异常

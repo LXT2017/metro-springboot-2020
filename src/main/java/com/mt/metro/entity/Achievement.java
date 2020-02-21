@@ -7,11 +7,13 @@ public class Achievement {
 
     private String achieveUrl;
 
-    private Integer requirement;
+    private Integer condition;
 
-    private String category;
+    private Integer category;
 
     private Integer reward;
+
+    private Integer kind;
 
     public Integer getId() {
         return id;
@@ -37,20 +39,20 @@ public class Achievement {
         this.achieveUrl = achieveUrl == null ? null : achieveUrl.trim();
     }
 
-    public Integer getRequirement() {
-        return requirement;
+    public Integer getCondition() {
+        return condition;
     }
 
-    public void setRequirement(Integer requirement) {
-        this.requirement = requirement;
+    public void setCondition(Integer condition) {
+        this.condition = condition;
     }
 
-    public String getCategory() {
+    public Integer getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category == null ? null : category.trim();
+    public void setCategory(Integer category) {
+        this.category = category;
     }
 
     public Integer getReward() {
@@ -59,6 +61,14 @@ public class Achievement {
 
     public void setReward(Integer reward) {
         this.reward = reward;
+    }
+
+    public Integer getKind() {
+        return kind;
+    }
+
+    public void setKind(Integer kind) {
+        this.kind = kind;
     }
 
     @Override
@@ -70,9 +80,10 @@ public class Achievement {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", achieveUrl=").append(achieveUrl);
-        sb.append(", requirement=").append(requirement);
+        sb.append(", condition=").append(condition);
         sb.append(", category=").append(category);
         sb.append(", reward=").append(reward);
+        sb.append(", kind=").append(kind);
         sb.append("]");
         return sb.toString();
     }

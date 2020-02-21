@@ -2,7 +2,9 @@ package com.mt.metro.mapper;
 
 import com.mt.metro.entity.HistorySgame;
 import com.mt.metro.entity.HistorySgameExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface HistorySgameMapper {

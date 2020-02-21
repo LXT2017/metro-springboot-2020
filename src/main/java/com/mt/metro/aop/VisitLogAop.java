@@ -17,17 +17,16 @@ public class VisitLogAop {
 
     //切入点
     @Pointcut("@annotation(com.mt.metro.annotation.VisitLog)")
-    public void visitLogPointCut(){}
+    public void visitLogPointCut() {
+    }
 
-    @Before(value="visitLogPointCut()")
-    public  void beforeVisitLog() {
+    @Before(value = "visitLogPointCut()")
+    public void beforeVisitLog() {
         logger.debug("Debugging log");
         logger.info("Info log");
         logger.warn("Hey, This is a warning!");
         logger.error("Oops! We have an Error. OK");
     }
-
-
 
 
 }

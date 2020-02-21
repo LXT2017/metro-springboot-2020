@@ -31,8 +31,9 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
 
-    User1 selectInitialInfo(@Param("id")int id);
+    User1 selectInitialInfo(@Param("id") int id);
 
     List<User1> selectDailyRanking();
+
     List<User1> selectWeekRanking();
 }

@@ -3,8 +3,8 @@ spring:
     #本地数据库
     master1:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      jdbc-url: jdbc:mysql://localhost:3306/metro?serverTimezone=GMT
-      username: root
+      jdbc-url: jdbc:mysql://localhost:3306/metro?serverTimezone=Asia/Shanghai
+      username: metro
       password: root
     master:
       driver-class-name: com.mysql.cj.jdbc.Driver
@@ -43,11 +43,18 @@ spring:
         min-idle: 0
     ## 连接超时时间（毫秒）
     timeout: 1200
-
+  ## 文件上传的设置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1024MB
+      max-request-size: 1024MB
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.mt.metro.entity
+  configuration:
+    map-underscore-to-camel-case: true # 驼峰命名规范
 #debug: true
 server:
   port: 8888

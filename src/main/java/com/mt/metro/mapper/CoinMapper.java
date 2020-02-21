@@ -30,4 +30,7 @@ public interface CoinMapper {
     int updateByPrimaryKey(Coin record);
 
     int updateByUid(Coin coin);
+
+
+    int updateAllByUid(Coin coin);
 }

@@ -19,15 +19,16 @@ public class MallController {
 
     /**
      * 查询积分商店的物品，按参数返回不同的商品
+     *
      * @param option
      * @return
      */
     @GetMapping("/getMallInfo")
-    public ResponseResult getMallInfo(int option){
-        if(option != 1 && option !=2){
-            return new ResponseResult(400,"参数异常",null);
+    public ResponseResult getMallInfo(int option) {
+        if (option != 1 && option != 2) {
+            return new ResponseResult(400, "参数异常", null);
         }
         Map map = mallService.getMallInfo(option);
-        return new ResponseResult(200,"success",map);
+        return new ResponseResult(200, "success", map);
     }
 }

@@ -16,6 +16,10 @@ public class User {
 
     private String defaultStation;
 
+    private Integer currentStrength;
+
+    private String headPortrait;
+
     public Integer getId() {
         return id;
     }
@@ -72,6 +76,22 @@ public class User {
         this.defaultStation = defaultStation == null ? null : defaultStation.trim();
     }
 
+    public Integer getCurrentStrength() {
+        return currentStrength;
+    }
+
+    public void setCurrentStrength(Integer currentStrength) {
+        this.currentStrength = currentStrength;
+    }
+
+    public String getHeadPortrait() {
+        return headPortrait;
+    }
+
+    public void setHeadPortrait(String headPortrait) {
+        this.headPortrait = headPortrait == null ? null : headPortrait.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -85,6 +105,8 @@ public class User {
         sb.append(", city=").append(city);
         sb.append(", statement=").append(statement);
         sb.append(", defaultStation=").append(defaultStation);
+        sb.append(", currentStrength=").append(currentStrength);
+        sb.append(", headPortrait=").append(headPortrait);
         sb.append("]");
         return sb.toString();
     }

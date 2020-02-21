@@ -22,7 +22,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig extends CachingConfigurerSupport {
 
 
-
     /**
      * 配置redis key
      */
@@ -51,7 +50,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * redis 缓存序列化
      */
     @Bean
-    public CacheManager cacheManager(RedisConnectionFactory connectionFactory){
+    public CacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         Jackson2JsonRedisSerializer<Object> redisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -69,6 +68,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     /**
      * retemplate相关配置
+     *
      * @param factory
      * @return
      */
@@ -127,7 +127,6 @@ public class RedisConfig extends CachingConfigurerSupport {
     }
 
  */
-
 
 
     /**

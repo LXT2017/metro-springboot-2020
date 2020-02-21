@@ -6,7 +6,8 @@ public class ResponseResult<T> {
     private Integer code;
     private T data;
 
-    public ResponseResult() {}
+    public ResponseResult() {
+    }
 
     public ResponseResult(Integer code, String msg, T data) {
         this.data = data;

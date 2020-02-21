@@ -19,13 +19,13 @@ public class NewsController {
 
 
     @PostMapping("/feedBack")
-    public ResponseResult postFeedBack(Feedback feedback){
-        int code =400;
+    public ResponseResult postFeedBack(Feedback feedback) {
+        int code = 400;
         String msg = "fail";
-        if(newsService.postFeedBack(feedback)){
+        if (newsService.postFeedBack(feedback)) {
             code = 200;
             msg = "success";
         }
-        return new ResponseResult(code,msg,null);
+        return new ResponseResult(code, msg, null);
     }
 }

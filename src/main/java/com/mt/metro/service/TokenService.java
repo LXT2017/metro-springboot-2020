@@ -25,14 +25,13 @@ public class TokenService {
 
     public String getToken(User user) {
         ValueOperations<String, String> operations = redisTemplate.opsForValue();
-        String token="";
-        token= JWT.create().withAudience(user.getId().toString())// 将 user id 保存到 token 里面
+        String token = "";
+        token = JWT.create().withAudience(user.getId().toString())// 将 user id 保存到 token 里面
                 .sign(Algorithm.HMAC256(audience.getBase64Secret()));// 以 password 作为 token 的密钥
 
         operations.set(user.getId().toString(), token);
         return token;
     }
-
 
 
 }
