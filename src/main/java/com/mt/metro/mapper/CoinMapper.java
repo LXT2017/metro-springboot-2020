@@ -2,7 +2,11 @@ package com.mt.metro.mapper;
 
 import com.mt.metro.entity.Coin;
 import com.mt.metro.entity.CoinExample;
+import com.mt.metro.entity.User1;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -32,5 +36,10 @@ public interface CoinMapper {
     int updateByUid(Coin coin);
 
 
-    int updateAllByUid(Coin coin);
+    @Select("select u.nickname,u.head_portrait,c.week_number from user u,coin c where u.id=c.user_id " +
+            " order by c.week_number desc")
+    @Results(value = {
+            @Result(column = "week_number",property = "weekNumber"),
+            @Result(column = "head_portrait",property = "headPortrait")})
+    List<User1> selectCoinRanking();
 }

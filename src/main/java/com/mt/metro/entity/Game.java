@@ -3,11 +3,11 @@ package com.mt.metro.entity;
 public class Game {
     private Integer id;
 
-    private Integer maxDistance;
+    private Integer entertainment;
 
-    private Integer maxScore;
+    private Integer bodybuilding;
 
-    private Integer totalDistance;
+    private Integer speedcontest;
 
     private Integer userId;
 
@@ -19,28 +19,28 @@ public class Game {
         this.id = id;
     }
 
-    public Integer getMaxDistance() {
-        return maxDistance;
+    public Integer getEntertainment() {
+        return entertainment;
     }
 
-    public void setMaxDistance(Integer maxDistance) {
-        this.maxDistance = maxDistance;
+    public void setEntertainment(Integer entertainment) {
+        this.entertainment = entertainment;
     }
 
-    public Integer getMaxScore() {
-        return maxScore;
+    public Integer getBodybuilding() {
+        return bodybuilding;
     }
 
-    public void setMaxScore(Integer maxScore) {
-        this.maxScore = maxScore;
+    public void setBodybuilding(Integer bodybuilding) {
+        this.bodybuilding = bodybuilding;
     }
 
-    public Integer getTotalDistance() {
-        return totalDistance;
+    public Integer getSpeedcontest() {
+        return speedcontest;
     }
 
-    public void setTotalDistance(Integer totalDistance) {
-        this.totalDistance = totalDistance;
+    public void setSpeedcontest(Integer speedcontest) {
+        this.speedcontest = speedcontest;
     }
 
     public Integer getUserId() {
@@ -58,9 +58,9 @@ public class Game {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", maxDistance=").append(maxDistance);
-        sb.append(", maxScore=").append(maxScore);
-        sb.append(", totalDistance=").append(totalDistance);
+        sb.append(", entertainment=").append(entertainment);
+        sb.append(", bodybuilding=").append(bodybuilding);
+        sb.append(", speedcontest=").append(speedcontest);
         sb.append(", userId=").append(userId);
         sb.append("]");
         return sb.toString();

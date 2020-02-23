@@ -21,7 +21,7 @@ public class AchieveController {
      * @param option
      * @return
      */
-    @GetMapping("/getAchievement")
+    @GetMapping("/getAchievementInfo")
     public ResponseResult getAchievement(int userId, int option){
         return achieveService.getAchievement(userId,option);
     }

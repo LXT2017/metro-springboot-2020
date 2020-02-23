@@ -8,6 +8,7 @@ import com.mt.metro.common.ResponseResult;
 import com.mt.metro.common.Time;
 import com.mt.metro.entity.Feedback;
 import com.mt.metro.entity.User;
+import com.mt.metro.service.AchieveService;
 import com.mt.metro.service.TokenService;
 import com.mt.metro.service.UserService;
 import io.swagger.annotations.Api;
@@ -38,6 +39,16 @@ public class UserLogin {
         this.tokenService = tokenService;
     }
 
+    @Autowired
+    AchieveService achieveService;
+
+    @GetMapping("/query")
+    public ResponseResult query(int id) {
+
+        System.out.println(achieveService.getAchievement(id));
+        return null;
+    }
+
 
     /**
      * 用户初始化以及公共资源获取
@@ -50,11 +61,7 @@ public class UserLogin {
     public ResponseResult login(User user) {
         ResponseResult responseResult;
         User userForBase = (User) userService.findUserByUId(user);
-        //假设传过来的都是合法用户
-        if (userForBase == null) {
-            System.out.println("用户不存在");
-            userForBase = userService.registry(user);
-        }
+
         Map map = userService.getInitialInfo(userForBase);
         String token = tokenService.getToken(userForBase);
         map.put("token", token);

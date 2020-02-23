@@ -45,6 +45,13 @@ public class UserService {
     @Autowired
     FeedbackMapper feedbackMapper;
 
+    @Autowired
+    GameMapper gameMapper;
+
+    @Autowired
+    AsyncService asyncService;
+
+
     //获取初始化资源
     //@Slave
     public Map getInitialInfo(User user) {
@@ -58,9 +65,8 @@ public class UserService {
         }
         Parameter parameter = parameterMapper.selectByPrimaryKey(1);
 
-        // 统计在线时长
-        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
-        operations.set("online" + user.getId(),System.currentTimeMillis(),Time.getRefreshTime(),TimeUnit.SECONDS);
+        initialResource(user);
+
         /*过滤字段
         System.out.println(parameter);
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(
@@ -95,6 +101,20 @@ public class UserService {
     }
 
 
+    /**
+     * 用户游戏登录时间的统计
+     * 存入redis
+     * @param user
+     */
+    public void initialResource(User user){
+        // 统计在线时长
+        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
+        operations.set("online" + user.getId(),System.currentTimeMillis(),Time.getRefreshTime(),TimeUnit.SECONDS);
+
+
+
+    }
+
     //模仿列车信息
     public Map getSubwayInfo() {
         Map map = new HashMap();
@@ -102,6 +122,9 @@ public class UserService {
         map.put("second", 8);
         return map;
     }
+
+
+    // 其他需要初始化的的信息
 
 
     //在这里使用注解来选择数据源
@@ -126,6 +149,13 @@ public class UserService {
     //@Master
     @Transactional(rollbackFor = Exception.class)
     public User registry(User user) {
+
+        // 多线程进行新注册用户的初始化
+        asyncService.achievementInitial(user);
+
+
+
+
         /**
          * 默认的事务规则是遇到运行异常（RuntimeException）
          * 和程序错误（Error）才会回滚。
@@ -135,22 +165,56 @@ public class UserService {
         userMapper.insertSelective(user);
         System.out.println(user);
 
+        // 新登录用户金币初始化
         Coin coin = new Coin();
         coin.setCoinNumber(0);
+        coin.setWeekNumber(0);
         coin.setUserId(user.getId());
         coinMapper.insertSelective(coin);
 
 
-        // 初始化签到信息
+        /**
+         * 初始化签到信息
+          */
         initialSignIn(user.getId());
 
+        // 初始化碳积分排行
         CarbonRanking carbonRanking = new CarbonRanking(0, 0, 0, -1, -1);
         carbonRanking.setUserId(user.getId());
         carbonRankingMapper.insertSelective(carbonRanking);
+
+
+        // 初始化用户的游戏登录时间表
+        Game game = new Game();
+        game.setUserId(user.getId());
+        gameMapper.insertSelective(game);
+
         return user;
     }
 
+    /**
+     * 初始化签到信息到redis
+     * @param id
+     * @return
+     */
+    public void initialSignIn(int id){
+        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
+        // 签到了几天了
+        String signcountkey = "signcount" + id;
+        // 用户的具体签到信息
+        String signkey = "sign" + id;
+        SignDay signDay = null;
+        operations.set(signcountkey,0,Time.getRefreshWeekTime(),TimeUnit.SECONDS);
+        signDay = new SignDay(0,0,0,0,0,0,0);
+        operations.set(signcountkey,0,Time.getRefreshWeekTime(),TimeUnit.SECONDS);
+        operations.set(signkey,signDay,Time.getRefreshWeekTime(),TimeUnit.SECONDS);
+    }
 
+
+    /**
+     * 公告内容
+     * @return
+     */
     public String getNotice() {
         ValueOperations<String, Object> operations = redisTemplate.opsForValue();
         Notice notice = (Notice)operations.get("notice");
@@ -183,22 +247,7 @@ public class UserService {
     }
 
     
-    /**
-     * 初始化签到信息
-     * @param id
-     * @return
-     */
-    public void initialSignIn(int id){
-        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
-        // 签到了几天了
-        String signcountkey = "signcount" + id;
-        String signkey = "sign" + id;
-        SignDay signDay = null;
-        operations.set(signcountkey,0,Time.getRefreshWeekTime(),TimeUnit.SECONDS);
-        signDay = new SignDay(0,0,0,0,0,0,0);
-        operations.set(signcountkey,0,Time.getRefreshWeekTime(),TimeUnit.SECONDS);
-        operations.set(signkey,signDay,Time.getRefreshWeekTime(),TimeUnit.SECONDS);
-    }
+
 
 
     //签到查询

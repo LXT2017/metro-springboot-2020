@@ -2,10 +2,12 @@ package com.mt.metro.mapper;
 
 import com.mt.metro.entity.Game;
 import com.mt.metro.entity.GameExample;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface GameMapper {
     int countByExample(GameExample example);
@@ -28,5 +30,10 @@ public interface GameMapper {
 
     int updateByPrimaryKeySelective(Game record);
 
+
     int updateByPrimaryKey(Game record);
+
+    @Select("select * from game where user_id=#{id} limit 1")
+    @Results(@Result(column = "user_id",property = "userId"))
+    Game selectBySelective(Integer id);
 }
