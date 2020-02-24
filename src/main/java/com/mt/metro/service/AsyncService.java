@@ -1,11 +1,10 @@
 package com.mt.metro.service;
 
-import com.mt.metro.entity.AchieveOwner;
-import com.mt.metro.entity.AchieveOwnerExample;
-import com.mt.metro.entity.Achievement;
-import com.mt.metro.entity.User;
+import com.mt.metro.entity.*;
 import com.mt.metro.mapper.AchieveOwnerMapper;
 import com.mt.metro.mapper.AchievementMapper;
+import com.mt.metro.mapper.CarbonRankingMapper;
+import com.mt.metro.mapper.CoinMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,11 @@ public class AsyncService {
     AchievementMapper achievementMapper;
     @Autowired
     AchieveOwnerMapper achieveOwnerMapper;
+    @Autowired
+    CoinMapper coinMapper;
+    @Autowired
+    CarbonRankingMapper carbonRankingMapper;
+
     @Autowired
     AchieveService achieveService;
     /**
@@ -69,10 +73,24 @@ public class AsyncService {
         for (AchieveOwner achieveOwner: achieveOwnerList ) {
             if(achieveOwner.getIsReach() == 0 && achieveOwner.getCategory() == 2){
                 // 从redis缓存里取得
-                int condition = achieveService.getAchievement(achieveOwner.getAchievementId()).getCondition();
+                Achievement achievement = achieveService.getAchievement(achieveOwner.getAchievementId());
+                int condition = achievement.getCondition();
+
+                // 如果成功达到某一个成就，获得奖励
                 if (achieveOwner.getProgress() + distance >= condition) {
                     achieveOwner.setProgress(condition);
                     achieveOwner.setIsReach(1);
+
+                    // 0则是增加积分,1为金币奖励
+                    if (achievement.getKind() == 0){
+                        carbonRankingMapper.updateByUid(id,achievement.getReward());
+                    } else if(achievement.getKind() == 1){
+                        Coin coin = new Coin();
+                        coin.setUserId(id);
+                        coin.setCoinNumber(achievement.getReward());
+                        coin.setWeekNumber(achievement.getReward());
+                        coinMapper.updateByUid(coin);
+                    }
                 } else {
                     achieveOwner.setProgress(achieveOwner.getProgress() + distance);
                 }

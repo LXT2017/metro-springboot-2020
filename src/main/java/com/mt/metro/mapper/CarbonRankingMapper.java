@@ -2,10 +2,10 @@ package com.mt.metro.mapper;
 
 import com.mt.metro.entity.CarbonRanking;
 import com.mt.metro.entity.CarbonRankingExample;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 
 public interface CarbonRankingMapper {
     int countByExample(CarbonRankingExample example);
@@ -29,4 +29,9 @@ public interface CarbonRankingMapper {
     int updateByPrimaryKeySelective(CarbonRanking record);
 
     int updateByPrimaryKey(CarbonRanking record);
+
+    @Update("update carbon_ranking set daily_score=daily_score+#{score}," +
+            "week_score=week_score+#{score}," +
+            "total_score=total_score+#{score} where user_id=#{userId}")
+    int updateByUid(int userId, int score);
 }
