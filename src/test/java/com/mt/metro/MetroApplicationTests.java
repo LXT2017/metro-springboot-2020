@@ -1,7 +1,6 @@
 package com.mt.metro;
 
 import com.mt.metro.common.Schedule;
-import com.mt.metro.entity.Notice;
 import com.mt.metro.mapper.CarbonRankingMapper;
 import com.mt.metro.service.MallService;
 import com.mt.metro.service.NewsService;
@@ -43,13 +42,6 @@ class MetroApplicationTests {
         System.out.println(mallService.getMallInfo(1));
     }
 
-
-    //@Test
-    void RedisTest() {
-        Notice notice = new Notice();
-        newsService.postNotice(notice);
-
-    }
 
 
 }

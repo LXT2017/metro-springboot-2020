@@ -6,9 +6,11 @@ import com.mt.metro.common.ResponseResult;
 import com.mt.metro.entity.AchieveOwner;
 import com.mt.metro.entity.AchieveOwnerExample;
 import com.mt.metro.entity.AchieveResponse;
+import com.mt.metro.entity.Achievement;
 import com.mt.metro.mapper.AchieveOwnerMapper;
 import com.mt.metro.mapper.AchievementMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,29 @@ public class AchieveService {
     @Autowired
     AchieveOwnerMapper achieveOwnerMapper;
 
+    /**
+     * 成就称号缓存
+     */
+    @Cacheable(value = "achieve")
+    public Achievement getAchievement(int id){
+        return achievementMapper.selectById(id);
+    }
+
+
+
+
+
+
+
+
+    /**
+     * 这里可以改进
+     * 但是之前写的不想动了
+     * 就这样吧
+     * @param id
+     * @param option
+     * @return
+     */
     public ResponseResult getAchievement(int id, int option){
         List<AchieveResponse> list = achievementMapper.getAllAchievement(option);
 
@@ -42,7 +67,7 @@ public class AchieveService {
 
 
         for (AchieveResponse a : list){
-            a.setProgress("0/" + a.getCondition());
+            //a.setProgress("0/" + a.getCondition());
             a.setIsReach(false);
             for (AchieveOwner achieveOwner : achieveOwnerList) {
                 a.setProgress(achieveOwner.getProgress() + "/" + a.getCondition());
@@ -51,6 +76,7 @@ public class AchieveService {
                 }
             }
         }
+
 
         // 过滤的字符
         PropertyFilter profilter = (object, name, value) -> {

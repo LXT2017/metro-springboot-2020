@@ -164,183 +164,183 @@ public class GameExample {
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceIsNull() {
-            addCriterion("max_distance is null");
+        public Criteria andEntertainmentIsNull() {
+            addCriterion("entertainment is null");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceIsNotNull() {
-            addCriterion("max_distance is not null");
+        public Criteria andEntertainmentIsNotNull() {
+            addCriterion("entertainment is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceEqualTo(Integer value) {
-            addCriterion("max_distance =", value, "maxDistance");
+        public Criteria andEntertainmentEqualTo(Integer value) {
+            addCriterion("entertainment =", value, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceNotEqualTo(Integer value) {
-            addCriterion("max_distance <>", value, "maxDistance");
+        public Criteria andEntertainmentNotEqualTo(Integer value) {
+            addCriterion("entertainment <>", value, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceGreaterThan(Integer value) {
-            addCriterion("max_distance >", value, "maxDistance");
+        public Criteria andEntertainmentGreaterThan(Integer value) {
+            addCriterion("entertainment >", value, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceGreaterThanOrEqualTo(Integer value) {
-            addCriterion("max_distance >=", value, "maxDistance");
+        public Criteria andEntertainmentGreaterThanOrEqualTo(Integer value) {
+            addCriterion("entertainment >=", value, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceLessThan(Integer value) {
-            addCriterion("max_distance <", value, "maxDistance");
+        public Criteria andEntertainmentLessThan(Integer value) {
+            addCriterion("entertainment <", value, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceLessThanOrEqualTo(Integer value) {
-            addCriterion("max_distance <=", value, "maxDistance");
+        public Criteria andEntertainmentLessThanOrEqualTo(Integer value) {
+            addCriterion("entertainment <=", value, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceIn(List<Integer> values) {
-            addCriterion("max_distance in", values, "maxDistance");
+        public Criteria andEntertainmentIn(List<Integer> values) {
+            addCriterion("entertainment in", values, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceNotIn(List<Integer> values) {
-            addCriterion("max_distance not in", values, "maxDistance");
+        public Criteria andEntertainmentNotIn(List<Integer> values) {
+            addCriterion("entertainment not in", values, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceBetween(Integer value1, Integer value2) {
-            addCriterion("max_distance between", value1, value2, "maxDistance");
+        public Criteria andEntertainmentBetween(Integer value1, Integer value2) {
+            addCriterion("entertainment between", value1, value2, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxDistanceNotBetween(Integer value1, Integer value2) {
-            addCriterion("max_distance not between", value1, value2, "maxDistance");
+        public Criteria andEntertainmentNotBetween(Integer value1, Integer value2) {
+            addCriterion("entertainment not between", value1, value2, "entertainment");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreIsNull() {
-            addCriterion("max_score is null");
+        public Criteria andBodybuildingIsNull() {
+            addCriterion("bodybuilding is null");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreIsNotNull() {
-            addCriterion("max_score is not null");
+        public Criteria andBodybuildingIsNotNull() {
+            addCriterion("bodybuilding is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreEqualTo(Integer value) {
-            addCriterion("max_score =", value, "maxScore");
+        public Criteria andBodybuildingEqualTo(Integer value) {
+            addCriterion("bodybuilding =", value, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreNotEqualTo(Integer value) {
-            addCriterion("max_score <>", value, "maxScore");
+        public Criteria andBodybuildingNotEqualTo(Integer value) {
+            addCriterion("bodybuilding <>", value, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreGreaterThan(Integer value) {
-            addCriterion("max_score >", value, "maxScore");
+        public Criteria andBodybuildingGreaterThan(Integer value) {
+            addCriterion("bodybuilding >", value, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreGreaterThanOrEqualTo(Integer value) {
-            addCriterion("max_score >=", value, "maxScore");
+        public Criteria andBodybuildingGreaterThanOrEqualTo(Integer value) {
+            addCriterion("bodybuilding >=", value, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreLessThan(Integer value) {
-            addCriterion("max_score <", value, "maxScore");
+        public Criteria andBodybuildingLessThan(Integer value) {
+            addCriterion("bodybuilding <", value, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreLessThanOrEqualTo(Integer value) {
-            addCriterion("max_score <=", value, "maxScore");
+        public Criteria andBodybuildingLessThanOrEqualTo(Integer value) {
+            addCriterion("bodybuilding <=", value, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreIn(List<Integer> values) {
-            addCriterion("max_score in", values, "maxScore");
+        public Criteria andBodybuildingIn(List<Integer> values) {
+            addCriterion("bodybuilding in", values, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreNotIn(List<Integer> values) {
-            addCriterion("max_score not in", values, "maxScore");
+        public Criteria andBodybuildingNotIn(List<Integer> values) {
+            addCriterion("bodybuilding not in", values, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreBetween(Integer value1, Integer value2) {
-            addCriterion("max_score between", value1, value2, "maxScore");
+        public Criteria andBodybuildingBetween(Integer value1, Integer value2) {
+            addCriterion("bodybuilding between", value1, value2, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andMaxScoreNotBetween(Integer value1, Integer value2) {
-            addCriterion("max_score not between", value1, value2, "maxScore");
+        public Criteria andBodybuildingNotBetween(Integer value1, Integer value2) {
+            addCriterion("bodybuilding not between", value1, value2, "bodybuilding");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceIsNull() {
-            addCriterion("total_distance is null");
+        public Criteria andSpeedcontestIsNull() {
+            addCriterion("speedContest is null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceIsNotNull() {
-            addCriterion("total_distance is not null");
+        public Criteria andSpeedcontestIsNotNull() {
+            addCriterion("speedContest is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceEqualTo(Integer value) {
-            addCriterion("total_distance =", value, "totalDistance");
+        public Criteria andSpeedcontestEqualTo(Integer value) {
+            addCriterion("speedContest =", value, "speedcontest");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceNotEqualTo(Integer value) {
-            addCriterion("total_distance <>", value, "totalDistance");
+        public Criteria andSpeedcontestNotEqualTo(Integer value) {
+            addCriterion("speedContest <>", value, "speedcontest");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceGreaterThan(Integer value) {
-            addCriterion("total_distance >", value, "totalDistance");
+        public Criteria andSpeedcontestGreaterThan(Integer value) {
+            addCriterion("speedContest >", value, "speedcontest");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceGreaterThanOrEqualTo(Integer value) {
-            addCriterion("total_distance >=", value, "totalDistance");
+        public Criteria andSpeedcontestGreaterThanOrEqualTo(Integer value) {
+            addCriterion("speedContest >=", value, "speedcontest");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceLessThan(Integer value) {
-            addCriterion("total_distance <", value, "totalDistance");
+        public Criteria andSpeedcontestLessThan(Integer value) {
+            addCriterion("speedContest <", value, "speedcontest");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceLessThanOrEqualTo(Integer value) {
-            addCriterion("total_distance <=", value, "totalDistance");
+        public Criteria andSpeedcontestLessThanOrEqualTo(Integer value) {
+            addCriterion("speedContest <=", value, "speedcontest");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceIn(List<Integer> values) {
-            addCriterion("total_distance in", values, "totalDistance");
+        public Criteria andSpeedcontestIn(List<Integer> values) {
+            addCriterion("speedContest in", values, "speedcontest");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceNotIn(List<Integer> values) {
-            addCriterion("total_distance not in", values, "totalDistance");
+        public Criteria andSpeedcontestNotIn(List<Integer> values) {
+            addCriterion("speedContest not in", values, "speedcontest");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceBetween(Integer value1, Integer value2) {
-            addCriterion("total_distance between", value1, value2, "totalDistance");
+        public Criteria andSpeedcontestBetween(Integer value1, Integer value2) {
+            addCriterion("speedContest between", value1, value2, "speedcontest");
             return (Criteria) this;
         }
 
-        public Criteria andTotalDistanceNotBetween(Integer value1, Integer value2) {
-            addCriterion("total_distance not between", value1, value2, "totalDistance");
+        public Criteria andSpeedcontestNotBetween(Integer value1, Integer value2) {
+            addCriterion("speedContest not between", value1, value2, "speedcontest");
             return (Criteria) this;
         }
 

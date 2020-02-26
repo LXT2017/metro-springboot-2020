@@ -232,6 +232,8 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+
     <update id="updateByPrimaryKey" parameterType="com.mt.metro.entity.CarbonRanking">
         update carbon_ranking
         set daily_score = #{dailyScore,jdbcType=INTEGER},

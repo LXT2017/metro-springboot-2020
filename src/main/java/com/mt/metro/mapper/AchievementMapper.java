@@ -22,7 +22,7 @@ public interface AchievementMapper {
     int insertSelective(Achievement record);
 
     List<Achievement> selectByExample(AchievementExample example);
-
+    //这里不知道为什么有错误
     Achievement selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") Achievement record, @Param("example") AchievementExample example);
@@ -38,4 +38,16 @@ public interface AchievementMapper {
             @Result(column = "achieve_url", property = "achieveUrl")
     })
     List<AchieveResponse> getAllAchievement(int option);
+
+    @Select("select * from achievement")
+    @Results(value = {
+            @Result(column = "achieve_url", property = "achieveUrl")
+    })
+    List<Achievement> getAll();
+
+    @Select("select * from achievement where id = #{id}")
+    @Results(value = {
+            @Result(column = "achieve_url", property = "achieveUrl")
+    })
+    Achievement selectById(int id);
 }

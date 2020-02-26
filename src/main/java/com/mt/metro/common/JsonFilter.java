@@ -2,6 +2,7 @@ package com.mt.metro.common;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.PropertyFilter;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 
 public class JsonFilter {
@@ -14,7 +15,7 @@ public class JsonFilter {
      * @return
      */
     public static Object getJsonFilter(Object entity, SimplePropertyPreFilter filter) {
-        Object o = JSONObject.parse(JSONObject.toJSONString(entity, filter));
+        Object o = JSONObject.parse(JSONObject.toJSONString(entity, filter,SerializerFeature.WriteMapNullValue));
         return o;
     }
 
@@ -27,7 +28,7 @@ public class JsonFilter {
      * @return
      */
     public static Object getJsonPreFilter(Object entity, PropertyFilter filter) {
-        Object o = JSONObject.parse(JSONObject.toJSONString(entity, filter));
+        Object o = JSONObject.parse(JSONObject.toJSONString(entity, filter, SerializerFeature.WriteMapNullValue));
         return o;
     }
 
