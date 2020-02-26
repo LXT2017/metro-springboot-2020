@@ -257,10 +257,9 @@ public class UserService {
         String signcountkey = "signcount" + id;
         String signkey = "sign" + id;
         SignDay signDay = null;
-        if(operations.get("flag").toString().equals("true")){
-            if(operations.get(signcountkey) == null){
-                initialSignIn(id);
-            }
+        // 如果没有签到信息就新建
+        if(operations.get(signcountkey) == null){
+            initialSignIn(id);
         }
 
         Map map = new HashMap();
