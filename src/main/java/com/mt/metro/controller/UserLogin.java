@@ -1,5 +1,6 @@
 package com.mt.metro.controller;
 
+import com.mt.metro.annotation.CacheLock;
 import com.mt.metro.annotation.PassToken;
 import com.mt.metro.annotation.UserLoginToken;
 import com.mt.metro.annotation.VisitLog;
@@ -18,10 +19,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 
-/**
- * @author jinbin
- * @date 2018-07-08 20:45
+/***
+ *
  */
+
 @RestController
 @RequestMapping("user")
 @Api
@@ -42,10 +43,11 @@ public class UserLogin {
     @Autowired
     AchieveService achieveService;
 
+
+    @CacheLock(prefix = "book")
     @GetMapping("/query")
     public ResponseResult query(int id) {
 
-        System.out.println(achieveService.getAchievement(id));
         return null;
     }
 

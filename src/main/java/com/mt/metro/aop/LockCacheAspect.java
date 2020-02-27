@@ -14,25 +14,26 @@ import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.Collections;
+import java.util.UUID;
 
 @Aspect
 @Component
-public class LockCheckAspect {
+public class LockCacheAspect {
 
     /** lua */
     private static final String RELEASE_LOCK_LUA_SCRIPT = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
 
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    RedisTemplate<String,String> redisTemplate;
 
     // 增强带有CacheLock注解的方法
     @Pointcut("@annotation(com.mt.metro.annotation.CacheLock)")
     public void pointCut() {
     }
 
-    @Around("pointCut()")
+    @Around(value = "pointCut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-
+        System.out.println("开始执行事务");
         // 可以根据业务获取用户唯一的个人信息，例如手机号码
         String phone = "12312";
 
@@ -47,11 +48,16 @@ public class LockCheckAspect {
         String delimiter = cacheLock.delimiter();
         StringBuilder sb = new StringBuilder();
         sb.append(prefix).append(delimiter).append(phone);
-        final String lockKey = sb.toString();
-        final String UUID = java.util.UUID.randomUUID().toString();
+        String lockKey = sb.toString();
+        String uuid = UUID.randomUUID().toString();
+
         try {
+            System.out.println(uuid);
             // 获取锁
-            boolean success = redisTemplate.opsForValue().setIfAbsent(lockKey, UUID, cacheLock.expire(), cacheLock.timeUnit());
+            //redisTemplate.opsForValue().setIfAbsent(lockKey,"kdsvjk",5, TimeUnit.SECONDS);
+            boolean success = redisTemplate.opsForValue().setIfAbsent(lockKey, "dsf"+uuid, cacheLock.expire(), cacheLock.timeUnit());
+
+            System.out.println(success);
             if (!success) {
                 throw new RuntimeException("请勿重复提交");
             }
@@ -60,7 +66,7 @@ public class LockCheckAspect {
         } finally {
             // 最后记得释放锁
             DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(RELEASE_LOCK_LUA_SCRIPT, Long.class);
-            Long result = redisTemplate.execute(redisScript, Collections.singletonList(lockKey), UUID);
+            Long result = (long)redisTemplate.execute(redisScript, Collections.singletonList(lockKey), uuid);
         }
 
     }

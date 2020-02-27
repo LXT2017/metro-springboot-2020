@@ -25,6 +25,7 @@ public class RedisConfig extends CachingConfigurerSupport {
     /**
      * 配置redis key
      */
+
     @Bean
     @Override
     public KeyGenerator keyGenerator() {

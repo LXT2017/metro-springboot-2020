@@ -18,10 +18,12 @@ public class VisitLogAop {
     //切入点
     @Pointcut("@annotation(com.mt.metro.annotation.VisitLog)")
     public void visitLogPointCut() {
+
     }
 
     @Before(value = "visitLogPointCut()")
     public void beforeVisitLog() {
+        System.out.println("!!!!!!");
         logger.debug("Debugging log");
         logger.info("Info log");
         logger.warn("Hey, This is a warning!");
