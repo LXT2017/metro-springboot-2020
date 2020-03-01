@@ -2,7 +2,7 @@ package com.mt.metro.controller;
 
 
 import com.mt.metro.annotation.PassToken;
-import com.mt.metro.common.ResponseResult;
+import com.mt.metro.utils.ResponseResult;
 import com.mt.metro.common.Schedule;
 import com.mt.metro.entity.Sign;
 import com.mt.metro.service.ResourceService;

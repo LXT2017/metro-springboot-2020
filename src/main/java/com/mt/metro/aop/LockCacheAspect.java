@@ -33,7 +33,7 @@ public class LockCacheAspect {
 
     @Around(value = "pointCut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-        System.out.println("开始执行事务");
+
         // 可以根据业务获取用户唯一的个人信息，例如手机号码
         String phone = "12312";
 
@@ -52,12 +52,9 @@ public class LockCacheAspect {
         String uuid = UUID.randomUUID().toString();
 
         try {
-            System.out.println(uuid);
             // 获取锁
             //redisTemplate.opsForValue().setIfAbsent(lockKey,"kdsvjk",5, TimeUnit.SECONDS);
             boolean success = redisTemplate.opsForValue().setIfAbsent(lockKey, "dsf"+uuid, cacheLock.expire(), cacheLock.timeUnit());
-
-            System.out.println(success);
             if (!success) {
                 throw new RuntimeException("请勿重复提交");
             }

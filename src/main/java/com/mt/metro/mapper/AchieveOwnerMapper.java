@@ -2,8 +2,10 @@ package com.mt.metro.mapper;
 
 import com.mt.metro.entity.AchieveOwner;
 import com.mt.metro.entity.AchieveOwnerExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 public interface AchieveOwnerMapper {
     int countByExample(AchieveOwnerExample example);
@@ -27,4 +29,7 @@ public interface AchieveOwnerMapper {
     int updateByPrimaryKeySelective(AchieveOwner record);
 
     int updateByPrimaryKey(AchieveOwner record);
+
+    @Select("select * from achieve_owner")
+    List<AchieveOwner> selectAll();
 }

@@ -1,4 +1,4 @@
-package com.mt.metro.common;
+package com.mt.metro.utils;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;

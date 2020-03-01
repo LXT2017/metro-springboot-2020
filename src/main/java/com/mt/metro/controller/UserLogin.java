@@ -1,17 +1,17 @@
 package com.mt.metro.controller;
 
-import com.mt.metro.annotation.CacheLock;
 import com.mt.metro.annotation.PassToken;
 import com.mt.metro.annotation.UserLoginToken;
 import com.mt.metro.annotation.VisitLog;
-import com.mt.metro.common.FileTransportation;
-import com.mt.metro.common.ResponseResult;
-import com.mt.metro.common.Time;
 import com.mt.metro.entity.Feedback;
 import com.mt.metro.entity.User;
 import com.mt.metro.service.AchieveService;
+import com.mt.metro.service.AsyncService;
 import com.mt.metro.service.TokenService;
 import com.mt.metro.service.UserService;
+import com.mt.metro.utils.FileTransportation;
+import com.mt.metro.utils.ResponseResult;
+import com.mt.metro.utils.Time;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +34,8 @@ public class UserLogin {
     private TokenService tokenService;
     @Autowired
     FileTransportation fileTransportation;
+    @Autowired
+    AsyncService asyncService;
 
     public UserLogin(UserService userService, TokenService tokenService) {
         this.userService = userService;
@@ -44,11 +46,17 @@ public class UserLogin {
     AchieveService achieveService;
 
 
-    @CacheLock(prefix = "book")
+    //@CacheLock(prefix = "book")
     @GetMapping("/query")
-    public ResponseResult query(int id) {
+    public String  query(String ip) {
+        // ip的查询
+        //HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        //String currentIp = IpUtil.getIpAddr(request);
 
-        return null;
+        System.out.println(ip);
+        asyncService.setUserCity(null,ip);
+        return "success";
+
     }
 
 

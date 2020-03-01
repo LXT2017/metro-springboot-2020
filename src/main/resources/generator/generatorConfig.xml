@@ -60,7 +60,7 @@
         <!--        <table tableName="dressup_owner"></table>-->
         <!--        <table tableName="dressup_sort"></table>-->
         <!--        <table tableName="feedback"></table>-->
-                 <table tableName="game"></table>
+<!--                 <table tableName="game"></table>-->
         <!--        <table tableName="history_dgame"></table>-->
         <!--        <table tableName="history_integral"></table>-->
         <!--        <table tableName="history_puzzle"></table>-->
@@ -74,5 +74,7 @@
         <!--        <table tableName="user"></table>-->
         <!--        <table tableName="coin"></table>-->
 <!--        <table tableName="sign"></table>-->
+        <table tableName="friend"></table>
+        <table tableName="addfriend"></table>
     </context>
 </generatorConfiguration>

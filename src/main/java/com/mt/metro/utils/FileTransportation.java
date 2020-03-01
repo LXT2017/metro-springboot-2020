@@ -1,4 +1,4 @@
-package com.mt.metro.common;
+package com.mt.metro.utils;
 
 
 import com.google.common.collect.Lists;
@@ -32,7 +32,8 @@ public class FileTransportation {
                 String newFileName = uuid.concat(".").concat(fileSuffix);
 
                 // 该方法返回的为当前项目的工作目录，即在哪个地方启动的java线程
-                String dirPath = System.getProperty("user.dir");
+                //String dirPath = System.getProperty("user.dir");
+                String dirPath = "/contest"+File.separator+"data";
                 String path = File.separator + "headPicUploadImg" + File.separator + newFileName;
 
                 File destFile = new File(dirPath + path);
@@ -45,7 +46,7 @@ public class FileTransportation {
                     return path;
                 } catch (IOException e) {
                     logger.error("upload pic error");
-                    return null;
+                    throw new RuntimeException("上传错误");
                 }
             } else {
                 // 非法文件

@@ -1,5 +1,6 @@
 package com.mt.metro.mapper;
 
+import com.mt.metro.entity.MyFriend;
 import com.mt.metro.entity.User;
 import com.mt.metro.entity.User1;
 import com.mt.metro.entity.UserExample;
@@ -36,4 +37,7 @@ public interface UserMapper {
     List<User1> selectDailyRanking();
 
     List<User1> selectWeekRanking();
+
+
+    List<MyFriend> findFriendByList(List<Integer> list);
 }

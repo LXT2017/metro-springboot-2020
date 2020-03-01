@@ -2,8 +2,8 @@ package com.mt.metro.service;
 
 
 import com.alibaba.fastjson.serializer.PropertyFilter;
-import com.mt.metro.common.JsonFilter;
-import com.mt.metro.common.ResponseResult;
+import com.mt.metro.utils.JsonFilter;
+import com.mt.metro.utils.ResponseResult;
 import com.mt.metro.entity.Dressup;
 import com.mt.metro.entity.DressupExample;
 import com.mt.metro.entity.DressupOwner;
@@ -48,6 +48,7 @@ public class DressService {
         criteria1.andDressupIdEqualTo(option);
         List<Dressup> dressupList = dressupMapper.selectByExample(dressupExample);
 
+        // 过滤
         PropertyFilter profilter = (object, name, value) -> {
             if (name.equalsIgnoreCase("dressupId")) {
                 //false表示last字段将被排除在外

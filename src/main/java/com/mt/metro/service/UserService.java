@@ -1,20 +1,24 @@
 package com.mt.metro.service;
 
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
-import com.mt.metro.common.JsonFilter;
-import com.mt.metro.common.ResponseResult;
 import com.mt.metro.common.SignDay;
-import com.mt.metro.common.Time;
 import com.mt.metro.entity.*;
 import com.mt.metro.mapper.*;
+import com.mt.metro.utils.IpUtil;
+import com.mt.metro.utils.JsonFilter;
+import com.mt.metro.utils.ResponseResult;
+import com.mt.metro.utils.Time;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,6 +115,11 @@ public class UserService {
         ValueOperations<String, Object> operations = redisTemplate.opsForValue();
         operations.set("online" + user.getId(),System.currentTimeMillis(),Time.getRefreshTime(),TimeUnit.SECONDS);
 
+        // ip的查询
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String currentIp = IpUtil.getIpAddr(request);
+        // 多线程利用访问ip进行定位，修改地理位置
+        asyncService.setUserCity(user,currentIp);
 
 
     }
@@ -161,6 +170,7 @@ public class UserService {
          * 和程序错误（Error）才会回滚。
          */
         user.setNickname("匿名用户");
+        user.setHeadPortrait("/headPicUploadImg/head.jpg");
         user.setCurrentStrength(100);
         userMapper.insertSelective(user);
         System.out.println(user);

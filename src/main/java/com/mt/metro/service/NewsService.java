@@ -2,7 +2,7 @@ package com.mt.metro.service;
 
 
 import com.mt.metro.annotation.Master;
-import com.mt.metro.common.Time;
+import com.mt.metro.utils.Time;
 import com.mt.metro.entity.Feedback;
 import com.mt.metro.entity.Notice;
 import com.mt.metro.mapper.FeedbackMapper;

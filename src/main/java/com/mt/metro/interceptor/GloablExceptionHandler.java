@@ -1,7 +1,7 @@
 package com.mt.metro.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
-import com.mt.metro.common.ResponseResult;
+import com.mt.metro.utils.ResponseResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;

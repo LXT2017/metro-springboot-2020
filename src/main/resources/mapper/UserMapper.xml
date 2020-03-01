@@ -22,6 +22,12 @@
     </resultMap>
 
 
+    <resultMap id="FindFriendMap" type="com.mt.metro.entity.MyFriend">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <resultMap id="User1ResultMap" type="com.mt.metro.entity.User1">
         <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
         <result column="daily_score" property="dailyScore" jdbcType="INTEGER"/>
@@ -124,6 +130,18 @@
         where u.id=c.user_id
         order by c.week_score desc
     </select>
+
+
+    <select id="findFriendByList" resultMap="FindFriendMap">
+        select id,nickname,head_portrait
+        from user
+        where id in
+        <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
 
 
     <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mt.metro.entity.UserExample">

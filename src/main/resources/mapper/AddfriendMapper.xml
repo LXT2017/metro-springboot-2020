@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mt.metro.mapper.AddfriendMapper" >
+  <resultMap id="BaseResultMap" type="com.mt.metro.entity.Addfriend" >
+    <result column="friend1" property="friend1" jdbcType="INTEGER" />
+    <result column="friend2" property="friend2" jdbcType="INTEGER" />
+    <result column="friend1_allow" property="friend1Allow" jdbcType="CHAR" />
+    <result column="friend2_allow" property="friend2Allow" jdbcType="CHAR" />
+  </resultMap>
+
+  <resultMap id="ResultMap" type="com.mt.metro.entity.MyFriend" >
+      <id column="id" property="id" jdbcType="INTEGER"/>
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <sql id="key">
+    <trim suffixOverrides=",">
+      <if test="friend1!=null and friend1!=''">friend1,</if>
+      <if test="friend2!=null and friend2!=''">friend2,</if>
+      <if test="friend1_allow!=null and friend1_allow!=''"> friend1_allow,</if>
+      <if test="friend2_allow!=null and friend2_allow!=''">friend2_allow,</if>
+    </trim>
+
+  </sql>
+
+  <sql id="value">
+    <trim suffixOverrides=",">
+      <if test="friend1!=null and friend1!=''">#{friend1},</if>
+      <if test="friend2!=null and friend2!=''">#{friend2},</if>
+      <if test="friend1_allow!=null and friend1_allow!=''">#{friend1_allow},</if>
+      <if test="friend2_allow!=null and friend2_allow!=''">#{friend2_allow},</if>
+    </trim>
+
+  </sql>
+  <insert id="addFriend" parameterType="com.mt.metro.entity.Addfriend">
+
+    insert into addfriend(<include refid="key"/>) values(<include refid="value"/>)
+
+  </insert>
+
+
+
+
+  <select id="findFriendRequest" parameterType="java.lang.Integer" resultType="com.mt.metro.entity.Addfriend">
+        select * from addfriend where friend2=#{friend2Id} and friend2_allow is null
+    </select>
+
+  <select id="responseMessage" parameterType="java.lang.Integer" resultType="com.mt.metro.entity.Addfriend">
+        select * from addfriend t where friend1=#{friend1Id} and friend2_allow is not null
+    </select>
+
+  <delete id="delFriendRequest" >
+        delete from addfriend where friend1_allow is not null and friend2_allow is not null AND friend1=#{id}
+    </delete>
+
+
+
+  <update id="friendRequest" parameterType="com.mt.metro.entity.Addfriend">
+        update addfriend set friend2_allow=#{friend2_allow} where friend1=#{id2} AND friend2=#{id1}
+    </update>
+
+
+
+  <select id="findFriendsByLocation" parameterType="java.lang.Integer" resultMap="ResultMap">
+        select u.head_portrait,u.nickname,u.id from user u where u.id!=#{id} and u.city=
+        (select mu.city from user mu where mu.id=#{id})
+    </select>
+
+</mapper>

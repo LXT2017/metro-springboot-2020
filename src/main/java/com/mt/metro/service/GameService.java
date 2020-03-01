@@ -1,8 +1,8 @@
 package com.mt.metro.service;
 
 import com.alibaba.fastjson.serializer.PropertyFilter;
-import com.mt.metro.common.JsonFilter;
-import com.mt.metro.common.ResponseResult;
+import com.mt.metro.utils.JsonFilter;
+import com.mt.metro.utils.ResponseResult;
 import com.mt.metro.entity.Game;
 import com.mt.metro.entity.GameExample;
 import com.mt.metro.mapper.GameMapper;

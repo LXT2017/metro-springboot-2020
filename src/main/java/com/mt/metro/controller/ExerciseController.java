@@ -1,7 +1,7 @@
 package com.mt.metro.controller;
 
 
-import com.mt.metro.common.ResponseResult;
+import com.mt.metro.utils.ResponseResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

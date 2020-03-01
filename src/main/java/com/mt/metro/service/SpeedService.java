@@ -1,6 +1,6 @@
 package com.mt.metro.service;
 
-import com.mt.metro.common.ResponseResult;
+import com.mt.metro.utils.ResponseResult;
 import com.mt.metro.entity.Coin;
 import com.mt.metro.mapper.CoinMapper;
 import org.springframework.beans.factory.annotation.Autowired;

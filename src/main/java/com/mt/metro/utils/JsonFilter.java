@@ -1,4 +1,4 @@
-package com.mt.metro.common;
+package com.mt.metro.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.PropertyFilter;

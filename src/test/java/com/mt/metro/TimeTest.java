@@ -1,7 +1,7 @@
 package com.mt.metro;
 
 
-import com.mt.metro.common.Time;
+import com.mt.metro.utils.Time;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

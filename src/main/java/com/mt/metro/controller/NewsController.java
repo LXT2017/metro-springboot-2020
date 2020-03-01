@@ -1,7 +1,7 @@
 package com.mt.metro.controller;
 
 
-import com.mt.metro.common.ResponseResult;
+import com.mt.metro.utils.ResponseResult;
 import com.mt.metro.entity.Feedback;
 import com.mt.metro.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;

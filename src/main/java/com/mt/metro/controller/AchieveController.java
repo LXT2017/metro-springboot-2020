@@ -1,6 +1,6 @@
 package com.mt.metro.controller;
 
-import com.mt.metro.common.ResponseResult;
+import com.mt.metro.utils.ResponseResult;
 import com.mt.metro.service.AchieveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
