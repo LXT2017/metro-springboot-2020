@@ -34,4 +34,11 @@ public interface CarbonRankingMapper {
             "week_score=week_score+#{score}," +
             "total_score=total_score+#{score} where user_id=#{userId}")
     int updateByUid(int userId, int score);
+
+
+    @Update("update carbon_ranking set daily_score=0")
+    int updateAllDailyRanking();
+
+    @Update("update carbon_ranking set week_score=0")
+    int updateAllWeekRanking();
 }

@@ -30,6 +30,6 @@ public interface AddfriendMapper {
 
 
 
-    List<MyFriend> findFriendsByLocation(int id);
+    List<MyFriend> findFriendsByLocation(int id,List<Integer> list);
 
 }

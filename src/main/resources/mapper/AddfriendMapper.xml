@@ -64,7 +64,12 @@
 
 
   <select id="findFriendsByLocation" parameterType="java.lang.Integer" resultMap="ResultMap">
-        select u.head_portrait,u.nickname,u.id from user u where u.id!=#{id} and u.city=
+        select u.head_portrait,u.nickname,u.id from user u where u.id!=#{id}
+
+        <if test="list!=null">
+        and u.id not in <foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
+        </if>
+        and u.city=
         (select mu.city from user mu where mu.id=#{id})
     </select>
 

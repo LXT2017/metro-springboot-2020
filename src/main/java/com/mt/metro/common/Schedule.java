@@ -2,6 +2,8 @@ package com.mt.metro.common;
 
 import com.mt.metro.entity.Parameter;
 import com.mt.metro.entity.Sign;
+import com.mt.metro.mapper.CarbonRankingMapper;
+import com.mt.metro.mapper.CoinMapper;
 import com.mt.metro.mapper.ParameterMapper;
 import com.mt.metro.mapper.SignMapper;
 import com.mt.metro.utils.Time;
@@ -23,6 +25,11 @@ public class Schedule {
     @Autowired
     ParameterMapper parameterMapper;
 
+    @Autowired
+    CarbonRankingMapper carbonRankingMapper;
+
+    @Autowired
+    CoinMapper coinMapper;
 
     @Autowired
     SignMapper signMapper;
@@ -56,4 +63,24 @@ public class Schedule {
         }
         logger.info("写入参数getweek");
     }
+
+
+    // 金币和积分周排行清零
+    @Scheduled(cron = "0 0 0 ? * MON")
+    public void setInitialCoinAndCarbon() {
+        carbonRankingMapper.updateAllWeekRanking();
+        coinMapper.updateAllWeekCoin();
+        logger.info("金币和碳积分清零");
+    }
+
+
+    // 积分日排行清零
+    @Scheduled(cron = "0 0 0 * * ?")
+    public void setDailyCarbon(){
+
+        carbonRankingMapper.updateAllDailyRanking();
+        logger.info("碳积分日排行清零");
+    }
+
+
 }

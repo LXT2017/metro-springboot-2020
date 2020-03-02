@@ -37,8 +37,11 @@ public class BuddySystemService {
      * @return
      */
     public ResponseResult getFriends(int id,int pageNum,int pageSize) {
+        List<Integer> myFriendsIdList = getMyFriendsIdList(id);
+        System.out.println(myFriendsIdList);
         PageHelper.startPage(pageNum,pageSize);
-        List<MyFriend> myFriendList = this.addfriendMapper.findFriendsByLocation(id);
+        // 要去除我已经添加了的好友
+        List<MyFriend> myFriendList = this.addfriendMapper.findFriendsByLocation(id,myFriendsIdList);
 
         PageInfo<MyFriend> pageInfo = new PageInfo<>(myFriendList);
 
@@ -48,17 +51,15 @@ public class BuddySystemService {
     }
 
     /**
-     * 返回我的好友列表
-     * @param id
-     * @return
+     * 获得我的好友的id序号
      */
-    public ResponseResult getMyFriends(int id){
+    private List<Integer> getMyFriendsIdList(int id){
         List<Friend> friendList = friendMapper.findFriendById(id);
 
         if (CollectionUtils.isEmpty(friendList)){
-            System.out.println("控制");
             return null;
         }
+
         List<Integer> myfriendList = new ArrayList();
         for(Friend friend:friendList) {
             if(id == friend.getFriend1()){
@@ -66,6 +67,20 @@ public class BuddySystemService {
             } else {
                 myfriendList.add(friend.getFriend1());
             }
+        }
+        return myfriendList;
+    }
+
+
+    /**
+     * 返回我的好友列表
+     * @param id
+     * @return
+     */
+    public ResponseResult getMyFriends(int id){
+        List<Integer> myfriendList = getMyFriendsIdList(id);
+        if(myfriendList == null){
+            return new ResponseResult(200,"您还没有好友",null);
         }
         List<MyFriend> list = userMapper.findFriendByList(myfriendList);
         System.out.println(list);
