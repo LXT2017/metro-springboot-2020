@@ -42,4 +42,6 @@ public interface CoinMapper {
 
     @Update("update coin set week_number=0")
     int updateAllWeekCoin();
+
+    List<User1> selectFriendsCoinRanking(List<Integer> myfriendIdList);
 }

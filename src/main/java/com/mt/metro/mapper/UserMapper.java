@@ -1,9 +1,6 @@
 package com.mt.metro.mapper;
 
-import com.mt.metro.entity.MyFriend;
-import com.mt.metro.entity.User;
-import com.mt.metro.entity.User1;
-import com.mt.metro.entity.UserExample;
+import com.mt.metro.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -34,10 +31,12 @@ public interface UserMapper {
 
     User1 selectInitialInfo(@Param("id") int id);
 
-    List<User1> selectDailyRanking();
+    // List<User1> selectDailyRanking();
+    // List<User1> selectWeekRanking();
 
-    List<User1> selectWeekRanking();
+    List<UserCarbonRaking> selectDailyRanking(@Param("list")List<Integer> list);
 
+    List<UserCarbonRaking> selectWeekRanking(@Param("list")List<Integer> list);
 
     List<MyFriend> findFriendByList(List<Integer> list);
 }

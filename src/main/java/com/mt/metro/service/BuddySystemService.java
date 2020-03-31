@@ -12,6 +12,8 @@ import com.mt.metro.mapper.UserMapper;
 import com.mt.metro.utils.JsonFilter;
 import com.mt.metro.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -32,7 +34,7 @@ public class BuddySystemService {
 
 
     /**
-     * 查找好友来进行添加
+     * 搜索附近好友
      * @param id
      * @return
      */
@@ -46,14 +48,44 @@ public class BuddySystemService {
         PageInfo<MyFriend> pageInfo = new PageInfo<>(myFriendList);
 
 
-        System.out.println(myFriendList);
         return new ResponseResult(200,"success",pageInfo);
+    }
+
+
+    /**
+     * 按照Id搜索好友
+     * @param id
+     * @return
+     */
+    public ResponseResult getMyFriendsById(int id,int friendId) {
+        MyFriend myFriend = addfriendMapper.selectUserById(friendId);
+        if(myFriend == null){
+            return new ResponseResult(501,"id错误，没有找到该好友",null);
+        }
+        if (getMyFriendsIdList(id).contains(myFriend.getId())){
+            return new ResponseResult(501,"您已添加对方为好友",null);
+        }
+        return new ResponseResult(200,"sucess",myFriend);
+    }
+
+
+    /**
+     * 好友按照名字模糊搜索
+     */
+    public ResponseResult getMyFriendsByName(int id, int pageNum, int pageSize, String name){
+        System.out.println(name);
+        List<Integer> friendsIdList = getMyFriendsIdList(id);
+        PageHelper.startPage(pageNum,pageSize);
+        List<MyFriend> myFriendList = addfriendMapper.selectUserByName(id,name,friendsIdList);
+        PageInfo<MyFriend> pageInfo = new PageInfo<>(myFriendList);
+        System.out.println(pageInfo);
+        return new ResponseResult(200,"sucess",pageInfo);
     }
 
     /**
      * 获得我的好友的id序号
      */
-    private List<Integer> getMyFriendsIdList(int id){
+    private List<Integer> getFriendsIdList(int id){
         List<Friend> friendList = friendMapper.findFriendById(id);
 
         if (CollectionUtils.isEmpty(friendList)){
@@ -71,6 +103,17 @@ public class BuddySystemService {
         return myfriendList;
     }
 
+    //缓存，时间2小时
+    @Cacheable(value = "friends",key = "#id")
+    public List<Integer> getMyFriendsIdList(int id){
+        return getFriendsIdList(id);
+    }
+
+    //更新缓存
+    @CachePut(value = "friends",key = "#id")
+    public List<Integer> updateMyFriendsIdList(int id){
+        return getFriendsIdList(id);
+    }
 
     /**
      * 返回我的好友列表
@@ -94,6 +137,9 @@ public class BuddySystemService {
      * @return
      */
     public ResponseResult postFriendRequest(Addfriend addfriend){
+        if(getMyFriendsIdList(addfriend.getFriend1()).contains(addfriend.getFriend2())){
+            return new ResponseResult(501,"对方已经是您的好友，无需重复添加",null);
+        }
         addfriend.setFriend1_allow(Addfriend.ALLOW);
         addfriendMapper.addFriend(addfriend);
         return new ResponseResult(200,"已成功发送申请",null);
@@ -156,7 +202,8 @@ public class BuddySystemService {
         friend.setFriend1(friend1);
         friend.setFriend2(friend2);
         friendMapper.insert(friend);
-
+        // 及时更新，可以引入消息队列
+        updateMyFriendsIdList(friend1);
         return new ResponseResult(200,"相见恨晚，快去聊天吧",null);
     }
 

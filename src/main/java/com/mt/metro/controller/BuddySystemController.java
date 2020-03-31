@@ -4,10 +4,7 @@ import com.mt.metro.entity.Addfriend;
 import com.mt.metro.service.BuddySystemService;
 import com.mt.metro.utils.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("buddy")
@@ -17,12 +14,38 @@ public class BuddySystemController {
     BuddySystemService buddySystemService;
 
 
+    /**
+     * 精确搜索好友
+     * @param id
+     * @return
+     */
+    @GetMapping("getFriendsById")
+    public ResponseResult getFriendsById(int id,int friendId){
+        return buddySystemService.getMyFriendsById(id,friendId);
+    }
+
+
     // 搜索附近的好友，通过地理位置
     @GetMapping("/getFriends")
-    public ResponseResult getFriends(int id,int pageNum, int pageSize){
+    public ResponseResult getFriends(int id,@RequestParam(value = "pageNum",defaultValue = "1",required = false) int pageNum,
+                                     @RequestParam(value = "pageSize",defaultValue = "15",required = false)int pageSize){
         return buddySystemService.getFriends(id,pageNum,pageSize);
     }
 
+    /**
+     * 按照名字模糊搜索
+     * @param id
+     * @param pageNum
+     * @param pageSize
+     * @param name
+     * @return
+     */
+    @GetMapping("/getFriendsByName")
+    public ResponseResult getFriendsByName(int id, @RequestParam(value = "pageNum",defaultValue = "1",required = false) int pageNum,
+                                           @RequestParam(value = "pageSize",defaultValue = "15",required = false)int pageSize, String name){
+        return buddySystemService.getMyFriendsByName(id,pageNum,pageSize,name);
+
+    }
 
     // 获得我的好友列表
     @GetMapping("/getMyFriends")

@@ -1,5 +1,6 @@
 package com.mt.metro.controller;
 
+import com.mt.metro.annotation.CacheLock;
 import com.mt.metro.annotation.PassToken;
 import com.mt.metro.annotation.UserLoginToken;
 import com.mt.metro.annotation.VisitLog;
@@ -13,6 +14,8 @@ import com.mt.metro.utils.FileTransportation;
 import com.mt.metro.utils.ResponseResult;
 import com.mt.metro.utils.Time;
 import io.swagger.annotations.Api;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,6 +40,8 @@ public class UserLogin {
     @Autowired
     AsyncService asyncService;
 
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
     public UserLogin(UserService userService, TokenService tokenService) {
         this.userService = userService;
         this.tokenService = tokenService;
@@ -49,12 +54,14 @@ public class UserLogin {
     //@CacheLock(prefix = "book")
     @GetMapping("/query")
     public String  query(String ip) {
+        logger.info("ip"+System.currentTimeMillis());
+
         // ip的查询
         //HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         //String currentIp = IpUtil.getIpAddr(request);
 
         System.out.println(ip);
-        asyncService.setUserCity(null,ip);
+        //asyncService.setUserCity(null,ip);
         return "success";
 
     }
@@ -62,11 +69,12 @@ public class UserLogin {
 
     /**
      * 用户初始化以及公共资源获取
-     *
+     *加入接口幂等
      * @param user
      * @return
      */
     @PassToken
+    @CacheLock(prefix = "login")
     @PostMapping("/login")
     public ResponseResult login(User user) {
         ResponseResult responseResult;
@@ -139,13 +147,12 @@ public class UserLogin {
 
     //查询用户碳积分情况，需要用户id
     @GetMapping("/getCarbonRanking")
-    public ResponseResult getCarbonRanking(int option) {
+    public ResponseResult getCarbonRanking(int id, int option,@RequestParam(value = "pageNum",defaultValue = "1",required = false) int pageNum,
+                                           @RequestParam(value = "pageSize",defaultValue = "15",required = false)int pageSize) {
         if (option != 1 && option != 2) {
             return new ResponseResult(501, "参数错误", null);
         }
-        Map map = (Map) userService.getCarbonRanking(option);
-        ResponseResult result = new ResponseResult(200, "success", map);
-        return result;
+       return userService.getCarbonRanking(id,option,pageNum,pageSize);
     }
 
 

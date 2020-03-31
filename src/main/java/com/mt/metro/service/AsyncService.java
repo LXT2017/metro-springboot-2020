@@ -2,17 +2,23 @@ package com.mt.metro.service;
 
 import com.mt.metro.entity.*;
 import com.mt.metro.mapper.*;
+import com.mt.metro.utils.IpUtil;
+import com.mt.metro.utils.Time;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,10 +37,15 @@ public class AsyncService {
     @Autowired
     AchieveService achieveService;
 
+    @Resource
+    RedisTemplate redisTemplate;
 
+
+    @Autowired
+    RabbitTemplate rabbitTemplate;
 
     private final Logger logger = LogManager.getLogger(AsyncService.class);
-    /**
+     /**
      * 多线程
      * 新用户注册时加载
      * @param
@@ -66,8 +77,9 @@ public class AsyncService {
 
     /**
      * 所在城市的判断与修改
+     * 这里是多线程的执行
      */
-    @Async
+    /*@Async
     public void setUserCity(User user,String ip){
 
 
@@ -101,11 +113,40 @@ public class AsyncService {
         userMapper.updateByPrimaryKey(user);
 
 
+    }
+*/
 
 
+
+    /**
+     * 用户游戏登录时间的统计
+     * 存入redis
+     * @param user
+     */
+    @Async("taskExecutor")
+    public void initialResource(User user,HttpServletRequest request){
+        // 统计在线时长
+        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
+        operations.set("online" + user.getId(),System.currentTimeMillis(), Time.getRefreshTime(), TimeUnit.SECONDS);
+
+
+        String currentIp = IpUtil.getIpAddr(request);
+        System.out.println(currentIp);
+        // 多线程利用访问ip进行定位，修改地理位置
+        //asyncService.setUserCity(user,currentIp);
+
+
+        // Object o = rabbitTemplate.receiveAndConvert("atguigu");
+        // System.out.println(o);
+
+
+        //放入消息队列，防止大量请求导致接口瘫痪
+        Map map = new HashMap();
+        map.put("ip",currentIp);
+        map.put("id",user.getId());
+        rabbitTemplate.convertAndSend("exchange.direct","login",map);
 
     }
-
 
 
     /**

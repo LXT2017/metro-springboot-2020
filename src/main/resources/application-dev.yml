@@ -16,6 +16,7 @@ spring:
       jdbc-url: jdbc:mysql://192.168.56.106:3306/metro?serverTimezone=GMT
       username: root
       password: Haha1234!
+
   ## Redis 配置
   redis:
     ## Redis数据库索引（默认为0）
@@ -51,12 +52,21 @@ spring:
       enabled: true
       max-file-size: 1024MB
       max-request-size: 1024MB
-  ##RabbitMQ
-#  rabbitmq:
-#    host: localhost
-#    port: 5672
-#    username: guest
-#    password: guest
+  #RabbitMQ
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java #重启目录
+      exclude: WEB-INF/**
+    freemarker:
+      cache: false    #页面不加载缓存，修改即时生效
+
+
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
@@ -78,7 +88,7 @@ audience:
   expiresSecond: 172800
 
 logging:
-  config: classpath:log4j2.xml
+  config: classpath:log4j2-dev.xml
 
 # 分页配置
 pagehelper:

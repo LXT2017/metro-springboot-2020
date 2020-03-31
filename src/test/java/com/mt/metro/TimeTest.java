@@ -2,14 +2,13 @@ package com.mt.metro;
 
 
 import com.mt.metro.utils.Time;
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
 public class TimeTest {
 
-    @Test
+    //@Test
     public void getCurrentDate() {
         System.out.println(Time.getRefreshTime());
     }
@@ -20,7 +19,7 @@ public class TimeTest {
         System.out.println(Time.getCurrentTime());
     }
 
-    @Test
+    //@Test
     public void getWeek(){
         System.out.println(Time.getRefreshWeekTime());
 

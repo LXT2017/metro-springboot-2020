@@ -2,6 +2,7 @@ package com.mt.metro.mapper;
 
 import com.mt.metro.entity.Addfriend;
 import com.mt.metro.entity.MyFriend;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
@@ -30,6 +31,9 @@ public interface AddfriendMapper {
 
 
 
-    List<MyFriend> findFriendsByLocation(int id,List<Integer> list);
+    List<MyFriend> findFriendsByLocation(@Param("id")int id,@Param("list")List<Integer> list);
 
+    MyFriend selectUserById(int id);
+
+    List<MyFriend> selectUserByName(@Param("id") int id, @Param("name") String name,@Param("list") List<Integer> list);
 }

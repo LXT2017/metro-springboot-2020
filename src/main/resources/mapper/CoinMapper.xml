@@ -7,6 +7,14 @@
         <result column="user_id" property="userId" jdbcType="INTEGER"/>
         <result column="week_number" property="weekNumber" jdbcType="INTEGER"/>
     </resultMap>
+
+
+    <resultMap id="UserResultMap" type="com.mt.metro.entity.User1">
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="week_number" property="weekNumber" javaType="INTEGER"/>
+        <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR"/>
+    </resultMap>
+
     <sql id="Example_Where_Clause">
         <where>
             <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -70,6 +78,17 @@
     <sql id="Base_Column_List">
         id, coin_number, user_id, week_number
     </sql>
+
+
+
+    <select id="selectFriendsCoinRanking" resultMap="UserResultMap">
+        select u.nickname,u.head_portrait,c.week_number from user u,coin c where u.id=c.user_id
+        AND u.id=c.user_id
+        <if test="list!=null">
+            and u.id in <foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
+        </if>
+        order by c.week_number desc
+    </select>
 
 
     <update id="updateByUid" parameterType="com.mt.metro.entity.Coin">

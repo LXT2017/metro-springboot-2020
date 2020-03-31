@@ -1,11 +1,10 @@
 package com.mt.metro.service;
 
-import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mt.metro.common.SignDay;
 import com.mt.metro.entity.*;
 import com.mt.metro.mapper.*;
-import com.mt.metro.utils.IpUtil;
-import com.mt.metro.utils.JsonFilter;
 import com.mt.metro.utils.ResponseResult;
 import com.mt.metro.utils.Time;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +54,11 @@ public class UserService {
     @Autowired
     AsyncService asyncService;
 
+    @Autowired
+    BuddySystemService buddySystemService;
+
+
+
 
     //获取初始化资源
     //@Slave
@@ -69,7 +73,10 @@ public class UserService {
         }
         Parameter parameter = parameterMapper.selectByPrimaryKey(1);
 
-        initialResource(user);
+        // 多线程执行，加快响应速度
+        // ip的查询
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        asyncService.initialResource(user,request);
 
         /*过滤字段
         System.out.println(parameter);
@@ -105,24 +112,6 @@ public class UserService {
     }
 
 
-    /**
-     * 用户游戏登录时间的统计
-     * 存入redis
-     * @param user
-     */
-    public void initialResource(User user){
-        // 统计在线时长
-        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
-        operations.set("online" + user.getId(),System.currentTimeMillis(),Time.getRefreshTime(),TimeUnit.SECONDS);
-
-        // ip的查询
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        String currentIp = IpUtil.getIpAddr(request);
-        // 多线程利用访问ip进行定位，修改地理位置
-        asyncService.setUserCity(user,currentIp);
-
-
-    }
 
     //模仿列车信息
     public Map getSubwayInfo() {
@@ -159,12 +148,6 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public User registry(User user) {
 
-        // 多线程进行新注册用户的初始化
-        asyncService.achievementInitial(user);
-
-
-
-
         /**
          * 默认的事务规则是遇到运行异常（RuntimeException）
          * 和程序错误（Error）才会回滚。
@@ -174,6 +157,11 @@ public class UserService {
         user.setCurrentStrength(100);
         userMapper.insertSelective(user);
         System.out.println(user);
+
+
+        // 多线程进行新注册用户的初始化
+        asyncService.achievementInitial(user);
+
 
         // 新登录用户金币初始化
         Coin coin = new Coin();
@@ -390,13 +378,13 @@ public class UserService {
     排行，只需返回用户昵称和碳积分
     日排行和周排行
      */
-    public Object getCarbonRanking(int option) {
+    /*public Object getCarbonRanking(int id,int option,int pageNum,int pageSize) {
         Map map = new HashMap();
         SimplePropertyPreFilter filter1 = new SimplePropertyPreFilter(
                 User1.class, "nickname", "dailyScore","headPortrait");
         SimplePropertyPreFilter filter2 = new SimplePropertyPreFilter(
                 User1.class, "nickname", "weekScore","headPortrait");
-        List<User1> user1 = null;
+        List<UserCarbonRaking> user1 = null;
 
         if (option == 1) {
             user1 = userMapper.selectDailyRanking();
@@ -407,6 +395,26 @@ public class UserService {
             map.put("weekRanking", JsonFilter.getJsonFilter(user1, filter2));
         }
         return map;
+    }*/
+    /*
+    排行，只需返回用户昵称和碳积分
+    日排行和周排行
+     */
+    public ResponseResult getCarbonRanking(int id,int option,int pageNum,int pageSize) {
+        List<UserCarbonRaking> user1 = null;
+        List<Integer> myfriendIdList = buddySystemService.getMyFriendsIdList(id);
+        myfriendIdList.add(id);
+        System.out.println(myfriendIdList);
+        PageHelper.startPage(pageNum,pageSize);
+        if (option == 1) {
+            user1 = userMapper.selectDailyRanking(myfriendIdList);
+        } else if (option == 2) {
+            user1 = userMapper.selectWeekRanking(myfriendIdList);
+        }
+        System.out.println(user1);
+        PageInfo<UserCarbonRaking> pageInfo = new PageInfo<>(user1);
+        return new ResponseResult<>(200,"success",pageInfo);
+
     }
 
 

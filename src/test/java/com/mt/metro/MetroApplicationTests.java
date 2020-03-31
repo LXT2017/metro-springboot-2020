@@ -1,10 +1,12 @@
 package com.mt.metro;
 
 import com.mt.metro.common.Schedule;
+import com.mt.metro.mapper.AchievementMapper;
 import com.mt.metro.mapper.CarbonRankingMapper;
 import com.mt.metro.service.MallService;
 import com.mt.metro.service.NewsService;
 import com.mt.metro.service.UserService;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -30,8 +32,15 @@ class MetroApplicationTests {
     @Autowired
     Schedule schedule;
 
-    //@Test
-    void contextLoads() {
+
+    @Autowired
+    AchievementMapper achievementMapper;
+
+
+    @Test
+    void contextLoad() {
+        int number = achievementMapper.countByExample(null);
+        System.out.println(number);
     }
 
 

@@ -63,7 +63,7 @@
 
 
 
-  <select id="findFriendsByLocation" parameterType="java.lang.Integer" resultMap="ResultMap">
+  <select id="findFriendsByLocation"  resultMap="ResultMap">
         select u.head_portrait,u.nickname,u.id from user u where u.id!=#{id}
 
         <if test="list!=null">
@@ -73,4 +73,18 @@
         (select mu.city from user mu where mu.id=#{id})
     </select>
 
+
+    <select id="selectUserById" parameterType="java.lang.Integer" resultMap="ResultMap">
+         select u.head_portrait,u.nickname,u.id from user u where u.id=#{id}
+    </select>
+
+
+    <select id="selectUserByName"  resultMap="ResultMap">
+        select u.head_portrait,u.nickname,u.id from user u where u.id!=#{id} AND u.nickname LIKE "%"#{name}"%"
+
+        <if test="list!=null">
+            and u.id not in <foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
+        </if>
+
+    </select>
 </mapper>

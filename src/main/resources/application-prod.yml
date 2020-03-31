@@ -51,12 +51,12 @@ spring:
       enabled: true
       max-file-size: 1024MB
       max-request-size: 1024MB
-  ##RabbitMQ
-#  rabbitmq:
-#    host: localhost
-#    port: 5672
-#    username: guest
-#    password: guest
+  #RabbitMQ
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: test
+    password: test@2018
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
@@ -78,7 +78,8 @@ audience:
   expiresSecond: 172800
 
 logging:
-  config: classpath:log4j2.xml
+  config: classpath:log4j2-prod.xml
+
 
 # 分页配置
 pagehelper:

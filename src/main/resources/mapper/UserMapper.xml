@@ -34,6 +34,12 @@
         <result column="week_score" property="weekScore" jdbcType="INTEGER"/>
     </resultMap>
 
+    <resultMap id="UserCarbonRanking" type="com.mt.metro.entity.UserCarbonRaking">
+        <result column="nickname" property="nickname" jdbcType="VARCHAR"/>
+        <result column="daily_score" property="score" jdbcType="INTEGER"/>
+        <result column="week_score" property="score" jdbcType="INTEGER"/>
+        <result column="head_portrait" property="headPortrait" jdbcType="VARCHAR"/>
+    </resultMap>
 
     <resultMap id="BaseResultMap" type="com.mt.metro.entity.User">
         <id column="id" property="id" jdbcType="INTEGER"/>
@@ -117,17 +123,23 @@
     </select>
 
 
-    <select id="selectDailyRanking" resultMap="UserResultMap">
+    <select id="selectDailyRanking" resultMap="UserCarbonRanking">
         select u.nickname,c.daily_score,u.head_portrait
         from user u,carbon_ranking c
         where u.id=c.user_id
+        <if test="list!=null">
+            and u.id in <foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
+        </if>
         order by c.daily_score desc
     </select>
 
-    <select id="selectWeekRanking" resultMap="UserResultMap">
+    <select id="selectWeekRanking" resultMap="UserCarbonRanking">
         select u.nickname,c.week_score,u.head_portrait
         from user u,carbon_ranking c
         where u.id=c.user_id
+        <if test="list!=null">
+            and u.id in <foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
+        </if>
         order by c.week_score desc
     </select>
 
