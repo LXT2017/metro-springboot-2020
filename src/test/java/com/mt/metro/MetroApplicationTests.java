@@ -6,7 +6,6 @@ import com.mt.metro.mapper.CarbonRankingMapper;
 import com.mt.metro.service.MallService;
 import com.mt.metro.service.NewsService;
 import com.mt.metro.service.UserService;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -37,7 +36,7 @@ class MetroApplicationTests {
     AchievementMapper achievementMapper;
 
 
-    @Test
+    //@Test
     void contextLoad() {
         int number = achievementMapper.countByExample(null);
         System.out.println(number);

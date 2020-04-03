@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +17,9 @@ import java.util.Map;
 
 @Service
 public class RabbitMqService {
+
+    @Autowired
+    RedisService redisService;
 
     @Autowired
     UserMapper userMapper;
@@ -29,8 +33,10 @@ public class RabbitMqService {
         User user = new User();
         user.setId((int)map.get("id"));
 
-
-        RestTemplate restTemplate=new RestTemplate();
+        SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+        requestFactory.setConnectTimeout(5000); //haomiao
+        requestFactory.setReadTimeout(5000); //haomiao
+        RestTemplate restTemplate=new RestTemplate(requestFactory);
         Map<String,String> params=new HashMap<>();
         params.put("ip",ip);  //
         ResponseEntity<String> responseEntity=restTemplate.getForEntity("http://ip.ws.126.net/ipquery?ip={ip}",String.class,params);
@@ -56,9 +62,11 @@ public class RabbitMqService {
         // 保存到数据库的数据
         String citySql = province + city;
         user.setCity(citySql);
+        redisService.setLoginNumber(user);
         userMapper.updateByPrimaryKeySelective(user);
 
     }
+
 
 
 

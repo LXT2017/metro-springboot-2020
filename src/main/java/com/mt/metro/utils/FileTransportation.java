@@ -51,7 +51,7 @@ public class FileTransportation {
             } else {
                 // 非法文件
                 logger.error("the picture's suffix is illegal");
-                throw new Exception("上传图片为非法文件");
+                throw new Exception("上传为非法文件");
             }
     }
 

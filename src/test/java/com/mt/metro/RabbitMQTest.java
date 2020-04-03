@@ -1,5 +1,7 @@
 package com.mt.metro;
 
+import com.mt.metro.service.LoginNumberService;
+import com.mt.metro.service.RedisService;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.DirectExchange;
@@ -22,7 +24,14 @@ public class RabbitMQTest {
 
 
     @Autowired
+    RedisService redisService;
+
+    @Autowired
     AmqpAdmin amqpAdmin;
+
+    @Autowired
+    LoginNumberService loginNumberService;
+
 
     public void createExchange(){
         amqpAdmin.declareExchange(new DirectExchange("name"));
@@ -53,4 +62,9 @@ public class RabbitMQTest {
 
     //将数据转为json发送
 
+   //@Test
+    public void getCityLoginFromRedis(){
+        //redisService.getCityLoginFromRedis();
+        loginNumberService.transLoginNumber();
+    }
 }

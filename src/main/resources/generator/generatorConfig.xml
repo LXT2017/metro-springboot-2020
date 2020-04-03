@@ -74,7 +74,8 @@
         <!--        <table tableName="user"></table>-->
         <!--        <table tableName="coin"></table>-->
 <!--        <table tableName="sign"></table>-->
-        <table tableName="friend"></table>
-        <table tableName="addfriend"></table>
+<!--        <table tableName="friend"></table>-->
+<!--        <table tableName="addfriend"></table>-->
+        <table tableName="statistic"></table>
     </context>
 </generatorConfiguration>

@@ -57,7 +57,8 @@ public class UserService {
     @Autowired
     BuddySystemService buddySystemService;
 
-
+    @Autowired
+    SignMapper signMapper;
 
 
     //获取初始化资源
@@ -251,6 +252,7 @@ public class UserService {
     //签到查询
     public ResponseResult querySignIn(int id) {
         ValueOperations<String, Object> operations = redisTemplate.opsForValue();
+
         // 签到了几天了
         String signcountkey = "signcount" + id;
         String signkey = "sign" + id;
@@ -260,12 +262,13 @@ public class UserService {
             initialSignIn(id);
         }
 
+        // 需要获取redis的签到表信息，否则会空指针
+
         Map map = new HashMap();
         int num = (int)operations.get(signcountkey);
         map.put("signAllDaysCount",num);
         map.put("signDay",operations.get(signkey));
         map.put("coinNum",getCoinNum(num));
-
 
         String key = Time.getCurrentDate() + id;
         String message;
@@ -287,6 +290,12 @@ public class UserService {
     public int getCoinNum(int i){
         ValueOperations<String, Object> operations = redisTemplate.opsForValue();
         Sign sign = (Sign)operations.get("sign");
+
+        // 如果没有就去数据库
+        if(sign == null){
+            sign =  signMapper.selectByPrimaryKey(1);
+            operations.set("sign",sign,Time.getRefreshTime(),TimeUnit.SECONDS);
+        }
         int coinNum = 0;
         i = i + 1;
         switch (i){

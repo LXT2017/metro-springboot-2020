@@ -17,7 +17,9 @@ public class TimeTest {
     //@Test
     public void getCurrentTime() {
         System.out.println(Time.getCurrentTime());
+        System.out.println(Time.getCurrentDate());
     }
+
 
     //@Test
     public void getWeek(){

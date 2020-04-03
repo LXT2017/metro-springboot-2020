@@ -4,6 +4,7 @@ import com.mt.metro.entity.Parameter;
 import com.mt.metro.entity.Sign;
 import com.mt.metro.mapper.*;
 import com.mt.metro.service.AchieveService;
+import com.mt.metro.service.LoginNumberService;
 import com.mt.metro.utils.Time;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -38,6 +39,9 @@ public class Schedule {
 
     @Autowired
     AchievementMapper achievementMapper;
+
+    @Autowired
+    LoginNumberService loginNumberService;
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
@@ -97,6 +101,14 @@ public class Schedule {
             achieveService.getAchievement(i);
         }
 
+    }
+
+
+    // 每日记录访问量保存到数据库，并清空
+    @Scheduled(cron = "50 59 23 * * ?")
+    public void setDailyLoginNumber(){
+        logger.info("保存每日登录量到数据库"+Time.getDateCurrentTime());
+        loginNumberService.transLoginNumber();
     }
 
 }
