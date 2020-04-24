@@ -1,4 +1,4 @@
-package com.mt.metro.common;
+package com.mt.metro.websocket;
 
 
 import com.alibaba.fastjson.JSON;
@@ -14,10 +14,17 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * @author Shawn
+ */
 @Component
 @ServerEndpoint("/wsserver/{userId}")
 public class WebSocketServer {
 
+    /**
+     * 单应用，集群还需要考虑
+     * 可以独立出去
+     */
     private final static Logger logger = LogManager.getLogger(WebSocketServer.class);
     /**静态变量，用来记录当前在线连接数。应该把它设计成线程安全的。*/
     private static int onlineCount = 0;
@@ -125,13 +132,31 @@ public class WebSocketServer {
     /**
      * 发送自定义消息
      * */
-    public static void sendInfo(String message,@PathParam("userId") String userId) throws IOException {
+    public static int sendInfo(String message, String userId) throws IOException {
         logger.info("发送消息到:"+userId+"，报文:"+message);
         if(StringUtils.isNotBlank(userId)&&webSocketMap.containsKey(userId)){
             webSocketMap.get(userId).sendMessage(message);
+            return 200;
         }else{
             logger.error("用户"+userId+",不在线！");
+            return 400;
         }
+    }
+
+    // 群发在线推送
+    public static void sendAll(String message){
+
+        //遍历HashMap
+        for (String key : webSocketMap.keySet()) {
+            try {
+
+                webSocketMap.get(key).sendMessage(message);
+                System.out.println("key = " + key);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public static synchronized int getOnlineCount() {

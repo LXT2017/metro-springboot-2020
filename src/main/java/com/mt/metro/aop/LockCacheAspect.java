@@ -52,15 +52,28 @@ public class LockCacheAspect {
         String uuid = UUID.randomUUID().toString();
 
         try {
-            // 获取锁
-            //redisTemplate.opsForValue().setIfAbsent(lockKey,"kdsvjk",5, TimeUnit.SECONDS);
-            boolean success = redisTemplate.opsForValue().setIfAbsent(lockKey, "dsf"+uuid, cacheLock.expire(), cacheLock.timeUnit());
-            if (!success) {
+            System.out.println("????");
+            //获取锁
+            //这个函数不存在，可能版本问题，不整合redission可以使用
+            // boolean success = redisTemplate.opsForValue().setIfAbsent(lockKey, "dsf"+uuid, cacheLock.expire(), cacheLock.timeUnit());
+            // if (!success) {
+            //     throw new RuntimeException("请勿重复提交");
+            // }
+
+
+            Object object = redisTemplate.opsForValue().get(lockKey);
+            if ( object!= null) {
                 throw new RuntimeException("请勿重复提交");
+            }else {
+                redisTemplate.opsForValue().set(lockKey, "dsf"+uuid, cacheLock.expire(), cacheLock.timeUnit());
             }
+
+
             Object result = joinPoint.proceed();
             return result;
-        } finally {
+        }
+
+        finally {
             // 最后记得释放锁
             DefaultRedisScript<Long> redisScript = new DefaultRedisScript<>(RELEASE_LOCK_LUA_SCRIPT, Long.class);
             Long result = (long)redisTemplate.execute(redisScript, Collections.singletonList(lockKey), uuid);

@@ -21,6 +21,9 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+/**
+ * @author Shawn
+ */
 @Service
 public class AsyncService {
 
@@ -37,6 +40,8 @@ public class AsyncService {
     @Autowired
     AchieveService achieveService;
 
+    @Autowired
+    StrengthService strengthService;
     @Resource
     RedisTemplate redisTemplate;
 
@@ -132,19 +137,24 @@ public class AsyncService {
 
         String currentIp = IpUtil.getIpAddr(request);
         System.out.println(currentIp);
+
         // 多线程利用访问ip进行定位，修改地理位置
-        //asyncService.setUserCity(user,currentIp);
-
-
+        // asyncService.setUserCity(user,currentIp);
+        //
+        //
         // Object o = rabbitTemplate.receiveAndConvert("atguigu");
         // System.out.println(o);
 
-
         //放入消息队列，防止大量请求导致接口瘫痪
-        Map map = new HashMap();
+        Map map = new HashMap(16);
         map.put("ip",currentIp);
         map.put("id",user.getId());
         rabbitTemplate.convertAndSend("exchange.direct","login",map);
+        try {
+            strengthService.msgSend(user.getId().toString());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

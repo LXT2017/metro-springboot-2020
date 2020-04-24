@@ -20,7 +20,7 @@ public @interface CacheLock {
     /**
      * 过期秒数,默认为5秒
      */
-    int expire() default 5;
+    long expire() default 5;
 
     /**
      * 超时时间单位，默认为秒

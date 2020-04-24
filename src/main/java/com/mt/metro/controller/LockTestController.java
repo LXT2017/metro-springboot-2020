@@ -14,7 +14,9 @@ public class LockTestController {
     @Autowired
     private DistributedRedisLock distributedRedisLock;
 
-    // 测试分布式锁
+    /**
+     * 利用redission实现分布式锁
+     */
     @GetMapping("/testLock")
     public void testLock() {
         for (int i = 0; i < 5; i++) {

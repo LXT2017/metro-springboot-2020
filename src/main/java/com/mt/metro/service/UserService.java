@@ -5,8 +5,11 @@ import com.github.pagehelper.PageInfo;
 import com.mt.metro.common.SignDay;
 import com.mt.metro.entity.*;
 import com.mt.metro.mapper.*;
+import com.mt.metro.utils.RedisKeyUtils;
 import com.mt.metro.utils.ResponseResult;
 import com.mt.metro.utils.Time;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -60,16 +63,24 @@ public class UserService {
     @Autowired
     SignMapper signMapper;
 
+    @Autowired
+    StrengthService strengthService;
+
+    private final Logger logger = LogManager.getLogger(this.getClass());
+
 
     //获取初始化资源
     //@Slave
     public Map getInitialInfo(User user) {
-        Map map = new HashMap();
+        Map map = new HashMap(16);
         User1 user1 = null;
         if (user != null) {
             user1 = userMapper.selectInitialInfo(user.getId());
             if (user1 == null) {
                 System.out.println("多数据表异常");
+            }else {
+                // 体力值从redis获取
+                user1.setCurrentStrength(strengthService.getLoginStrength(user.getId().toString()));
             }
         }
         Parameter parameter = parameterMapper.selectByPrimaryKey(1);
@@ -102,7 +113,6 @@ public class UserService {
          json = JSON.toJSONString(user, propertyFilter);
         System.out.println(json);
         */
-
 
         map.put("user", user1);
         map.put("param", parameter);
@@ -163,6 +173,9 @@ public class UserService {
         // 多线程进行新注册用户的初始化
         asyncService.achievementInitial(user);
 
+        // redis体力值hash表注册,刚进去100
+        redisTemplate.opsForHash().put(RedisKeyUtils.STRENGTH,user.getId().toString(),100);
+        redisTemplate.opsForHash().put(RedisKeyUtils.LOGIN_TIME, user.getId().toString(),System.currentTimeMillis());
 
         // 新登录用户金币初始化
         Coin coin = new Coin();

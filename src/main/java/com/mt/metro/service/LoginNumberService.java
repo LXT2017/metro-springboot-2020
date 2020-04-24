@@ -21,7 +21,7 @@ public class LoginNumberService {
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void transLoginNumber(){
         List<Statistic> list = redisService.getCityLoginFromRedis();
         for (Statistic it:list){

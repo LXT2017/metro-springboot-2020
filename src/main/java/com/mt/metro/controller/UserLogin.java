@@ -79,7 +79,6 @@ public class UserLogin {
     public ResponseResult login(User user) {
         ResponseResult responseResult;
         User userForBase = (User) userService.findUserByUId(user);
-
         Map map = userService.getInitialInfo(userForBase);
         String token = tokenService.getToken(userForBase);
         map.put("token", token);

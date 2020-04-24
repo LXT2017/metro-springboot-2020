@@ -7,6 +7,16 @@ public class RedisKeyUtils {
     public static final String MAP_KEY_USER_CITY_LOGIN = "MAP_KEY_USER_CITY_LOGIN";
 
     /**
+     * 用户登录时间Hash表
+     */
+    public static final String LOGIN_TIME = "LOGIN_TIME";
+
+    /**
+     * 体力值Hash表
+     */
+    public static final String STRENGTH = "STRENGTH";
+
+    /**
      * redis key的拼接
      */
     public static String getLikedKey(String likedUserId, String likedPostId){

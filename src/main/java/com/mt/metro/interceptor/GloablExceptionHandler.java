@@ -62,7 +62,7 @@ public class GloablExceptionHandler {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     public Object handleTypeMismatchException(NullPointerException ex) {
-        logger.error("空指针异常，{}", ex.getMessage());
+        logger.error("空指针异常，{}", ex);
         return new ResponseResult<>(501, "空指针异常了", null);
     }
 }

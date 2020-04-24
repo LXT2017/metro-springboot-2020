@@ -2,6 +2,7 @@ package com.mt.metro;
 
 import com.mt.metro.service.LoginNumberService;
 import com.mt.metro.service.RedisService;
+import com.mt.metro.utils.RedisKeyUtils;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.DirectExchange;
@@ -9,6 +10,7 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -32,6 +34,8 @@ public class RabbitMQTest {
     @Autowired
     LoginNumberService loginNumberService;
 
+    @Autowired
+    RedisTemplate redisTemplate;
 
     public void createExchange(){
         amqpAdmin.declareExchange(new DirectExchange("name"));
@@ -66,5 +70,11 @@ public class RabbitMQTest {
     public void getCityLoginFromRedis(){
         //redisService.getCityLoginFromRedis();
         loginNumberService.transLoginNumber();
+    }
+
+
+    //@Test
+    public void getCity(){
+        redisTemplate.opsForHash().put(RedisKeyUtils.STRENGTH,"1",100);
     }
 }
