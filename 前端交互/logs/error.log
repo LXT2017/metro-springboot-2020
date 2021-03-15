@@ -1,0 +1,63 @@
+2020.03.16 at 14:33:35 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @34 - 系统异常
+2020.03.16 at 15:26:12 CST ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter report() @40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'customRealm', defined in class path resource [com/mt/metroadmin/config/ShiroConfig.class], could not be registered. A bean with that name has already been defined in file [D:\work\intellij\metroadmin\target\classes\com\mt\metroadmin\shiro\CustomRealm.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+
+2020.03.16 at 17:25:05 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @34 - 系统异常
+2020.03.16 at 17:26:38 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @34 - 系统异常
+2020.03.16 at 17:27:35 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @34 - 系统异常
+2020.03.16 at 17:39:13 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @34 - 系统异常
+2020.03.16 at 17:44:25 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @34 - 系统异常
+2020.03.16 at 17:46:18 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @34 - 系统异常
+2020.03.16 at 17:48:15 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @34 - 系统异常
+2020.03.16 at 17:48:27 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @34 - 系统异常
+2020.03.16 at 19:47:25 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:49:30 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:57:59 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:58:02 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:58:05 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:58:07 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:58:08 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:58:28 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:58:32 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:58:32 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:58:33 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 19:58:33 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:05:28 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:05:56 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:05:59 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:06:02 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:07:55 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:07:57 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:08:51 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:08:52 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:08:58 CST ERROR com.mt.metroadmin.interceptor.GloablExceptionHandler handleException() @36 - 系统异常
+2020.03.16 at 20:46:09 CST ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter report() @40 - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
+
+Reason: Failed to determine a suitable driver class
+
+
+Action:
+
+Consider the following:
+	If you want an embedded database (H2, HSQL or Derby), please put it on the classpath.
+	If you have database settings to be loaded from a particular profile you may need to activate it (no profiles are currently active).
+

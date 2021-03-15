@@ -1,0 +1,73 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/metro?serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    lettuce:
+      pool:
+        #连接池支持的最大连接数
+        max-active: 1000
+        #连接池中连接用完时,新的请求等待时间,毫秒
+        max-wait: -1ms
+        #连接池中最多可空闲maxIdle个连接
+        max-idle: 400
+        min-idle: 0
+    timeout: 1000ms
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java #重启目录
+      exclude: WEB-INF/**
+  freemarker:
+    cache: false    #页面不加载缓存，修改即时生效
+
+  ## 文件上传的设置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.mt.metroadmin.entity
+#debug: true
+server:
+  port: 8443
+##jwt配置
+audience:
+  # 代表这个JWT的接收对象,存入audience
+  clientId: 098f6bcd4621d373cade4e832627b4f6
+  # 密钥, 经过Base64加密, 可自行替换
+  base64Secret: MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=
+  # JWT的签发主体，存入issuer
+  name: restapiuser
+  # 过期时间，时间戳
+  expiresSecond: 172800
+
+
+# 分页插件配置
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  page-size-zero: false
+
+logging:
+  config: classpath:log4j2.xml
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error
+
+# 自定义参数
+ipport:
+  ip: localhost
+  name: ""
+  port: 8888

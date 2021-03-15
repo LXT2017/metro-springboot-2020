@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mt.metroadmin.mapper.ParameterMapper" >
+  <resultMap id="BaseResultMap" type="com.mt.metroadmin.entity.Parameter" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="puzzle_music" property="puzzleMusic" jdbcType="VARCHAR" />
+    <result column="game_music" property="gameMusic" jdbcType="VARCHAR" />
+    <result column="puzzle_pic" property="puzzlePic" jdbcType="VARCHAR" />
+    <result column="game_pic" property="gamePic" jdbcType="VARCHAR" />
+    <result column="addition" property="addition" jdbcType="INTEGER" />
+    <result column="total_strength" property="totalStrength" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, puzzle_music, game_music, puzzle_pic, game_pic, addition, total_strength
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mt.metroadmin.entity.ParameterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from parameter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from parameter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from parameter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mt.metroadmin.entity.ParameterExample" >
+    delete from parameter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mt.metroadmin.entity.Parameter" >
+    insert into parameter (id, puzzle_music, game_music, 
+      puzzle_pic, game_pic, addition, 
+      total_strength)
+    values (#{id,jdbcType=INTEGER}, #{puzzleMusic,jdbcType=VARCHAR}, #{gameMusic,jdbcType=VARCHAR}, 
+      #{puzzlePic,jdbcType=VARCHAR}, #{gamePic,jdbcType=VARCHAR}, #{addition,jdbcType=INTEGER}, 
+      #{totalStrength,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mt.metroadmin.entity.Parameter" >
+    insert into parameter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="puzzleMusic != null" >
+        puzzle_music,
+      </if>
+      <if test="gameMusic != null" >
+        game_music,
+      </if>
+      <if test="puzzlePic != null" >
+        puzzle_pic,
+      </if>
+      <if test="gamePic != null" >
+        game_pic,
+      </if>
+      <if test="addition != null" >
+        addition,
+      </if>
+      <if test="totalStrength != null" >
+        total_strength,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="puzzleMusic != null" >
+        #{puzzleMusic,jdbcType=VARCHAR},
+      </if>
+      <if test="gameMusic != null" >
+        #{gameMusic,jdbcType=VARCHAR},
+      </if>
+      <if test="puzzlePic != null" >
+        #{puzzlePic,jdbcType=VARCHAR},
+      </if>
+      <if test="gamePic != null" >
+        #{gamePic,jdbcType=VARCHAR},
+      </if>
+      <if test="addition != null" >
+        #{addition,jdbcType=INTEGER},
+      </if>
+      <if test="totalStrength != null" >
+        #{totalStrength,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mt.metroadmin.entity.ParameterExample" resultType="java.lang.Integer" >
+    select count(*) from parameter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update parameter
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.puzzleMusic != null" >
+        puzzle_music = #{record.puzzleMusic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gameMusic != null" >
+        game_music = #{record.gameMusic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.puzzlePic != null" >
+        puzzle_pic = #{record.puzzlePic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gamePic != null" >
+        game_pic = #{record.gamePic,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addition != null" >
+        addition = #{record.addition,jdbcType=INTEGER},
+      </if>
+      <if test="record.totalStrength != null" >
+        total_strength = #{record.totalStrength,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update parameter
+    set id = #{record.id,jdbcType=INTEGER},
+      puzzle_music = #{record.puzzleMusic,jdbcType=VARCHAR},
+      game_music = #{record.gameMusic,jdbcType=VARCHAR},
+      puzzle_pic = #{record.puzzlePic,jdbcType=VARCHAR},
+      game_pic = #{record.gamePic,jdbcType=VARCHAR},
+      addition = #{record.addition,jdbcType=INTEGER},
+      total_strength = #{record.totalStrength,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mt.metroadmin.entity.Parameter" >
+    update parameter
+    <set >
+      <if test="puzzleMusic != null" >
+        puzzle_music = #{puzzleMusic,jdbcType=VARCHAR},
+      </if>
+      <if test="gameMusic != null" >
+        game_music = #{gameMusic,jdbcType=VARCHAR},
+      </if>
+      <if test="puzzlePic != null" >
+        puzzle_pic = #{puzzlePic,jdbcType=VARCHAR},
+      </if>
+      <if test="gamePic != null" >
+        game_pic = #{gamePic,jdbcType=VARCHAR},
+      </if>
+      <if test="addition != null" >
+        addition = #{addition,jdbcType=INTEGER},
+      </if>
+      <if test="totalStrength != null" >
+        total_strength = #{totalStrength,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mt.metroadmin.entity.Parameter" >
+    update parameter
+    set puzzle_music = #{puzzleMusic,jdbcType=VARCHAR},
+      game_music = #{gameMusic,jdbcType=VARCHAR},
+      puzzle_pic = #{puzzlePic,jdbcType=VARCHAR},
+      game_pic = #{gamePic,jdbcType=VARCHAR},
+      addition = #{addition,jdbcType=INTEGER},
+      total_strength = #{totalStrength,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
